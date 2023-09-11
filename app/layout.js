@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Headline Fights",
-  description: "Test your ability recognize bias in the news media",
+  description: "Test your ability to recognize bias in the news media",
 };
 
 // app/layout.js
