@@ -2,7 +2,6 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -35,7 +34,7 @@ export default function PublicationForm({ headlines, fetchOnClick }) {
   if (status === "correctAnswer") {
     return (
       <>
-        <h1 className="mt-20">You got it right. Great job!</h1>
+        <h1 className="mt-8 md:mt-24">You got it right. Great job!</h1>
         <div className="mt-5">
           <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
         </div>
@@ -44,7 +43,7 @@ export default function PublicationForm({ headlines, fetchOnClick }) {
   } else if (status === "wrongAnswer") {
     return (
       <>
-        <h1 className="mt-20">Wrong answer. Better luck next time.</h1>
+        <h1 className="mt-8 md:mt-24">Wrong answer. Better luck next time.</h1>
         <div className="mt-5">
           <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
         </div>
@@ -53,8 +52,8 @@ export default function PublicationForm({ headlines, fetchOnClick }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl sx={{ mt: 10 }} variant="standard">
+    <form className="mt-6 md:mt-20" onSubmit={handleSubmit}>
+      <FormControl variant="standard">
         <FormLabel id="publication-radio-group-label">Guess the news source:</FormLabel>
         <RadioGroup aria-labelledby="publication-radio-button-group" name="publication-radio-button-group" value={value} onChange={handleRadioChange}>
           <FormControlLabel value="cnn" control={<Radio />} label="CNN" />
