@@ -11,6 +11,11 @@ import HeadlineButton from "./getHeadlineButton";
 export default function PublicationForm({ headlines, fetchOnClick }) {
   const [value, setValue] = React.useState("");
   const [status, setStatus] = React.useState("newForm");
+  const [disabled, setDisabled] = React.useState(true);
+
+  // if (status != "") {
+  //   setDisabled(false);
+  // }
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);

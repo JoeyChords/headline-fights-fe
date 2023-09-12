@@ -1,12 +1,12 @@
 "use client";
 import Headline from "app/game/headline.js";
-import ResponsiveAppBar from "app/components/responsiveAppBar.js";
+import AppBarLoggedIn from "app/components/app-bar/appBarLoggedIn.js";
 
 export default function Home() {
   return (
     <>
       <main>
-        <ResponsiveAppBar></ResponsiveAppBar>
+        <AppBarLoggedIn></AppBarLoggedIn>
         <Headline></Headline>
       </main>
     </>

@@ -13,7 +13,7 @@ export default function Headline() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/headlines")
+    fetch("/api/headlines")
       .then((res) => res.json())
       .then((headlines) => {
         setheadlines(headlines.data[0]);
@@ -24,7 +24,7 @@ export default function Headline() {
 
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch("/headlines")
+    fetch("/api/headlines")
       .then((res) => res.json())
       .then((headlines) => {
         setheadlines(headlines.data[0]);

@@ -10,9 +10,11 @@ import HeadlineButton from "./getHeadlineButton";
 export default function PublicationForm({ headlines, fetchOnClick }) {
   const [value, setValue] = React.useState("");
   const [status, setStatus] = React.useState("newForm");
+  const [disabled, setDisabled] = React.useState(true);
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
+    setDisabled(false);
   };
 
   const handleSubmit = (event) => {
@@ -23,6 +25,7 @@ export default function PublicationForm({ headlines, fetchOnClick }) {
     } else {
       setStatus("wrongAnswer");
     }
+    setDisabled(true);
   };
 
   const getNextHeadline = () => {
@@ -59,7 +62,7 @@ export default function PublicationForm({ headlines, fetchOnClick }) {
           <FormControlLabel value="cnn" control={<Radio />} label="CNN" />
           <FormControlLabel value="fox news" control={<Radio />} label="Fox News" />
         </RadioGroup>
-        <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+        <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained" disabled={disabled}>
           Submit Guess
         </Button>
       </FormControl>
