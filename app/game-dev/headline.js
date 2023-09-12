@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -5,6 +6,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
+import HeadlineButton from "./getHeadlineButton";
 
 var photo = "/image-not-found.png";
 
@@ -13,25 +15,29 @@ export default function Headline() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/headlines")
+    fetch("http://localhost:3000/headlines")
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines.data[0]);
-        console.log(headlines.data[0]);
+        setheadlines(headlines);
+        console.log(headlines);
         setLoading(false);
       });
   }, []);
 
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch("/headlines")
+    fetch("http://localhost:3000/headlines")
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines.data[0]);
+        setheadlines(headlines);
+        console.log(headlines);
         setLoading(false);
       });
-    if (headlines.photo_source_url != null) {
-      photo = headlines.photo_source_url;
+    if (headlines[0].photo_source_url != null) {
+      photo = headlines[0].photo_source_url;
+      if (headlines[0].photo_source_url.slice(0, 1) != "h") {
+        photo = "https://" + headlines[0].photo_source_url;
+      }
     }
   };
 
@@ -52,16 +58,19 @@ export default function Headline() {
       </>
     );
 
-  if (headlines.photo_source_url != null) {
-    photo = headlines.photo_source_url;
+  if (headlines[0].photo_source_url != null) {
+    photo = headlines[0].photo_source_url;
+    if (headlines[0].photo_source_url.slice(0, 1) != "h") {
+      photo = "https://" + headlines[0].photo_source_url;
+    }
   }
   return (
     <>
-      <Container className="mt-6 md:mt-20" maxWidth="lg">
+      <Container sx={{ mt: 30 }} maxWidth="lg">
         <Grid direction="row" justifyContent="center" container spacing={2}>
           <Grid xs={12} md={6}>
             <Card sx={{ boxShadow: 3 }}>
-              <CardHeader title=<h2 className="font-bold text-2xl">{headlines.headline}</h2>></CardHeader>
+              <CardHeader title=<h2 className="font-bold text-2xl">{headlines[0].headline}</h2>></CardHeader>
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
