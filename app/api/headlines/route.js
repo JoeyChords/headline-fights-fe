@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  const res = await fetch(process.env.HEADLINE_API, { cache: "no-store" });
+export async function POST() {
+  const res = await fetch(process.env.DEV_HEADLINE_API + "?" + "accessToken=" + process.env.DATA_API_KEY, {
+    method: "POST",
+  });
   const data = await res.json();
 
   return NextResponse.json({ data });
