@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import AppBarRegisterPage from "/app/components/app-bar/appBarRegisterPage.js";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -30,8 +31,11 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+  const [emailAvailability, setEmailAvailability] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
 
     const userInput = {
@@ -45,7 +49,13 @@ export default function SignUp() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
     }).then((res) => {
-      console.log(res);
+      res.json().then((response) => {
+        setEmailAvailability(response.data[0].available);
+        console.log(response.data[0].available);
+        if (response.data[0].available == "True") {
+          window.location.href = "http://localhost:3000/login";
+        }
+      });
     });
   };
 
