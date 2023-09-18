@@ -6,15 +6,14 @@ export async function POST(request) {
   const headersList = headers();
   const contentType = headersList.get("content-type");
   const bodyContent = await request.json();
-  const res = await fetch(process.env.DEV_REGISTER_API, {
+  const res = await fetch(process.env.DEV_LOGIN_API, {
     method: "POST",
     withCredentials: true,
     credentials: "include",
     headers: { "Content-Type": contentType },
     body: JSON.stringify(bodyContent),
   });
-  const data = await res.json();
-  console.log(data);
+  var data = await res.text();
 
   return NextResponse.json({ data });
 }

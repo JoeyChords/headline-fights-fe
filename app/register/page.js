@@ -6,8 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import FormHelperText from "@mui/material/FormHelperText";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -31,7 +30,7 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  const [emailAvailability, setEmailAvailability] = useState(null);
+  const [helperText, setHelperText] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,14 +45,17 @@ export default function SignUp() {
 
     fetch("/api/register", {
       method: "POST",
+      withCredentials: true,
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
     }).then((res) => {
       res.json().then((response) => {
-        setEmailAvailability(response.data[0].available);
-        console.log(response.data[0].available);
+        //Check to see if the email address is available
         if (response.data[0].available == "True") {
-          window.location.href = "http://localhost:3000/login";
+          window.location.href = "http://localhost:3001/login";
+        } else {
+          setHelperText("The email address you entered is already in use");
         }
       });
     });
@@ -79,13 +81,14 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <FormHelperText error={true}>{helperText}</FormHelperText>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField required fullWidth id="name" label="Name" name="name" autoComplete="name" />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                  <TextField required fullWidth id="email" type="email" label="Email Address" name="email" autoComplete="email" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />

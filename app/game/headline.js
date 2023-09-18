@@ -24,7 +24,7 @@ export default function Headline() {
 
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch("/api/headlines", { method: "POST" })
+    fetch("/api/headlines", { method: "POST", withCredentials: true, credentials: "include" })
       .then((res) => res.json())
       .then((headlines) => {
         setheadlines(headlines.data[0]);

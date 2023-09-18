@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 const pages = { Login: "/register", Signup: "/signup" };
-const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/" };
+const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/logout" };
 
 function AppBarLoggedIn() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

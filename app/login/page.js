@@ -9,6 +9,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import FormHelperText from "@mui/material/FormHelperText";
+import { useState } from "react";
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { LegendToggleRounded } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -24,14 +30,43 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const [helperText, setHelperText] = React.useState("");
+  const [isSignedIn, setIsSignedIn] = useState(null);
+  const router = useRouter();
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      try {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        const userInput = {
+          email: data.get("email"),
+          password: data.get("password"),
+        };
+        let response = await fetch("/api/login", {
+          method: "POST",
+          withCredentials: true,
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userInput),
+        });
+        response = await response.text();
+        response = await JSON.parse(response);
+        if (response.data == "Unauthorized") {
+          setHelperText("Something is wrong with your email or password");
+        } else {
+          response = await JSON.parse(response.data);
+          if (response.isSignedIn == "True") {
+            router.push("/game");
+          }
+        }
+      } catch (err) {
+        setHelperText("Something went wrong");
+      }
+    },
+    [router]
+  );
 
   return (
     <>
@@ -48,6 +83,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <FormHelperText error={true}>{helperText}</FormHelperText>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
             <TextField
@@ -60,16 +96,10 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+            <Grid container justifyContent="center">
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
