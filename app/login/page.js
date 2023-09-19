@@ -31,6 +31,7 @@ function Copyright(props) {
 
 export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
+  const [error, setError] = React.useState(true);
   const router = useRouter();
 
   const handleSubmit = useCallback(
@@ -57,6 +58,8 @@ export default function SignIn() {
         } else {
           response = await JSON.parse(response.data);
           if (response.isSignedIn == "True") {
+            setError(false);
+            setHelperText("Loading...");
             router.push("/game");
           }
         }
@@ -82,7 +85,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <FormHelperText error={true}>{helperText}</FormHelperText>
+          <FormHelperText error={error}>{helperText}</FormHelperText>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
             <TextField
