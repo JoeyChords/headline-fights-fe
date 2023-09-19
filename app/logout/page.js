@@ -1,13 +1,15 @@
+"use client";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export default async function Logout() {
-  const response = await fetch("/api/logout", {
+export default function Logout() {
+  const router = useRouter();
+
+  fetch("/api/logout", {
     method: "POST",
-    withCredentials: true,
-    credentials: "include",
-  });
-
-  if (response.status == 200) {
-    redirect("/login");
-  }
+  })
+    .then((res) => res.json())
+    .then((response) => {
+      router.push("/login");
+    });
 }

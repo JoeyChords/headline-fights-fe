@@ -31,7 +31,6 @@ function Copyright(props) {
 
 export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
-  const [isSignedIn, setIsSignedIn] = useState(null);
   const router = useRouter();
 
   const handleSubmit = useCallback(

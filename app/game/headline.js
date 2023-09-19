@@ -1,3 +1,5 @@
+//Fetches and renders the game headlines and images
+"use client";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -6,14 +8,16 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
 
+//Placeholder image in case of missing images
 var photo = "/image-not-found.png";
 
 export default function Headline() {
   const [headlines, setheadlines] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
+  //Fetch new headline and accompanying image on page load
   useEffect(() => {
-    fetch("/api/headlines", { method: "POST" })
+    fetch("/api/headlines", { method: "POST", withCredentials: true, credentials: "include" })
       .then((res) => res.json())
       .then((headlines) => {
         setheadlines(headlines.data[0]);
@@ -22,14 +26,18 @@ export default function Headline() {
       });
   }, []);
 
+  //Fetch new headline and accompanying image on submit
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
     fetch("/api/headlines", { method: "POST", withCredentials: true, credentials: "include" })
       .then((res) => res.json())
       .then((headlines) => {
         setheadlines(headlines.data[0]);
+        console.log(headlines.data[0]);
         setLoading(false);
       });
+
+    //Set place holder image to headline image
     if (headlines.photo_source_url != null) {
       photo = headlines.photo_source_url;
     }
