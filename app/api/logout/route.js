@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function GET(request) {
   const res = await fetch(process.env.API_BASE_URL + "/logout", {
-    method: "POST",
+    method: "GET",
     mode: "cors",
     credentials: "include",
   });
