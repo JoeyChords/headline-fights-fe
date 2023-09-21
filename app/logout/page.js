@@ -5,7 +5,7 @@ import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 export default function Logout() {
   const router = useRouter();
 
-  fetch("/api/logout", {
+  fetch("../api/logout", {
     method: "GET",
   })
     .then((res) => res.json())
