@@ -8,7 +8,8 @@ export async function GET(request) {
     mode: "cors",
     credentials: "include",
   });
-  const data = await res.json();
+  const data = await res.text();
+  console.log(data);
 
   return NextResponse.json({ data });
 }
