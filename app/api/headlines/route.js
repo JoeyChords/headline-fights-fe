@@ -6,7 +6,7 @@ export async function POST() {
     credentials: "include",
   });
   const cookieData = res.headers.getSetCookie();
-  console.log(res);
+
   var data = await res.json();
   data = JSON.stringify(data[0]);
 

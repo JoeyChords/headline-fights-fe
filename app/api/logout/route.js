@@ -5,8 +5,11 @@ export async function GET(request) {
     method: "GET",
     mode: "cors",
     credentials: "include",
+    cache: "no-store",
   });
-  const data = await res.json();
+
+  const data = await res.text();
+  console.log(data);
 
   return NextResponse.json({ data });
 }
