@@ -1,5 +1,4 @@
 "use client";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 
@@ -7,7 +6,7 @@ export default function Logout() {
   const router = useRouter();
 
   fetch("/api/logout", {
-    method: "POST",
+    method: "GET",
   })
     .then((res) => res.json())
     .then((response) => {
