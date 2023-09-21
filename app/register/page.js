@@ -45,8 +45,6 @@ export default function SignUp() {
 
     fetch("/api/register", {
       method: "POST",
-      withCredentials: true,
-      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
     }).then((res) => {

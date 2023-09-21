@@ -17,11 +17,11 @@ export default function Headline() {
 
   //Fetch new headline and accompanying image on page load
   useEffect(() => {
-    fetch("/api/headlines", { method: "POST", withCredentials: true, credentials: "include" })
+    fetch("/api/headlines", { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines.data[0]);
-        console.log(headlines.data[0]);
+        setheadlines(headlines);
+        console.log(headlines);
         setLoading(false);
       });
   }, []);
@@ -29,11 +29,11 @@ export default function Headline() {
   //Fetch new headline and accompanying image on submit
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch("/api/headlines", { method: "POST", withCredentials: true, credentials: "include" })
+    fetch("/api/headlines", { method: "POST" })
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines.data[0]);
-        console.log(headlines.data[0]);
+        setheadlines(headlines);
+        console.log(headlines);
         setLoading(false);
       });
 

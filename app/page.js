@@ -1,7 +1,16 @@
 "use client";
 import AppBarLoggedOut from "/app/components/app-bar/appBarLoggedOut.js";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    fetch("/api/home", { method: "GET", credentials: "include" })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+      });
+  }, []);
+
   return (
     <>
       <main>

@@ -46,17 +46,17 @@ export default function SignIn() {
         };
         let response = await fetch("/api/login", {
           method: "POST",
-          withCredentials: true,
-          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
+
         response = await response.text();
         response = await JSON.parse(response);
-        if (response.data == "Unauthorized") {
+
+        if (response == "Unauthorized") {
           setHelperText("Something is wrong with your email or password");
         } else {
-          response = await JSON.parse(response.data);
+          response = await JSON.parse(response);
           if (response.isSignedIn == "True") {
             setError(false);
             setHelperText("Loading...");

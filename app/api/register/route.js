@@ -6,9 +6,9 @@ export async function POST(request) {
   const headersList = headers();
   const contentType = headersList.get("content-type");
   const bodyContent = await request.json();
-  const res = await fetch(process.env.DEV_REGISTER_API, {
+  const res = await fetch(process.env.API_BASE_URL + "/register", {
     method: "POST",
-    withCredentials: true,
+    mode: "cors",
     credentials: "include",
     headers: { "Content-Type": contentType },
     body: JSON.stringify(bodyContent),

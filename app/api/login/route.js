@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 
 //Uses headers and body content from original request on register page form
@@ -6,14 +5,26 @@ export async function POST(request) {
   const headersList = headers();
   const contentType = headersList.get("content-type");
   const bodyContent = await request.json();
-  const res = await fetch(process.env.DEV_LOGIN_API, {
+  const res = await fetch(process.env.API_BASE_URL + "/login", {
     method: "POST",
-    withCredentials: true,
-    credentials: "include",
     headers: { "Content-Type": contentType },
     body: JSON.stringify(bodyContent),
+    credentials: "include",
   });
-  var data = await res.text();
 
-  return NextResponse.json({ data });
+  //Parse body to send in response
+  var data = await res.text();
+  data = JSON.stringify(data);
+  var cookieData = res.headers.getSetCookie();
+
+  return new Response(data, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Credentials": "true",
+      "Content-Type": "application/json",
+      "Set-Cookie": cookieData,
+    },
+  });
 }
