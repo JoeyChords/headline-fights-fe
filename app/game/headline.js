@@ -1,41 +1,80 @@
-import Image from "next/image";
-import Button from "@mui/material/Button";
+//Fetches and renders the game headlines and images
+"use client";
+import { useEffect, useState } from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
+import Image from "next/image";
+import PublicationForm from "./publicationForm";
 
-var photo = "/public/images/image-not-found.png";
+//Placeholder image in case of missing images
+var photo = "/image-not-found.png";
 
-// This gets called on every request
-async function getHeadline() {
-  // Fetch data from external API
-  const res = await fetch("http://localhost:3000/headlines");
-  const data = await res.json();
-  let dataString = JSON.stringify(data);
-  let headline = JSON.parse(dataString);
-  console.log(data);
+export default function Headline() {
+  const [headlines, setheadlines] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
-  return headline;
-}
+  //Fetch new headline and accompanying image on page load
+  useEffect(() => {
+    fetch("/api/headlines", { method: "POST", credentials: "include" })
+      .then((res) => res.json())
+      .then((headlines) => {
+        setheadlines(headlines);
+        console.log(headlines);
+        setLoading(false);
+      });
+  }, []);
 
-export default async function Headline() {
-  let headline = await getHeadline();
-  console.log(headline);
-  if (headline[0].photo_source_url != null) {
-    photo = headline[0].photo_source_url;
-    if (headline[0].photo_source_url.slice(0, 1) != "h") {
-      photo = "https://" + headline[0].photo_source_url;
+  //Fetch new headline and accompanying image on submit
+  const fetchOnClick = () => {
+    photo = "/image-not-found.png";
+    fetch("/api/headlines", { method: "POST" })
+      .then((res) => res.json())
+      .then((headlines) => {
+        setheadlines(headlines);
+        console.log(headlines);
+        setLoading(false);
+      });
+
+    //Set place holder image to headline image
+    if (headlines.photo_source_url != null) {
+      photo = headlines.photo_source_url;
     }
+  };
+
+  if (isLoading)
+    return (
+      <>
+        <Container sx={{ mt: 30 }} maxWidth="lg">
+          <p className="text-center">Loading...</p>
+        </Container>
+      </>
+    );
+  if (!headlines)
+    return (
+      <>
+        <Container sx={{ mt: 30 }} maxWidth="lg">
+          <p className="text-center">No headlines to show</p>
+        </Container>
+      </>
+    );
+
+  if (headlines.photo_source_url != null) {
+    photo = headlines.photo_source_url;
   }
   return (
     <>
-      <Container sx={{ mt: 30 }} maxWidth="lg">
+      <Container className="mt-6 md:mt-20" maxWidth="lg">
         <Grid direction="row" justifyContent="center" container spacing={2}>
-          <Grid xs={6}>
-            <h2>{headline[0].headline}</h2>
-            <Image className="rounded-lg" alt="" src={photo} width={720} height={405} />
+          <Grid xs={12} md={6}>
+            <Card sx={{ boxShadow: 3 }}>
+              <CardHeader title=<h2 className="font-bold text-2xl">{headlines.headline}</h2>></CardHeader>
+              <Image priority={true} alt="" src={photo} width={720} height={405} />
+            </Card>
           </Grid>
-          <Grid xs={6}>
-            <Button variant="contained">Submit</Button>
+          <Grid className="text-center" xs={12} md={6}>
+            <PublicationForm headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
           </Grid>
         </Grid>
       </Container>
