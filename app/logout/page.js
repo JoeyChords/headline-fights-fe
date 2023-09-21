@@ -1,17 +1,21 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 
 export default function Logout() {
   const router = useRouter();
 
-  fetch("../api/logout", {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((response) => {
-      router.push("/login");
-    });
+  useEffect(() => {
+    fetch("/api/logout", {
+      method: "GET",
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        router.push("/login");
+      });
+  });
 
   return (
     <>
