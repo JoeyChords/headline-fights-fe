@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "app/theme.js";
+const API_ENDPOINT = require("app/config");
 
 function Copyright(props) {
   return (
@@ -43,7 +44,7 @@ export default function SignUp() {
       password: data.get("password"),
     };
 
-    fetch("/api/register", {
+    fetch(API_ENDPOINT + "/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
