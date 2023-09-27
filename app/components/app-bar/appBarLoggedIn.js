@@ -12,13 +12,22 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { indigo } from "@mui/material/colors";
+import { usePathname, useSearchParams } from "next/navigation";
+var capitalize = require("lodash/capitalize");
 
 const pages = { Login: "/register", Signup: "/signup" };
-const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/logout" };
 
-function AppBarLoggedIn() {
+function AppBarLoggedIn(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  //Get username from URL
+  const name = useSearchParams().get("name");
+  const settings = {
+    Dashboard: `/dashboard?name=${useSearchParams().get("name")}`,
+    Settings: `/settings?name=${useSearchParams().get("name")}`,
+    Logout: `/logout?name=${useSearchParams().get("name")}`,
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,7 +53,7 @@ function AppBarLoggedIn() {
             variant="h6"
             noWrap
             component="a"
-            href="/game"
+            href={`/game?name=${useSearchParams().get("name")}`}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -64,7 +73,7 @@ function AppBarLoggedIn() {
             variant="h5"
             noWrap
             component="a"
-            href="/game"
+            href={`/game?name=${useSearchParams().get("name")}`}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -85,7 +94,9 @@ function AppBarLoggedIn() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" />
+                <Avatar sx={{ bgcolor: indigo[200] }} alt={capitalize(name)}>
+                  {capitalize(name).slice(0, 1)}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

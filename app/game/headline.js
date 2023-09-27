@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
+const API_ENDPOINT = require("/app/config");
 
 //Placeholder image in case of missing images
 var photo = "/image-not-found.png";
@@ -17,11 +18,11 @@ export default function Headline() {
 
   //Fetch new headline and accompanying image on page load
   useEffect(() => {
-    fetch("/api/headlines", { method: "POST", credentials: "include" })
+    fetch(API_ENDPOINT + "/headlines/", { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines);
-        console.log(headlines);
+        setheadlines(headlines[0]);
+        console.log(headlines[0]);
         setLoading(false);
       });
   }, []);
@@ -29,11 +30,11 @@ export default function Headline() {
   //Fetch new headline and accompanying image on submit
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch("/api/headlines", { method: "POST" })
+    fetch(API_ENDPOINT + "/headlines", { method: "POST" })
       .then((res) => res.json())
       .then((headlines) => {
-        setheadlines(headlines);
-        console.log(headlines);
+        setheadlines(headlines[0]);
+        console.log(headlines[0]);
         setLoading(false);
       });
 

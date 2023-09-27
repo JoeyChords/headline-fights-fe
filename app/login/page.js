@@ -2,19 +2,16 @@
 import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
-import { useState } from "react";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { LegendToggleRounded } from "@mui/icons-material";
+const API_ENDPOINT = require("/app/config");
 
 function Copyright(props) {
   return (
@@ -44,14 +41,12 @@ export default function SignIn() {
           email: data.get("email"),
           password: data.get("password"),
         };
-        let response = await fetch("/api/login", {
+        let response = await fetch(`${API_ENDPOINT}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
-
         response = await response.text();
-        response = await JSON.parse(response);
 
         if (response == "Unauthorized") {
           setHelperText("Something is wrong with your email or password");
@@ -60,7 +55,7 @@ export default function SignIn() {
           if (response.isSignedIn == "True") {
             setError(false);
             setHelperText("Loading...");
-            router.push("/game");
+            router.push(`/game?name=${response.user}`);
           }
         }
       } catch (err) {

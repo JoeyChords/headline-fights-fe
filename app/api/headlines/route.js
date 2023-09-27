@@ -1,3 +1,5 @@
+// This to nested server side component so env works
+
 import { NextResponse } from "next/server";
 
 export async function POST() {

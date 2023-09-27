@@ -2,13 +2,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
+const API_ENDPOINT = require("/app/config");
 
 export default function Logout() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/logout", {
+    fetch(API_ENDPOINT + "/logout", {
       method: "GET",
+      credentials: "include",
       cache: "no-store",
     })
       .then((res) => res.json())
