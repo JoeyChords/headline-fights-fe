@@ -3,8 +3,6 @@ import Headline from "app/game/headline.js";
 import AppBarLoggedIn from "app/components/app-bar/appBarLoggedIn.js";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { usePathname, useSearchParams } from "next/navigation";
-var capitalize = require("lodash/capitalize");
 
 function Copyright(props) {
   return (
@@ -20,11 +18,10 @@ function Copyright(props) {
 }
 
 export default function Home() {
-  const name = useSearchParams().get("name");
   return (
     <>
       <main>
-        <AppBarLoggedIn alt={capitalize(name)}></AppBarLoggedIn>
+        <AppBarLoggedIn></AppBarLoggedIn>
         <Headline></Headline>
         <Copyright sx={{ mt: 5 }} />
       </main>
