@@ -24,9 +24,9 @@ function AppBarLoggedIn(props) {
   //Get username from URL
   const name = useSearchParams().get("name");
   const settings = {
-    Dashboard: `/dashboard?name=${useSearchParams().get("name")}`,
-    Settings: `/settings?name=${useSearchParams().get("name")}`,
-    Logout: `/logout?name=${useSearchParams().get("name")}`,
+    Dashboard: props.name != null ? `/dashboard?name=${props.name}` : `/dashboard?name=${name}`,
+    Settings: props.name != null ? `/settings?name=${props.name}` : `/settings?name=${name}`,
+    Logout: props.name != null ? `/logout?name=${props.name}` : `/logout?name=${name}`,
   };
 
   const handleOpenNavMenu = (event) => {
@@ -95,7 +95,7 @@ function AppBarLoggedIn(props) {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={{ bgcolor: indigo[200] }} alt={capitalize(name)}>
-                  {capitalize(name).slice(0, 1)}
+                  {props.name != null ? capitalize(props.name).slice(0, 1) : capitalize(name).slice(0, 1)}
                 </Avatar>
               </IconButton>
             </Tooltip>

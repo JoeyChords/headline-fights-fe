@@ -43,6 +43,7 @@ export default function SignIn() {
         };
         let response = await fetch(`${API_ENDPOINT}/login`, {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
