@@ -1,5 +1,6 @@
 "use client";
 import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   return (

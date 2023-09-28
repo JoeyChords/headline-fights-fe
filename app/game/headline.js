@@ -7,6 +7,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
+import { useRouter } from "next/navigation";
+
 const API_ENDPOINT = require("/app/config");
 
 //Placeholder image in case of missing images
@@ -15,27 +17,36 @@ var photo = "/image-not-found.png";
 export default function Headline() {
   const [headlines, setheadlines] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
 
   //Fetch new headline and accompanying image on page load
   useEffect(() => {
     fetch(API_ENDPOINT + "/headlines/", { method: "POST", credentials: "include" })
       .then((res) => res.json())
-      .then((headlines) => {
-        setheadlines(headlines[0]);
-        console.log(headlines[0]);
-        setLoading(false);
+      .then((response) => {
+        console.log(response);
+        if (response.isAuthenticated) {
+          setheadlines(response.headline);
+          setLoading(false);
+        } else {
+          router.push("/login");
+        }
       });
-  }, []);
+  }, [router]);
 
   //Fetch new headline and accompanying image on submit
   const fetchOnClick = () => {
     photo = "/image-not-found.png";
-    fetch(API_ENDPOINT + "/headlines", { method: "POST" })
+    fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
       .then((res) => res.json())
-      .then((headlines) => {
-        setheadlines(headlines[0]);
-        console.log(headlines[0]);
-        setLoading(false);
+      .then((response) => {
+        console.log(response);
+        if (response.isAuthenticated) {
+          setheadlines(response.headline);
+          setLoading(false);
+        } else {
+          router.push("/login");
+        }
       });
 
     //Set place holder image to headline image
