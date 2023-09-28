@@ -8,7 +8,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
 import { useRouter } from "next/navigation";
-
 const API_ENDPOINT = require("/app/config");
 
 //Placeholder image in case of missing images
@@ -21,7 +20,7 @@ export default function Headline() {
 
   //Fetch new headline and accompanying image on page load
   useEffect(() => {
-    fetch(API_ENDPOINT + "/headlines/", { method: "POST", credentials: "include" })
+    fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((response) => {
         console.log(response);
@@ -59,7 +58,7 @@ export default function Headline() {
     return (
       <>
         <Container sx={{ mt: 30 }} maxWidth="lg">
-          <p className="text-center">Loading...</p>
+          <p className="text-center mt-20">Loading...</p>
         </Container>
       </>
     );
