@@ -23,7 +23,7 @@ export default function Headline() {
     fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
+        console.log(response.headline);
         if (response.isAuthenticated) {
           setheadlines(response.headline);
           setLoading(false);
@@ -39,7 +39,7 @@ export default function Headline() {
     fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
+        console.log(response.headline);
         if (response.isAuthenticated) {
           setheadlines(response.headline);
           setLoading(false);

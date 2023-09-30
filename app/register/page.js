@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import AppBarRegisterPage from "/app/components/app-bar/appBarRegisterPage.js";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "app/theme.js";
+import { useRouter } from "next/navigation";
 const API_ENDPOINT = require("app/config");
 
 function Copyright(props) {
@@ -32,6 +32,7 @@ function Copyright(props) {
 
 export default function SignUp() {
   const [helperText, setHelperText] = React.useState("");
+  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,15 +45,15 @@ export default function SignUp() {
       password: data.get("password"),
     };
 
-    fetch(API_ENDPOINT + "/register", {
+    fetch(`${API_ENDPOINT}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
     }).then((res) => {
       res.json().then((response) => {
         //Check to see if the email address is available
-        if (response.data[0].available == "True") {
-          window.location.href = "http://localhost:3001/login";
+        if (response.available == "True") {
+          router.push("/login");
         } else {
           setHelperText("The email address you entered is already in use");
         }
