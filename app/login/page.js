@@ -38,9 +38,10 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: data.get("email"),
+          email: data.get("email").toLowerCase(),
           password: data.get("password"),
         };
+
         let response = await fetch(`${API_ENDPOINT}/login`, {
           method: "POST",
           credentials: "include",
