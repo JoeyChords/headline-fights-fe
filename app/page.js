@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 const API_ENDPOINT = require("/app/config");
 
-export default function Settings() {
+export default function Home() {
   const queryName = useSearchParams().get("name");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUsername] = useState("");

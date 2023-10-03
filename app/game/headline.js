@@ -14,7 +14,8 @@ const API_ENDPOINT = require("/app/config");
 var photo = "/image-not-found.png";
 
 export default function Headline() {
-  const [headlines, setheadlines] = useState(null);
+  const [headlines, setHeadlines] = useState(null);
+  const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -25,8 +26,13 @@ export default function Headline() {
       .then((response) => {
         console.log(response.headline);
         if (response.isAuthenticated) {
-          setheadlines(response.headline);
-          setLoading(false);
+          if (!response.getNewHeadline) {
+            setHeadlines(response.headline);
+            setUser(response.user);
+            setLoading(false);
+          } else {
+            fetchOnClick();
+          }
         } else {
           router.push("/login");
         }
@@ -34,15 +40,27 @@ export default function Headline() {
   }, [router]);
 
   //Fetch new headline and accompanying image on submit
-  const fetchOnClick = () => {
+  //Pass answers here
+  const fetchOnClick = (userFeedback) => {
+    console.log(userFeedback);
     photo = "/image-not-found.png";
-    fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
+    fetch(API_ENDPOINT + "/headlines", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userFeedback),
+    })
       .then((res) => res.json())
       .then((response) => {
         console.log(response.headline);
         if (response.isAuthenticated) {
-          setheadlines(response.headline);
-          setLoading(false);
+          if (!response.getNewHeadline) {
+            setHeadlines(response.headline);
+            setUser(response.user);
+            setLoading(false);
+          } else {
+            fetchOnClick();
+          }
         } else {
           router.push("/login");
         }
@@ -85,7 +103,7 @@ export default function Headline() {
             </Card>
           </Grid>
           <Grid className="text-center" xs={12} md={6}>
-            <PublicationForm headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
+            <PublicationForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
           </Grid>
         </Grid>
       </Container>
