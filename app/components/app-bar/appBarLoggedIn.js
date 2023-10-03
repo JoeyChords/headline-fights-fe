@@ -115,6 +115,7 @@ function AppBarLoggedIn(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              <Typography class="text-center text-xs">{props.name}</Typography>
               {Object.entries(settings).map(([setting, path]) => (
                 <MenuItem component={Link} href={path} key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
