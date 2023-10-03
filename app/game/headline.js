@@ -31,7 +31,7 @@ export default function Headline() {
             setUser(response.user);
             setLoading(false);
           } else {
-            Headline();
+            fetchOnClick();
           }
         } else {
           router.push("/login");
@@ -54,9 +54,13 @@ export default function Headline() {
       .then((response) => {
         console.log(response.headline);
         if (response.isAuthenticated) {
-          setHeadlines(response.headline);
-          setUser(response.user);
-          setLoading(false);
+          if (!response.getNewHeadline) {
+            setHeadlines(response.headline);
+            setUser(response.user);
+            setLoading(false);
+          } else {
+            fetchOnClick();
+          }
         } else {
           router.push("/login");
         }
