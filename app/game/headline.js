@@ -67,6 +67,7 @@ export default function Headline() {
             setHeadlines(response.headline);
             setUser(response.user);
             setLoading(false);
+            setPublicationStats(response.publicationStats);
           } else {
             /**
              * Re-render loading message to rerun useEffect
