@@ -17,6 +17,7 @@ export default function Headline() {
   const [headlines, setHeadlines] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const [publicationStats, setPublicationStats] = useState(null);
   const router = useRouter();
 
   /**
@@ -37,6 +38,7 @@ export default function Headline() {
           if (!response.getNewHeadline) {
             setHeadlines(response.headline);
             setUser(response.user);
+            setPublicationStats(response.publicationStats);
             setLoading(false);
           } else {
             fetchOnClick();
@@ -108,7 +110,7 @@ export default function Headline() {
             </Card>
           </Grid>
           <Grid className="text-center" xs={12} md={6}>
-            <PublicationForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
+            <PublicationForm user={user} headlines={headlines} publicationStats={publicationStats} fetchOnClick={fetchOnClick}></PublicationForm>
           </Grid>
         </Grid>
       </Container>
