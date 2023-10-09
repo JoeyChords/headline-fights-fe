@@ -11,6 +11,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import normalizeEmail from "validator/lib/normalizeEmail";
 const API_ENDPOINT = require("/app/config");
 
 function Copyright(props) {
@@ -38,7 +39,7 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: data.get("email").toLowerCase(),
+          email: normalizeEmail(data.get("email")),
           password: data.get("password"),
         };
 
