@@ -82,7 +82,7 @@ export default function PublicationForm({ user, headlines, publicationStats, fet
   if (publicationCorrect) {
     return (
       <>
-        <h1 className="mt-5 md:mt-19">You got it right. Great job!</h1>
+        <h1 className="mt-6 md:mt-19">You got it right. Great job!</h1>
         <div className="flex items-center justify-center">
           <BarChart
             dataset={dataset}
@@ -102,7 +102,7 @@ export default function PublicationForm({ user, headlines, publicationStats, fet
   } else if (publicationCorrect === false) {
     return (
       <>
-        <h1 className="mt-5 md:mt-19">Wrong answer. Better luck next time.</h1>
+        <h1 className="mt-6 md:mt-19">Wrong answer. Better luck next time.</h1>
         <div className="flex items-center justify-center">
           <BarChart
             className="mr-auto ml-auto"
@@ -123,7 +123,7 @@ export default function PublicationForm({ user, headlines, publicationStats, fet
   }
 
   return (
-    <form className="mt-5 md:mt-19" onSubmit={handleSubmit}>
+    <form className="mt-6 md:mt-20" onSubmit={handleSubmit}>
       <FormControl variant="standard">
         <FormLabel id="publication-radio-group-label">Guess the news source:</FormLabel>
         <RadioGroup
