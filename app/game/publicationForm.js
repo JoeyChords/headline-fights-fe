@@ -7,11 +7,43 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import HeadlineButton from "./getHeadlineButton";
 import UserFeedback from "./classes/UserFeedback";
+import { BarChart } from "@mui/x-charts/BarChart";
+import { axisClasses } from "@mui/x-charts";
 
-export default function PublicationForm({ user, headlines, fetchOnClick }) {
+export default function PublicationForm({ user, headlines, publicationStats, fetchOnClick }) {
   const [publicationValue, setPublicationValue] = React.useState("");
   const [publicationCorrect, setPublicationCorrect] = React.useState(null);
+  const [publicationDataset, setPublicationDataset] = React.useState([
+    {
+      you: 0,
+      crowd: 0,
+      publication: "CNN",
+    },
+    {
+      you: 0,
+      crowd: 0,
+      publication: "Fox News",
+    },
+  ]);
   const [disabled, setDisabled] = React.useState(true);
+
+  const chartSetting = {
+    yAxis: [
+      {
+        label: "Guess Accuracy (Overall)",
+      },
+    ],
+    width: 300,
+    height: 300,
+    sx: {
+      [`.${axisClasses.left} .${axisClasses.label}`]: {
+        transform: "rotate(-90deg) translate(0px, -20px)",
+      },
+    },
+  };
+  let dataset = publicationDataset;
+
+  const valueFormatter = (value) => `${value}%`;
 
   const handlePublicationRadioChange = (event) => {
     setPublicationValue(event.target.value);
@@ -20,7 +52,18 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setPublicationDataset([
+      {
+        you: publicationStats.userPub1Percent,
+        crowd: publicationStats.crowdPub1Percent,
+        publication: "CNN",
+      },
+      {
+        you: publicationStats.userPub2Percent,
+        crowd: publicationStats.crowdPub2Percent,
+        publication: "Fox News",
+      },
+    ]);
     if (publicationValue === headlines.publication) {
       setPublicationCorrect(true);
     } else {
@@ -39,7 +82,18 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   if (publicationCorrect) {
     return (
       <>
-        <h1 className="mt-8 md:mt-24">You got it right. Great job!</h1>
+        <h1 className="mt-5 md:mt-19">You got it right. Great job!</h1>
+        <div className="flex items-center justify-center">
+          <BarChart
+            dataset={dataset}
+            xAxis={[{ scaleType: "band", dataKey: "publication" }]}
+            series={[
+              { dataKey: "you", label: "You", valueFormatter },
+              { dataKey: "crowd", label: "Crowd", valueFormatter },
+            ]}
+            {...chartSetting}
+          />
+        </div>
         <div className="mt-5">
           <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
         </div>
@@ -48,7 +102,19 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   } else if (publicationCorrect === false) {
     return (
       <>
-        <h1 className="mt-8 md:mt-24">Wrong answer. Better luck next time.</h1>
+        <h1 className="mt-5 md:mt-19">Wrong answer. Better luck next time.</h1>
+        <div className="flex items-center justify-center">
+          <BarChart
+            className="mr-auto ml-auto"
+            dataset={dataset}
+            xAxis={[{ scaleType: "band", dataKey: "publication" }]}
+            series={[
+              { dataKey: "you", label: "You", valueFormatter },
+              { dataKey: "crowd", label: "Crowd", valueFormatter },
+            ]}
+            {...chartSetting}
+          />
+        </div>
         <div className="mt-5">
           <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
         </div>
@@ -57,7 +123,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   }
 
   return (
-    <form className="mt-6 md:mt-20" onSubmit={handleSubmit}>
+    <form className="mt-5 md:mt-19" onSubmit={handleSubmit}>
       <FormControl variant="standard">
         <FormLabel id="publication-radio-group-label">Guess the news source:</FormLabel>
         <RadioGroup
