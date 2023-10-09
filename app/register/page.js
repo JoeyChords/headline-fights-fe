@@ -15,6 +15,10 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "app/theme.js";
 import { useRouter } from "next/navigation";
+import isEmail from "validator/lib/isEmail";
+import isStrongPassword from "validator/lib/isStrongPassword";
+import normalizeEmail from "validator/lib/normalizeEmail";
+
 const API_ENDPOINT = require("app/config");
 
 function Copyright(props) {
@@ -41,24 +45,32 @@ export default function SignUp() {
 
     const userInput = {
       name: data.get("name"),
-      email: data.get("email"),
+      email: normalizeEmail(data.get("email")),
       password: data.get("password"),
     };
 
-    fetch(`${API_ENDPOINT}/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userInput),
-    }).then((res) => {
-      res.json().then((response) => {
-        //Check to see if the email address is available
-        if (response.available == "True") {
-          router.push("/login");
-        } else {
-          setHelperText("The email address you entered is already in use");
-        }
+    if (isEmail(userInput.email) && isStrongPassword(userInput.password)) {
+      fetch(`${API_ENDPOINT}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      }).then((res) => {
+        res.json().then((response) => {
+          //Check to see if the email address is available
+          if (response.available == "True") {
+            router.push("/login");
+          } else {
+            setHelperText("The email address you entered is already in use");
+          }
+        });
       });
-    });
+    } else if (!isEmail(userInput.email) || response.validEmail == "False") {
+      setHelperText("Please enter a valid email address");
+    } else if (!isStrongPassword(userInput.password)) {
+      setHelperText(
+        "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+      );
+    }
   };
 
   return (

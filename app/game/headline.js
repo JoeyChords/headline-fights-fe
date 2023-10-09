@@ -19,30 +19,11 @@ export default function Headline() {
   const [isLoading, setLoading] = useState(true);
   const router = useRouter();
 
-  //Fetch new headline and accompanying image on page load
-  useEffect(() => {
-    fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response.headline);
-        if (response.isAuthenticated) {
-          if (!response.getNewHeadline) {
-            setHeadlines(response.headline);
-            setUser(response.user);
-            setLoading(false);
-          } else {
-            fetchOnClick();
-          }
-        } else {
-          router.push("/login");
-        }
-      });
-  }, [router]);
-
-  //Fetch new headline and accompanying image on submit
-  //Pass answers here
+  /**
+   * Fetch new headline and accompanying image on user submit.
+   * Send user feedback to API.
+   */
   const fetchOnClick = (userFeedback) => {
-    console.log(userFeedback);
     photo = "/image-not-found.png";
     fetch(API_ENDPOINT + "/headlines", {
       method: "POST",
@@ -52,7 +33,6 @@ export default function Headline() {
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response.headline);
         if (response.isAuthenticated) {
           if (!response.getNewHeadline) {
             setHeadlines(response.headline);
@@ -65,12 +45,37 @@ export default function Headline() {
           router.push("/login");
         }
       });
-
-    //Set place holder image to headline image
+    /**
+     * Set place holder image to headline image
+     */
     if (headlines.photo_source_url != null) {
       photo = headlines.photo_source_url;
     }
   };
+
+  /**
+   * Fetch new headline and accompanying image on page load
+   */
+  useEffect(() => {
+    fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.isAuthenticated) {
+          if (!response.getNewHeadline) {
+            setHeadlines(response.headline);
+            setUser(response.user);
+            setLoading(false);
+          } else {
+            /**
+             * Re-render loading message to rerun useEffect
+             */
+            setLoading(true);
+          }
+        } else {
+          router.push("/login");
+        }
+      });
+  }, [router]);
 
   if (isLoading)
     return (
