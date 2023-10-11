@@ -16,7 +16,7 @@ const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
 
 export default function PublicationForm({ user, headlines, fetchOnClick }) {
-  const [publicationCorrect, setPublicationCorrect] = React.useState(null);
+  const [publicationCorrect, setPublicationCorrect] = React.useState(undefined);
   const [publicationValue, setPublicationValue] = React.useState("");
   const [publicationDataset, setPublicationDataset] = React.useState([
     {
@@ -92,7 +92,6 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
               publication: PUB_2,
             },
           ]);
-          console.log("Fetched");
         } else {
           router.push("/login");
         }
