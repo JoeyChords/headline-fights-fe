@@ -3,7 +3,8 @@ import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-const API_ENDPOINT = require("/app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Settings() {
   const queryName = useSearchParams().get("name");
@@ -16,7 +17,6 @@ export default function Settings() {
       fetch(`${API_ENDPOINT}/settings`, { method: "GET", credentials: "include" })
         .then((res) => res.json())
         .then((response) => {
-          console.log(response);
           if (response.isAuthenticated) {
             setIsLoggedIn(true);
             setUsername(response.user.username);

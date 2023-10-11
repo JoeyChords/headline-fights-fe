@@ -9,23 +9,31 @@ import HeadlineButton from "./getHeadlineButton";
 import UserFeedback from "./classes/UserFeedback";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
+import { useRouter } from "next/navigation";
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
+const PUB_1 = config.PUB_1;
+const PUB_2 = config.PUB_2;
 
-export default function PublicationForm({ user, headlines, publicationStats, fetchOnClick }) {
-  const [publicationValue, setPublicationValue] = React.useState("");
+export default function PublicationForm({ user, headlines, fetchOnClick }) {
   const [publicationCorrect, setPublicationCorrect] = React.useState(null);
+  const [publicationValue, setPublicationValue] = React.useState("");
   const [publicationDataset, setPublicationDataset] = React.useState([
     {
       you: 0,
       crowd: 0,
-      publication: "CNN",
+      publication: PUB_1,
     },
     {
       you: 0,
       crowd: 0,
-      publication: "Fox News",
+      publication: PUB_2,
     },
   ]);
   const [disabled, setDisabled] = React.useState(true);
+  const router = useRouter();
+  let feedback = {};
+  let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
 
   const chartSetting = {
     yAxis: [
@@ -52,31 +60,52 @@ export default function PublicationForm({ user, headlines, publicationStats, fet
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPublicationDataset([
-      {
-        you: publicationStats.userPub1Percent,
-        crowd: publicationStats.crowdPub1Percent,
-        publication: "CNN",
-      },
-      {
-        you: publicationStats.userPub2Percent,
-        crowd: publicationStats.crowdPub2Percent,
-        publication: "Fox News",
-      },
-    ]);
+
     if (publicationValue === headlines.publication) {
       setPublicationCorrect(true);
+      publicationCorrectProxy = true;
     } else {
       setPublicationCorrect(false);
+      publicationCorrectProxy = false;
     }
-    setDisabled(true);
+
+    feedback = new UserFeedback(headlines.publication, publicationCorrectProxy, headlines._id, user.id);
+
+    fetch(API_ENDPOINT + "/updateStatistics", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(feedback),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.isAuthenticated) {
+          setPublicationDataset([
+            {
+              you: response.publicationStats.userPub1Percent,
+              crowd: response.publicationStats.crowdPub1Percent,
+              publication: PUB_1,
+            },
+            {
+              you: response.publicationStats.userPub2Percent,
+              crowd: response.publicationStats.crowdPub2Percent,
+              publication: PUB_2,
+            },
+          ]);
+          console.log("Fetched");
+        } else {
+          router.push("/login");
+        }
+      });
   };
 
   const getNextHeadline = () => {
-    const feedback = new UserFeedback(headlines.publication, publicationCorrect, headlines._id, user.id);
-    fetchOnClick(feedback);
+    fetchOnClick();
     setPublicationCorrect(null);
     setPublicationValue("");
+    setDisabled(true);
+    feedback = {};
+    publicationCorrectProxy = undefined;
   };
 
   if (publicationCorrect) {

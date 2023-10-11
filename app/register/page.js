@@ -19,7 +19,8 @@ import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import normalizeEmail from "validator/lib/normalizeEmail";
 
-const API_ENDPOINT = require("app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 function Copyright(props) {
   return (
@@ -59,12 +60,14 @@ export default function SignUp() {
           //Check to see if the email address is available
           if (response.available == "True") {
             router.push("/login");
+          } else if (response.validEmail == "False") {
+            setHelperText("Please enter a valid email address");
           } else {
             setHelperText("The email address you entered is already in use");
           }
         });
       });
-    } else if (!isEmail(userInput.email) || response.validEmail == "False") {
+    } else if (!isEmail(userInput.email)) {
       setHelperText("Please enter a valid email address");
     } else if (!isStrongPassword(userInput.password)) {
       setHelperText(

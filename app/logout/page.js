@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
-const API_ENDPOINT = require("/app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Logout() {
   const router = useRouter();

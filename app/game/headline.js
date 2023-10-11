@@ -8,7 +8,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import PublicationForm from "./publicationForm";
 import { useRouter } from "next/navigation";
-const API_ENDPOINT = require("/app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 //Placeholder image in case of missing images
 var photo = "/image-not-found.png";
@@ -17,20 +18,17 @@ export default function Headline() {
   const [headlines, setHeadlines] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  const [publicationStats, setPublicationStats] = useState(null);
   const router = useRouter();
 
   /**
    * Fetch new headline and accompanying image on user submit.
    * Send user feedback to API.
    */
-  const fetchOnClick = (userFeedback) => {
+  const fetchOnClick = () => {
     photo = "/image-not-found.png";
     fetch(API_ENDPOINT + "/headlines", {
       method: "POST",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userFeedback),
     })
       .then((res) => res.json())
       .then((response) => {
@@ -38,7 +36,6 @@ export default function Headline() {
           if (!response.getNewHeadline) {
             setHeadlines(response.headline);
             setUser(response.user);
-            setPublicationStats(response.publicationStats);
             setLoading(false);
           } else {
             fetchOnClick();
@@ -67,7 +64,6 @@ export default function Headline() {
             setHeadlines(response.headline);
             setUser(response.user);
             setLoading(false);
-            setPublicationStats(response.publicationStats);
           } else {
             /**
              * Re-render loading message to rerun useEffect
@@ -111,7 +107,7 @@ export default function Headline() {
             </Card>
           </Grid>
           <Grid className="text-center" xs={12} md={6}>
-            <PublicationForm user={user} headlines={headlines} publicationStats={publicationStats} fetchOnClick={fetchOnClick}></PublicationForm>
+            <PublicationForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
           </Grid>
         </Grid>
       </Container>
