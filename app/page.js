@@ -3,7 +3,8 @@ import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-const API_ENDPOINT = require("/app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Home() {
   const queryName = useSearchParams().get("name");

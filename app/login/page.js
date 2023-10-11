@@ -12,7 +12,8 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
-const API_ENDPOINT = require("/app/config");
+const config = require("/app/config");
+const API_ENDPOINT = config.API_ENDPOINT;
 
 function Copyright(props) {
   return (
