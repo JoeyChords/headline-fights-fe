@@ -105,7 +105,7 @@ function AppBarLoginPage() {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: black_ops_one.style.fontFamily,
               fontSize: 23,
               fontWeight: 400,
               letterSpacing: ".1rem",
