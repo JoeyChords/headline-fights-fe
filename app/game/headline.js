@@ -25,6 +25,7 @@ export default function Headline() {
    * Send user feedback to API.
    */
   const fetchOnClick = () => {
+    setLoading(true);
     photo = "/image-not-found.png";
     fetch(API_ENDPOINT + "/headlines", {
       method: "POST",
@@ -68,6 +69,7 @@ export default function Headline() {
             /**
              * Re-render loading message to rerun useEffect
              */
+            fetchOnClick();
             setLoading(true);
           }
         } else {
