@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { black_ops_one } from "/app/fonts";
 
 const pages = { Signup: "/register" };
 const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/" };
@@ -48,8 +49,8 @@ function AppBarLoginPage() {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
+              fontFamily: black_ops_one.style.fontFamily,
+              fontWeight: 400,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
@@ -106,7 +107,7 @@ function AppBarLoginPage() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontSize: 23,
-              fontWeight: 700,
+              fontWeight: 400,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",

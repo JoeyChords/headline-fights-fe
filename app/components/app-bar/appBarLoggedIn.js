@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { indigo } from "@mui/material/colors";
 import { usePathname, useSearchParams } from "next/navigation";
+import { black_ops_one } from "/app/fonts";
 var capitalize = require("lodash/capitalize");
 
 const pages = { Login: "/register", Signup: "/signup" };
@@ -57,8 +58,8 @@ function AppBarLoggedIn(props) {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
+              fontFamily: black_ops_one.style.fontFamily,
+              fontWeight: 400,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
@@ -78,9 +79,9 @@ function AppBarLoggedIn(props) {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: black_ops_one.style.fontFamily,
               fontSize: 23,
-              fontWeight: 700,
+              fontWeight: 400,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
