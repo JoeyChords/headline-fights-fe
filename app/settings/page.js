@@ -3,6 +3,9 @@ import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -45,7 +48,12 @@ export default function Settings() {
     <>
       <main>
         <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-        <p className="text-center mt-20">Loading...</p>
+        <Container sx={{ mt: 15 }} maxWidth="lg">
+          <Box justifyContent="center" sx={{ display: "flex" }}>
+            <CircularProgress color="secondary" />
+          </Box>
+          <p className="text-center mt-5">Loading...</p>
+        </Container>{" "}
       </main>
     </>
   );

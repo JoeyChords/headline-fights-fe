@@ -37,10 +37,13 @@ function Copyright(props) {
 
 export default function SignUp() {
   const [helperText, setHelperText] = React.useState("");
+  const [error, setError] = React.useState(false);
   const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(false);
+    setHelperText("Loading...");
 
     const data = new FormData(event.currentTarget);
 
@@ -61,15 +64,19 @@ export default function SignUp() {
           if (response.available == "True") {
             router.push("/login");
           } else if (response.validEmail == "False") {
+            setError(true);
             setHelperText("Please enter a valid email address");
           } else {
+            setError(true);
             setHelperText("The email address you entered is already in use");
           }
         });
       });
     } else if (!isEmail(userInput.email)) {
+      setError(true);
       setHelperText("Please enter a valid email address");
     } else if (!isStrongPassword(userInput.password)) {
+      setError(true);
       setHelperText(
         "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
       );
@@ -96,7 +103,7 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <FormHelperText error={true}>{helperText}</FormHelperText>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
