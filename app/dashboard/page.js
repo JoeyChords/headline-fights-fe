@@ -6,6 +6,9 @@ import { useSearchParams } from "next/navigation";
 import UserFeedback from "../game/classes/UserFeedback";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
+import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -45,6 +48,8 @@ export default function Dashboard() {
   let dataset = publicationDataset;
 
   const valueFormatter = (value) => `${value}%`;
+
+  const barColors = ["#e91e63", "#212121"];
 
   const router = useRouter();
 
@@ -88,6 +93,7 @@ export default function Dashboard() {
                 { dataKey: "crowd", label: "Crowd", valueFormatter },
               ]}
               {...chartSetting}
+              colors={barColors}
             />
           </div>
         </main>
@@ -99,7 +105,12 @@ export default function Dashboard() {
     <>
       <main>
         <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-        <p className="text-center mt-20">Loading...</p>
+        <Container sx={{ mt: 15 }} maxWidth="lg">
+          <Box justifyContent="center" sx={{ display: "flex" }}>
+            <CircularProgress color="secondary" />
+          </Box>
+          <p className="text-center mt-5">Loading...</p>
+        </Container>
       </main>
     </>
   );

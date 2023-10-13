@@ -6,21 +6,11 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {"Copyright © "}
-      <Link color="inherit" href="/game">
-        Headline Fights
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function Home() {
   const queryName = useSearchParams().get("name");
@@ -53,7 +43,6 @@ export default function Home() {
         <main>
           <AppBarLoggedIn name={userName}></AppBarLoggedIn>
           <Headline></Headline>
-          <Copyright sx={{ mt: 5 }} />
         </main>
       </>
     );
@@ -62,7 +51,12 @@ export default function Home() {
     <>
       <main>
         <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-        <p className="text-center mt-20">Loading...</p>
+        <Container sx={{ mt: 30 }} maxWidth="lg">
+          <Box justifyContent="center" sx={{ display: "flex" }}>
+            <CircularProgress color="secondary" />
+          </Box>
+          <p className="text-center mt-5">Loading...</p>
+        </Container>
       </main>
     </>
   );

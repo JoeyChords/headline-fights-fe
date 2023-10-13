@@ -7,6 +7,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import HeadlineButton from "./getHeadlineButton";
 import UserFeedback from "./classes/UserFeedback";
+import { red } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
 import { useRouter } from "next/navigation";
@@ -52,6 +54,8 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   let dataset = publicationDataset;
 
   const valueFormatter = (value) => `${value}%`;
+
+  const barColors = ["#e91e63", "#212121"];
 
   const handlePublicationRadioChange = (event) => {
     setPublicationValue(event.target.value);
@@ -120,6 +124,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
               { dataKey: "crowd", label: "Crowd", valueFormatter },
             ]}
             {...chartSetting}
+            colors={barColors}
           />
         </div>
         <div className="mt-5">
@@ -141,6 +146,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
               { dataKey: "crowd", label: "Crowd", valueFormatter },
             ]}
             {...chartSetting}
+            colors={barColors}
           />
         </div>
         <div className="mt-5">
