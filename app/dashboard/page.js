@@ -9,9 +9,11 @@ import { axisClasses } from "@mui/x-charts";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Grid from "@mui/system/Unstable_Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
+import HeadlineCount from "./components/HeadlineCount";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -21,6 +23,10 @@ export default function Dashboard() {
   const queryName = useSearchParams().get("name");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUsername] = useState("");
+  const [totalRatings, setTotalRatings] = useState("");
+  const [pub1Total, setPub1Total] = useState("");
+  const [pub2Total, setPub2Total] = useState("");
+
   const [publicationDataset, setPublicationDataset] = useState([
     {
       you: 0,
@@ -65,6 +71,9 @@ export default function Dashboard() {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);
           setUsername(response.user.username);
+          setTotalRatings(response.publicationStats.totalRatingsCount);
+          setPub1Total(response.publicationStats.pub1RatingsCount);
+          setPub2Total(response.publicationStats.pub2RatingsCount);
           setPublicationDataset([
             {
               you: response.publicationStats.userPub1Percent,
@@ -98,31 +107,52 @@ export default function Dashboard() {
           }}
         >
           <Container maxWidth="lg">
-            <Stack direction="row" justifyContent="center">
-              <Paper
-                elevation={2}
-                sx={{
-                  display: "flex",
-                  mt: 3,
-                  ml: 1,
-                  mr: 1,
-                  pb: 5,
-                  height: 380,
-                  width: 380,
-                }}
-              >
-                <BarChart
-                  dataset={dataset}
-                  xAxis={[{ scaleType: "band", dataKey: "publication" }]}
-                  series={[
-                    { dataKey: "you", label: "You", valueFormatter },
-                    { dataKey: "crowd", label: "Crowd", valueFormatter },
-                  ]}
-                  {...chartSetting}
-                  colors={barColors}
-                />
-              </Paper>
-            </Stack>
+            <Grid container spacing={2}>
+              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+                <Paper
+                  elevation={2}
+                  direction="column"
+                  justifyContent="center"
+                  sx={{
+                    display: "flex",
+                    mt: 3,
+                    ml: 1,
+                    mr: 1,
+                    p: 2,
+                    pt: 5,
+                    height: 380,
+                    width: 250,
+                  }}
+                >
+                  <HeadlineCount total={totalRatings} pub1Total={pub1Total} pub2Total={pub2Total}></HeadlineCount>
+                </Paper>
+              </Grid>
+              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+                <Paper
+                  elevation={2}
+                  sx={{
+                    display: "flex",
+                    mt: 3,
+                    ml: 1,
+                    mr: 1,
+                    pb: 5,
+                    height: 380,
+                    width: 360,
+                  }}
+                >
+                  <BarChart
+                    dataset={dataset}
+                    xAxis={[{ scaleType: "band", dataKey: "publication" }]}
+                    series={[
+                      { dataKey: "you", label: "You", valueFormatter },
+                      { dataKey: "crowd", label: "Crowd", valueFormatter },
+                    ]}
+                    {...chartSetting}
+                    colors={barColors}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
           </Container>
         </Box>
       </>
