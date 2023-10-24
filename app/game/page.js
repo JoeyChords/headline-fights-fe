@@ -1,6 +1,6 @@
 "use client";
-import Headline from "app/game/headline.js";
-import AppBarLoggedIn from "app/components/app-bar/appBarLoggedIn.js";
+import Headline from "./headline";
+import AppBarLoggedIn from "../components/app-bar/appBarLoggedIn";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";

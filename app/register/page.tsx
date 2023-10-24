@@ -1,5 +1,5 @@
 "use client";
-import AppBarRegisterPage from "/app/components/app-bar/appBarRegisterPage.js";
+import AppBarRegisterPage from "../components/app-bar/appBarRegisterPage";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,8 +12,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "app/theme.js";
+import { SxProps, ThemeProvider } from "@mui/material/styles";
+import theme from "../theme";
 import { useRouter } from "next/navigation";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
@@ -22,9 +22,9 @@ import normalizeEmail from "validator/lib/normalizeEmail";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
-function Copyright(props) {
+function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="theme.primary" align="center" {...props}>
+    <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="/">
         Headline Fights
@@ -40,14 +40,15 @@ export default function SignUp() {
   const [error, setError] = React.useState(false);
   const router = useRouter();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     setError(false);
     setHelperText("Loading...");
 
-    const data = new FormData(event.currentTarget);
+    const data: any = new FormData(event.currentTarget);
 
-    const userInput = {
+
+    const userInput: any = {
       name: data.get("name"),
       email: normalizeEmail(data.get("email")),
       password: data.get("password"),

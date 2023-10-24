@@ -9,6 +9,9 @@ import { axisClasses } from "@mui/x-charts";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { grey } from "@mui/material/colors";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -37,12 +40,13 @@ export default function Dashboard() {
         label: "Guess Accuracy (Overall)",
       },
     ],
-    width: 300,
-    height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
         transform: "rotate(-90deg) translate(0px, -20px)",
       },
+    },
+    margin: {
+      left: 70,
     },
   };
   let dataset = publicationDataset;
@@ -82,36 +86,69 @@ export default function Dashboard() {
   if (isLoggedIn) {
     return (
       <>
-        <main>
-          <AppBarLoggedIn name={userName}></AppBarLoggedIn>
-          <div className="flex items-center justify-center">
-            <BarChart
-              dataset={dataset}
-              xAxis={[{ scaleType: "band", dataKey: "publication" }]}
-              series={[
-                { dataKey: "you", label: "You", valueFormatter },
-                { dataKey: "crowd", label: "Crowd", valueFormatter },
-              ]}
-              {...chartSetting}
-              colors={barColors}
-            />
-          </div>
-        </main>
+        <AppBarLoggedIn name={userName}></AppBarLoggedIn>
+        <Box
+          component="main"
+          sx={{
+            bgcolor: grey[100],
+            display: "flex",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="lg">
+            <Stack direction="row" justifyContent="center">
+              <Paper
+                elevation={2}
+                sx={{
+                  display: "flex",
+                  mt: 3,
+                  ml: 1,
+                  mr: 1,
+                  pb: 5,
+                  height: 380,
+                  width: 380,
+                }}
+              >
+                <BarChart
+                  dataset={dataset}
+                  xAxis={[{ scaleType: "band", dataKey: "publication" }]}
+                  series={[
+                    { dataKey: "you", label: "You", valueFormatter },
+                    { dataKey: "crowd", label: "Crowd", valueFormatter },
+                  ]}
+                  {...chartSetting}
+                  colors={barColors}
+                />
+              </Paper>
+            </Stack>
+          </Container>
+        </Box>
       </>
     );
   }
 
   return (
     <>
-      <main>
-        <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
+      <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: grey[100],
+          display: "flex",
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+        }}
+      >
         <Container sx={{ mt: 15 }} maxWidth="lg">
           <Box justifyContent="center" sx={{ display: "flex" }}>
             <CircularProgress color="secondary" />
           </Box>
           <p className="text-center mt-5">Loading...</p>
         </Container>
-      </main>
+      </Box>
     </>
   );
 }
