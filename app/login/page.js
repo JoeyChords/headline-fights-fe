@@ -17,7 +17,7 @@ const API_ENDPOINT = config.API_ENDPOINT;
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="/">
         Headline Fights

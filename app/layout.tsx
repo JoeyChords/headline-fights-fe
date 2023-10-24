@@ -5,13 +5,12 @@ import ThemeRegistry from "./ThemeRegistry";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Headline Fights",
   description: "Remove your bias and find your truth",
 };
 
-// app/layout.js
-export default function RootLayout(props) {
+export default function RootLayout(props: any) {
   const { children } = props;
   return (
     <html lang="en">
