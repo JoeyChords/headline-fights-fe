@@ -45,7 +45,7 @@ function AppBarLoginPage() {
             variant="h6"
             noWrap
             component="a"
-            href="/game"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -100,7 +100,7 @@ function AppBarLoginPage() {
             variant="h5"
             noWrap
             component="a"
-            href="/game"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

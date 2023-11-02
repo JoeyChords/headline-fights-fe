@@ -1,17 +1,23 @@
 "use client";
 import AppBarLoggedIn from "./components/app-bar/appBarLoggedIn";
+import AppBarLoggedOut from "./components/app-bar/appBarLoggedOut";
+import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Grid from "@mui/system/Unstable_Grid";
+import { black_ops_one } from "./fonts";
+import { Typography } from "@mui/material";
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Home() {
   const queryName = useSearchParams().get("name");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [userName, setUsername] = useState("");
   const router = useRouter();
 
@@ -25,7 +31,7 @@ export default function Home() {
             setIsLoggedIn(true);
             setUsername(response.user.username);
           } else {
-            router.push("/login");
+            setIsLoggedIn(false);
           }
         });
     } else {
@@ -34,12 +40,40 @@ export default function Home() {
     }
   }, [router, queryName]);
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return (
       <>
         <main>
-          <AppBarLoggedIn name={userName}></AppBarLoggedIn>
-          <h1 className="text-center mt-20 font-bold text-2xl">Home Page Coming Soon</h1>
+          <AppBarLoggedOut></AppBarLoggedOut>
+          <Box component="section">
+            <Grid container spacing={0}>
+              <Grid xs={6} sx={{ display: "flex", justifyContent: "center" }}>
+                <Typography
+                  variant={"h1"}
+                  sx={{
+                    fontFamily: black_ops_one.style.fontFamily,
+                    fontSize: "4rem",
+                  }}
+                >
+                  CNN vs. Fox News
+                </Typography>
+                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+                  Submit Guess
+                </Button>
+                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+                  Submit Guess
+                </Button>
+              </Grid>
+              <Grid xs={6} sx={{ textAlign: "center" }}>
+                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+                  Submit Guess
+                </Button>
+                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+                  Submit Guess
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
         </main>
       </>
     );
