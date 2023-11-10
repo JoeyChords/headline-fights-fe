@@ -1,6 +1,6 @@
 "use client";
 import AppBarLoggedIn from "./components/app-bar/appBarLoggedIn";
-import AppBarLoggedOut from "./components/app-bar/appBarLoggedOut";
+import AppBarHomePage from "./components/app-bar/appBarHomePage";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import { black_ops_one } from "./fonts";
 import { Typography } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -44,36 +45,45 @@ export default function Home() {
     return (
       <>
         <main>
-          <AppBarLoggedOut></AppBarLoggedOut>
-          <Box component="section">
-            <Grid container spacing={0}>
-              <Grid xs={6} sx={{ display: "flex", justifyContent: "center" }}>
-                <Typography
-                  variant={"h1"}
-                  sx={{
-                    fontFamily: black_ops_one.style.fontFamily,
-                    fontSize: "4rem",
-                  }}
-                >
-                  CNN vs. Fox News
-                </Typography>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
-                  Submit Guess
-                </Button>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
-                  Submit Guess
-                </Button>
+          <div className="page-wrapper bg-black w-screen h-screen p-4">
+            <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "1rem", borderRadius: "1.75rem" }}>
+              <AppBarHomePage></AppBarHomePage>
+              <Grid container maxWidth="85rem" spacing={0} sx={{ mx: "auto" }}>
+                <Grid xs={12} sm={6} sx={{ display: "flex", justifyContent: "center" }}></Grid>
+                <Grid xs={12} sm={6} sx={{}}>
+                  <Typography
+                    component="div"
+                    variant={"h1"}
+                    sx={{
+                      fontFamily: black_ops_one.style.fontFamily,
+                      fontSize: "6.5rem",
+                      lineHeight: "1",
+                    }}
+                  >
+                    <Box>CNN</Box>
+                    <Box>VS</Box>
+                    <Box>Fox News</Box>
+                  </Typography>
+                  <Typography
+                    component="div"
+                    variant={"h2"}
+                    sx={{
+                      fontSize: "1.25rem",
+                      fontWeight: "500",
+                      lineHeight: "1.45rem",
+                    }}
+                  >
+                    <Box>
+                      Headline Fights finds out which is truly worse. Rate headlines without bias to find out what you and the crowd really think.
+                    </Box>
+                  </Typography>
+                  <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
+                    Submit Guess
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid xs={6} sx={{ textAlign: "center" }}>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
-                  Submit Guess
-                </Button>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained">
-                  Submit Guess
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          </div>
         </main>
       </>
     );
