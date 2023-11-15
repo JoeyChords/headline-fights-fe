@@ -6,9 +6,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
 import Paper from "@mui/material/Paper";
-import HeadlineCount from "@/app/dashboard/components/HeadlineCount";
+import StatsComponent from "@/app/components/homePage/statsComponent";
 
-export default function Stats() {
+export default function Stats(props: any) {
   return (
     <>
       <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "6rem 1rem", borderRadius: "1.75rem", width: "100%", mt: "5rem" }}>
@@ -18,19 +18,19 @@ export default function Stats() {
           </Typography>
         </Box>
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem" }}>
-          <Grid xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <HeadlineCount total={40} pub1Total={30} pub2Total={34}></HeadlineCount>
+              <StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>
+            </Box>
+          </Grid>
+          <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
+              <StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>
             </Box>
           </Grid>
           <Grid xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <HeadlineCount total={40} pub1Total={30} pub2Total={34}></HeadlineCount>
-            </Box>
-          </Grid>
-          <Grid xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <HeadlineCount total={40} pub1Total={30} pub2Total={34}></HeadlineCount>
+              <StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>
             </Box>
           </Grid>
         </Grid>

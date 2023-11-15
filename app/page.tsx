@@ -17,18 +17,20 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [userName, setUsername] = useState("");
   const router = useRouter();
+  const [stats, setStats] = useState({});
 
   useEffect(() => {
     if (!queryName) {
-      fetch(API_ENDPOINT, { method: "GET", credentials: "include" })
+      fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
         .then((res) => res.json())
         .then((response) => {
-          console.log(response);
           if (response.isAuthenticated) {
             setIsLoggedIn(true);
             setUsername(response.user.username);
+            router.push("/game");
           } else {
             setIsLoggedIn(false);
+            setStats(response);
           }
         });
     } else {
@@ -43,7 +45,7 @@ export default function Home() {
         <main>
           <Box className={"min-h-screen"} sx={{ bgcolor: "black", p: "1.25rem" }}>
             <HeroSection></HeroSection>
-            <Stats></Stats>
+            <Stats props={stats}></Stats>
           </Box>
         </main>
       </>
