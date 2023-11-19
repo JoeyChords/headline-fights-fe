@@ -5,6 +5,7 @@ import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
+import EvilChart from "@/app/components/homePage/evilChart";
 
 export default function HeroSection() {
   return (
@@ -12,7 +13,9 @@ export default function HeroSection() {
       <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "1rem", borderRadius: "1.75rem", width: "100%" }}>
         <AppBarHomePage></AppBarHomePage>
         <Grid container maxWidth="85rem" spacing={0} sx={{ mx: "auto", mt: "5rem", mb: "5rem", display: "flex" }}>
-          <Grid xs={12} sm={6} sx={{ display: "flex", justifyContent: "center" }}></Grid>
+          <Grid xs={12} sm={6} sx={{ padding: "40px" }}>
+            <EvilChart></EvilChart>
+          </Grid>
           <Grid xs={12} sm={6} sx={{ p: 5 }}>
             <Box>
               <Typography

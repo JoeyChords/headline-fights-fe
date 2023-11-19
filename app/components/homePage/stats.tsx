@@ -13,7 +13,13 @@ export default function Stats(props: any) {
     <>
       <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "6rem 1rem", borderRadius: "1.75rem", width: "100%", mt: "5rem" }}>
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
+          <Typography fontSize={"1rem"} fontWeight={"500"} lineHeight={"1.3"}>
+            <Box textAlign={"center"}>PLACEHOLDER</Box>
+          </Typography>
           <Typography variant="h3" fontSize={"3.25rem"} fontWeight={"500"} lineHeight={"1.3"}>
+            <Box textAlign={"center"}>Placeholder</Box>
+          </Typography>
+          <Typography variant="h3" fontSize={"1rem"} fontWeight={"500"} lineHeight={"1.45"}>
             <Box textAlign={"center"}>Placeholder</Box>
           </Typography>
         </Box>

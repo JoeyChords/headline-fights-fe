@@ -13,31 +13,25 @@ const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Home() {
-  const queryName = useSearchParams().get("name");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userName, setUsername] = useState("");
   const router = useRouter();
   const [stats, setStats] = useState({});
 
   useEffect(() => {
-    if (!queryName) {
-      fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.isAuthenticated) {
-            setIsLoggedIn(true);
-            setUsername(response.user.username);
-            router.push("/game");
-          } else {
-            setIsLoggedIn(false);
-            setStats(response);
-          }
-        });
-    } else {
-      setUsername(queryName);
-      setIsLoggedIn(true);
-    }
-  }, [router, queryName]);
+    fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.isAuthenticated) {
+          setIsLoggedIn(true);
+          setUsername(response.user.username);
+          router.push("/game?name=" + userName);
+        } else {
+          setIsLoggedIn(false);
+          setStats(response);
+        }
+      });
+  }, [router, userName]);
 
   if (!isLoggedIn) {
     return (
@@ -55,7 +49,6 @@ export default function Home() {
   return (
     <>
       <main>
-        <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
         <Container sx={{ mt: 15 }} maxWidth="lg">
           <Box justifyContent="center" sx={{ display: "flex" }}>
             <CircularProgress color="secondary" />
