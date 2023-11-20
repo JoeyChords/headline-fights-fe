@@ -118,7 +118,12 @@ function AppBarRegisterPage() {
           {/* Web view login buttons */}
           <Box sx={{ pr: 4, flexGrow: 1, flexDirection: "row-reverse", display: { xs: "none", md: "flex" } }}>
             {Object.entries(pages).map(([page, route]) => (
-              <Button key={page} href={route} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              <Button
+                key={page}
+                href={route}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block", textTransform: "capitalize" }}
+              >
                 {page}
               </Button>
             ))}

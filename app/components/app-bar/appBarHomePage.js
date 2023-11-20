@@ -38,7 +38,7 @@ function AppBarLoggedOut() {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: deepPurple["A100"], boxShadow: "none" }}>
+    <AppBar position="static" sx={{ bgcolor: deepPurple["A100"], boxShadow: "none", borderRadius: "1.75rem" }}>
       <Container maxWidth="xl" sx={{ p: 0 }}>
         <Toolbar disableGutters>
           {/* Web View NavBar Typography*/}

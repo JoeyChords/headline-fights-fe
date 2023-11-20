@@ -45,14 +45,10 @@ export default function Dashboard() {
   const chartSetting = {
     yAxis: [
       {
-        label: "Guess Accuracy (Overall)",
+        label: "Guess Accuracy % (Overall)",
       },
     ],
-    sx: {
-      [`.${axisClasses.left} .${axisClasses.label}`]: {
-        transform: "rotate(-90deg) translate(0px, -20px)",
-      },
-    },
+
     margin: {
       left: 70,
     },

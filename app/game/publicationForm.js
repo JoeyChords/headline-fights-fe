@@ -5,7 +5,6 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import HeadlineButton from "./getHeadlineButton";
 import UserFeedback from "./classes/UserFeedback";
 import { deepPurple } from "@mui/material/colors";
 import { BarChart } from "@mui/x-charts/BarChart";
@@ -39,15 +38,15 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   const chartSetting = {
     yAxis: [
       {
-        label: "Guess Accuracy (Overall)",
+        label: "Guess Accuracy % (Overall)",
       },
     ],
     width: 300,
     height: 300,
     sx: {
-      [`.${axisClasses.left} .${axisClasses.label}`]: {
-        transform: "rotate(-90deg) translate(0px, -20px)",
-      },
+      // [`.${axisClasses.left} .${axisClasses.label}`]: {
+      //   transform: "rotate(-90deg) translate(0px, -20px)",
+      // },
     },
   };
   let dataset = publicationDataset;
@@ -127,7 +126,14 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           />
         </div>
         <div className="mt-5">
-          <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
+          <Button
+            onClick={getNextHeadline}
+            variant="contained"
+            size="large"
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" } }}
+          >
+            Next
+          </Button>
         </div>
       </>
     );
@@ -149,7 +155,14 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           />
         </div>
         <div className="mt-5">
-          <HeadlineButton content={"Next"} onClick={getNextHeadline}></HeadlineButton>
+          <Button
+            onClick={getNextHeadline}
+            variant="contained"
+            size="large"
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" } }}
+          >
+            Next
+          </Button>
         </div>
       </>
     );
@@ -168,7 +181,13 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           <FormControlLabel value="cnn" control={<Radio />} label="CNN" />
           <FormControlLabel value="fox news" control={<Radio />} label="Fox News" />
         </RadioGroup>
-        <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained" disabled={disabled}>
+        <Button
+          sx={{ mt: 1, mr: 1, fontSize: { lg: "1.25rem", xs: "1rem" }, textTransform: "capitalize" }}
+          type="submit"
+          variant="contained"
+          size="large"
+          disabled={disabled}
+        >
           Submit Guess
         </Button>
       </FormControl>

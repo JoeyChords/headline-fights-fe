@@ -10,13 +10,10 @@ import EvilChart from "@/app/components/homePage/evilChart";
 export default function HeroSection() {
   return (
     <>
-      <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "1rem", borderRadius: "1.75rem", width: "100%" }}>
+      <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: { sm: "0", lg: "1rem" }, borderRadius: "1.75rem", width: "100%" }}>
         <AppBarHomePage></AppBarHomePage>
         <Grid container maxWidth="85rem" spacing={0} sx={{ mx: "auto", mt: "5rem", mb: "5rem", display: "flex" }}>
-          <Grid xs={12} sm={6} sx={{ padding: "40px" }}>
-            <EvilChart></EvilChart>
-          </Grid>
-          <Grid xs={12} sm={6} sx={{ p: 5 }}>
+          <Grid xs={12} sm={6} sx={{ p: { xs: 1.5, sm: 3, lg: 5 } }}>
             <Box>
               <Typography
                 component="h1"
@@ -42,7 +39,7 @@ export default function HeroSection() {
                   mb: 5,
                 }}
               >
-                <Box>Headline Fights tells us which is truly worse. Rate headlines without bias to find out what you and the crowd really think.</Box>
+                <Box>Headline Fights is a bias-free zone where the crowd decides which news source is truly worse.</Box>
               </Typography>
               <Button
                 sx={{ mt: 1, mr: 1, textTransform: "capitalize", fontSize: { lg: "1.25rem", xs: "1rem" } }}
@@ -53,6 +50,9 @@ export default function HeroSection() {
                 Start Rating
               </Button>
             </Box>
+          </Grid>
+          <Grid xs={12} sm={6} sx={{ p: { xs: 1.5, sm: 3, lg: 5 } }}>
+            <EvilChart></EvilChart>
           </Grid>
         </Grid>
       </Box>
