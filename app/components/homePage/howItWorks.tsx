@@ -26,24 +26,38 @@ export default function HowItWorks(props: any) {
         }}
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
-          <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"500"} lineHeight={"1.3"}>
+          <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
             <Box textAlign={"center"}>How It Works</Box>
           </Typography>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.25rem" }} fontWeight={"500"} lineHeight={"1.45"}>
-            <Box textAlign={"center"}>Placeholder</Box>
+            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+              Your Truth reveals the Universal Truth
+            </Box>
           </Typography>
         </Box>
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", mb: "3.5rem" }}>
           <Grid xs={12} sm={6} md={3} sx={{}}>
             <HowItWorksBox
               icon={<HideSourceOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></HideSourceOutlinedIcon>}
-              component={<HowItWorksComponent total={10} title={"1."} explanation={"We remove the source of the headline "}></HowItWorksComponent>}
+              component={
+                <HowItWorksComponent
+                  total={10}
+                  title={"1."}
+                  explanation={"We show you a headline and accompanying image without revealing its source."}
+                ></HowItWorksComponent>
+              }
             ></HowItWorksBox>
           </Grid>
           <Grid xs={12} sm={6} md={3} sx={{ display: "flex", justifyContent: "center" }}>
             <HowItWorksBox
               icon={<ThumbUpOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></ThumbUpOutlinedIcon>}
-              component={<HowItWorksComponent total={10} title={"2."} explanation={"You rate it"}></HowItWorksComponent>}
+              component={
+                <HowItWorksComponent
+                  total={10}
+                  title={"2."}
+                  explanation={"You rate the headline by various criteria, then guess where it came from."}
+                ></HowItWorksComponent>
+              }
             ></HowItWorksBox>
           </Grid>
           <Grid xs={12} sm={6} md={3} sx={{ display: "flex", justifyContent: "center" }}>
@@ -53,7 +67,7 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"3."}
-                  explanation={"we find out which news organization is more evil through crowdsourcing opinions"}
+                  explanation={"We calculate your ratings both separately and along with everyone else's."}
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>
@@ -65,9 +79,7 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"4."}
-                  explanation={
-                    "you find out what you really think when your biases are removed, and you find out how you compare to the rest of the crowd "
-                  }
+                  explanation={"You get your bias-free personal results, as well as how they compare with the crowd."}
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>

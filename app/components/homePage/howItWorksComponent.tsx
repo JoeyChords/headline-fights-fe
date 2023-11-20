@@ -12,7 +12,7 @@ export default function StatsComponent(props: any) {
         <Typography variant="h5" sx={{ fontWeight: "700", fontSize: { xs: "1.25rem" }, color: "#ffffff" }}>
           {props.title}
         </Typography>
-        <Typography variant="h5" sx={{ fontWeight: "500", fontSize: { xs: "1rem" }, color: grey[400] }}>
+        <Typography variant="h5" sx={{ mt: "1rem", fontWeight: "500", fontSize: { xs: "1rem" }, color: grey[400] }}>
           {props.explanation}
         </Typography>
       </Box>
