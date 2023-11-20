@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Headline Fights",
-  description: "Remove your bias and find your truth",
+  description: "Headline Fights is a bias-free rating system that lets the crowd decide whether Fox News or CNN is truly worse.",
 };
 
 export default function RootLayout(props: any) {
