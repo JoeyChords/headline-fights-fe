@@ -10,8 +10,8 @@ import HowItWorksBox from "@/app/components/homePage/howItWorksBox";
 import HideSourceOutlinedIcon from "@mui/icons-material/HideSourceOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined";
-import DangerousOutlinedIcon from "@mui/icons-material/DangerousOutlined";
 import CTAButton from "@/app/components/homePage/ctaButton";
+import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
 
 export default function HowItWorks(props: any) {
   return (
@@ -63,7 +63,7 @@ export default function HowItWorks(props: any) {
           </Grid>
           <Grid xs={12} sm={6} md={3} sx={{ display: "flex", justifyContent: "center" }}>
             <HowItWorksBox
-              icon={<DangerousOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.25rem" }}></DangerousOutlinedIcon>}
+              icon={<CalculateOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.8rem" }}></CalculateOutlinedIcon>}
               component={
                 <HowItWorksComponent
                   total={10}
