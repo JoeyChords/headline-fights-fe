@@ -20,13 +20,13 @@ export default function Stats(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
           <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>PLACEHOLDER</Box>
+            <Box textAlign={"center"}>STATISTICS</Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>Placeholder</Box>
+            <Box textAlign={"center"}>Bigger Is Better</Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
-            <Box textAlign={"center"}>Placeholder</Box>
+            <Box textAlign={"center"}>Data is more accurate when it&apos;s large. That&apos;s why your ratings are so important.</Box>
           </Typography>
         </Box>
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem" }}>
