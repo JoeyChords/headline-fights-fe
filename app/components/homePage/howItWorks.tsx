@@ -11,6 +11,7 @@ import HideSourceOutlinedIcon from "@mui/icons-material/HideSourceOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined";
 import DangerousOutlinedIcon from "@mui/icons-material/DangerousOutlined";
+import CTAButton from "@/app/components/homePage/ctaButton";
 
 export default function HowItWorks(props: any) {
   return (
@@ -25,7 +26,7 @@ export default function HowItWorks(props: any) {
           mt: "6rem",
         }}
       >
-        <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
+        <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
             <Box textAlign={"center"}>How It Works</Box>
           </Typography>
@@ -86,9 +87,7 @@ export default function HowItWorks(props: any) {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button sx={{ textTransform: "capitalize", fontSize: { lg: "1.25rem", xs: "1rem" } }} size="large" variant="contained" href="/login">
-            Start Rating
-          </Button>
+          <CTAButton cta={"Start Rating"}></CTAButton>
         </Box>
       </Box>
     </>

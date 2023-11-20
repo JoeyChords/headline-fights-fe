@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
 import EvilChart from "@/app/components/homePage/evilChart";
+import CTAButton from "@/app/components/homePage/ctaButton";
 
 export default function HeroSection() {
   return (
@@ -42,14 +43,7 @@ export default function HeroSection() {
                 <Box>Headline Fights is a bias-free rating system that lets the crowd decide which news source is truly worse.</Box>
               </Typography>
               <Box sx={{ textAlign: { xs: "center", sm: "left" }, mb: { xs: "4rem", sm: 0 } }}>
-                <Button
-                  sx={{ mt: 1, mr: 1, textTransform: "capitalize", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
-                  size="large"
-                  variant="contained"
-                  href="/login"
-                >
-                  Start Rating
-                </Button>
+                <CTAButton cta={"Start Rating"}></CTAButton>
               </Box>
             </Box>
           </Grid>
@@ -63,14 +57,7 @@ export default function HeroSection() {
                 display: { xs: "block", sm: "none" },
               }}
             >
-              <Button
-                sx={{ mt: 1, mr: 1, textTransform: "capitalize", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
-                size="large"
-                variant="contained"
-                href="/login"
-              >
-                Start Rating
-              </Button>
+              <CTAButton cta={"Start Rating"}></CTAButton>
             </Box>
           </Grid>
         </Grid>
