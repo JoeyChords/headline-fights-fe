@@ -4,6 +4,7 @@ import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import StatsComponent from "@/app/components/homePage/statsComponent";
+import CTAButton from "@/app/components/homePage/ctaButton";
 
 export default function Stats(props: any) {
   return (
@@ -18,15 +19,19 @@ export default function Stats(props: any) {
           mt: "6rem",
         }}
       >
-        <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
+        <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
             <Box textAlign={"center"}>STATISTICS</Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>Bigger Is Better</Box>
+            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+              Bigger Is Better
+            </Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
-            <Box textAlign={"center"}>Data is more accurate when it&apos;s large. That&apos;s why your ratings are so important.</Box>
+            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+              Data is more accurate when it&apos;s large. That&apos;s why your ratings are so important.
+            </Box>
           </Typography>
         </Box>
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem" }}>
@@ -47,9 +52,7 @@ export default function Stats(props: any) {
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button sx={{ textTransform: "capitalize", fontSize: { lg: "1.25rem", xs: "1rem" } }} size="large" variant="contained" href="/login">
-            Start Rating
-          </Button>
+          <CTAButton cta={"Start Rating"}></CTAButton>
         </Box>
       </Box>
     </>

@@ -1,10 +1,8 @@
 import Box from "@mui/material/Box";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { axisClasses } from "@mui/x-charts";
 import { Typography } from "@mui/material";
 import { black_ops_one } from "@/app/fonts";
 import { blueGrey } from "@mui/material/colors";
-import { deepPurple } from "@mui/material/colors";
 import { createTheme, useTheme, ThemeProvider } from "@mui/material/styles";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -22,12 +20,6 @@ const chartSetting = {
 
   height: 300,
   width: 500,
-
-  sx: {
-    [`.${axisClasses.left} .${axisClasses.label}`]: {
-      transform: "translate(-20px, 0)",
-    },
-  },
 };
 const dataset = [
   {
@@ -58,7 +50,7 @@ export default function EvilChart(props: any) {
           flexDirection: "column",
           justifyContent: "center",
           justifyItems: "center",
-          paddingBottom: "4rem",
+          p: "0 1rem 4rem",
         }}
       >
         <Typography
@@ -93,6 +85,7 @@ export default function EvilChart(props: any) {
               //change left yAxis label styles
               "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
                 fontSize: "1rem !important",
+                transform: { xs: "rotate(0.75turn) translateX(-10px) translateY(-80px)", sm: "rotate(0turn) translateX(0px) translateY(0px)" },
               },
               // change bottom label styles
               //change left yAxis label styles
