@@ -97,7 +97,7 @@ export default function Headline() {
       <Container className="mt-6 md:mt-20" maxWidth="lg">
         <Grid direction="row" justifyContent="center" container spacing={2}>
           <Grid xs={12} md={6}>
-            <Card sx={{ boxShadow: 3 }}>
+            <Card sx={{ boxShadow: 2 }}>
               <CardHeader title=<h2 className="font-bold text-2xl">{headlines.headline}</h2>></CardHeader>
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>

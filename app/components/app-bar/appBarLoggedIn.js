@@ -6,14 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { pink } from "@mui/material/colors";
-import { usePathname, useSearchParams } from "next/navigation";
+import { deepPurple } from "@mui/material/colors";
+import { useSearchParams } from "next/navigation";
 import { black_ops_one } from "/app/fonts";
 var capitalize = require("lodash/capitalize");
 
@@ -30,15 +28,8 @@ function AppBarLoggedIn(props) {
     Logout: props.name != null ? `/logout?name=${props.name}` : `/logout?name=${name}`,
   };
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -95,7 +86,7 @@ function AppBarLoggedIn(props) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: pink[500] }} alt={capitalize(name)}>
+                <Avatar sx={{ bgcolor: deepPurple["A100"] }} alt={capitalize(name)}>
                   {props.name != null ? capitalize(props.name).slice(0, 1) : capitalize(name).slice(0, 1)}
                 </Avatar>
               </IconButton>

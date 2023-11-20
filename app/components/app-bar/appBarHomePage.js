@@ -13,11 +13,12 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { black_ops_one } from "/app/fonts";
+import { deepPurple } from "@mui/material/colors";
 
-const pages = { Login: "/login" };
+const pages = { Login: "/login", Signup: "/register" };
 const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/" };
 
-function AppBarRegisterPage() {
+function AppBarLoggedOut() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,8 +38,8 @@ function AppBarRegisterPage() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="static" sx={{ bgcolor: deepPurple["A100"], boxShadow: "none", borderRadius: "1.75rem" }}>
+      <Container maxWidth="xl" sx={{ p: 0 }}>
         <Toolbar disableGutters>
           {/* Web View NavBar Typography*/}
           <Typography
@@ -52,7 +53,7 @@ function AppBarRegisterPage() {
               fontFamily: black_ops_one.style.fontFamily,
               fontWeight: 400,
               letterSpacing: ".1rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -66,7 +67,7 @@ function AppBarRegisterPage() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -109,7 +110,7 @@ function AppBarRegisterPage() {
               fontSize: 23,
               fontWeight: 400,
               letterSpacing: ".1rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -119,10 +120,11 @@ function AppBarRegisterPage() {
           <Box sx={{ pr: 4, flexGrow: 1, flexDirection: "row-reverse", display: { xs: "none", md: "flex" } }}>
             {Object.entries(pages).map(([page, route]) => (
               <Button
+                variant="outlined"
                 key={page}
                 href={route}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block", textTransform: "capitalize" }}
+                sx={{ my: 2, ml: 1, color: "white", display: "block", textTransform: "capitalize", color: "black" }}
               >
                 {page}
               </Button>
@@ -135,4 +137,4 @@ function AppBarRegisterPage() {
     </AppBar>
   );
 }
-export default AppBarRegisterPage;
+export default AppBarLoggedOut;

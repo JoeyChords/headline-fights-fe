@@ -13,7 +13,9 @@ import Grid from "@mui/system/Unstable_Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
+import { deepPurple } from "@mui/material/colors";
 import HeadlineCount from "./components/HeadlineCount";
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -43,14 +45,10 @@ export default function Dashboard() {
   const chartSetting = {
     yAxis: [
       {
-        label: "Guess Accuracy (Overall)",
+        label: "Guess Accuracy % (Overall)",
       },
     ],
-    sx: {
-      [`.${axisClasses.left} .${axisClasses.label}`]: {
-        transform: "rotate(-90deg) translate(0px, -20px)",
-      },
-    },
+
     margin: {
       left: 70,
     },
@@ -59,7 +57,7 @@ export default function Dashboard() {
 
   const valueFormatter = (value) => `${value}%`;
 
-  const barColors = ["#e91e63", "#212121"];
+  const barColors = [deepPurple["A100"], "#212121"];
 
   const router = useRouter();
 

@@ -6,40 +6,43 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import HeroSection from "./components/homePage/hero";
+import Stats from "./components/homePage/stats";
+import HowItWorks from "./components/homePage/howItWorks";
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Home() {
-  const queryName = useSearchParams().get("name");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userName, setUsername] = useState("");
   const router = useRouter();
+  const [stats, setStats] = useState({});
 
   useEffect(() => {
-    if (!queryName) {
-      fetch(API_ENDPOINT, { method: "GET", credentials: "include" })
-        .then((res) => res.json())
-        .then((response) => {
-          console.log(response);
-          if (response.isAuthenticated) {
-            setIsLoggedIn(true);
-            setUsername(response.user.username);
-          } else {
-            router.push("/login");
-          }
-        });
-    } else {
-      setUsername(queryName);
-      setIsLoggedIn(true);
-    }
-  }, [router, queryName]);
+    fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.isAuthenticated) {
+          setIsLoggedIn(true);
+          setUsername(response.user.username);
+          router.push("/game?name=" + userName);
+        } else {
+          setIsLoggedIn(false);
+          setStats(response);
+        }
+      });
+  }, [router, userName]);
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return (
       <>
         <main>
-          <AppBarLoggedIn name={userName}></AppBarLoggedIn>
-          <h1 className="text-center mt-20 font-bold text-2xl">Home Page Coming Soon</h1>
+          <Box className={"min-h-screen"} sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" } }}>
+            <HeroSection></HeroSection>
+            <HowItWorks></HowItWorks>
+            <Stats props={stats}></Stats>
+          </Box>
         </main>
       </>
     );
@@ -48,7 +51,6 @@ export default function Home() {
   return (
     <>
       <main>
-        <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
         <Container sx={{ mt: 15 }} maxWidth="lg">
           <Box justifyContent="center" sx={{ display: "flex" }}>
             <CircularProgress color="secondary" />

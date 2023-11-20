@@ -1,8 +1,7 @@
 "use client";
 import Headline from "./headline";
 import AppBarLoggedIn from "../components/app-bar/appBarLoggedIn";
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
+import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -23,7 +22,6 @@ export default function Home() {
       fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
         .then((res) => res.json())
         .then((response) => {
-          console.log(response);
           if (response.isAuthenticated) {
             setIsLoggedIn(true);
             setUsername(response.user.username);
@@ -42,7 +40,18 @@ export default function Home() {
       <>
         <main>
           <AppBarLoggedIn name={userName}></AppBarLoggedIn>
-          <Headline></Headline>
+          <Box
+            component="main"
+            sx={{
+              bgcolor: grey[100],
+              display: "flex",
+              flexGrow: 1,
+              height: "100vh",
+              overflow: "auto",
+            }}
+          >
+            <Headline></Headline>
+          </Box>
         </main>
       </>
     );
@@ -51,12 +60,23 @@ export default function Home() {
     <>
       <main>
         <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-        <Container sx={{ mt: 30 }} maxWidth="lg">
-          <Box justifyContent="center" sx={{ display: "flex" }}>
-            <CircularProgress color="secondary" />
-          </Box>
-          <p className="text-center mt-5">Loading...</p>
-        </Container>
+        <Box
+          component="main"
+          sx={{
+            bgcolor: grey[100],
+            display: "flex",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container sx={{ mt: 30 }} maxWidth="lg">
+            <Box justifyContent="center" sx={{ display: "flex" }}>
+              <CircularProgress color="secondary" />
+            </Box>
+            <p className="text-center mt-5">Loading...</p>
+          </Container>
+        </Box>
       </main>
     </>
   );

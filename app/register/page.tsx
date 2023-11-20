@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import normalizeEmail from "validator/lib/normalizeEmail";
+import { grey } from "@mui/material/colors";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -46,7 +47,6 @@ export default function SignUp() {
     setHelperText("Loading...");
 
     const data: any = new FormData(event.currentTarget);
-
 
     const userInput: any = {
       name: data.get("name"),
@@ -88,49 +88,60 @@ export default function SignUp() {
     <>
       <ThemeProvider theme={theme}>
         <AppBarRegisterPage></AppBarRegisterPage>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField required fullWidth id="name" label="Name" name="name" autoComplete="name" />
+        <Box
+          component="main"
+          sx={{
+            bgcolor: grey[100],
+            display: "flex",
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign up
+              </Typography>
+              <FormHelperText error={error}>{helperText}</FormHelperText>
+              <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField required fullWidth id="name" label="Name" name="name" autoComplete="name" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField required fullWidth id="email" type="email" label="Email Address" name="email" autoComplete="email" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField required fullWidth id="email" type="email" label="Email Address" name="email" autoComplete="email" />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}>
+                  Sign Up
+                </Button>
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <Link href="/login" variant="body2">
+                      Already have an account? Sign in
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
-                </Grid>
-              </Grid>
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign Up
-              </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
+              </Box>
             </Box>
-          </Box>
-          <Copyright sx={{ mt: 5 }} />
-        </Container>
+            <Copyright sx={{ mt: 5 }} />
+          </Container>
+        </Box>
       </ThemeProvider>
     </>
   );
