@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import HeroSection from "./components/homePage/hero";
 import Stats from "./components/homePage/stats";
+import HowItWorks from "./components/homePage/howItWorks";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -39,6 +40,7 @@ export default function Home() {
         <main>
           <Box className={"min-h-screen"} sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" } }}>
             <HeroSection></HeroSection>
+            <HowItWorks></HowItWorks>
             <Stats props={stats}></Stats>
           </Box>
         </main>

@@ -66,7 +66,7 @@ export default function EvilChart(props: any) {
           variant={"h2"}
           sx={{
             fontFamily: black_ops_one.style.fontFamily,
-            fontSize: { lg: "4rem", md: "4rem", xs: "3rem" },
+            fontSize: { xs: "2rem", md: "3rem", xl: "4rem" },
             lineHeight: "1",
             fontWeight: "500",
 

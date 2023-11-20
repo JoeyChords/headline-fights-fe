@@ -1,25 +1,31 @@
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import { black_ops_one } from "@/app/fonts";
 import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
-import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
-import Paper from "@mui/material/Paper";
 import StatsComponent from "@/app/components/homePage/statsComponent";
 
 export default function Stats(props: any) {
   return (
     <>
-      <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: "6rem 1rem", borderRadius: "1.75rem", width: "100%", mt: "5rem" }}>
+      <Box
+        component="section"
+        sx={{
+          bgcolor: deepPurple["A100"],
+          p: { xs: "4rem 0", sm: "4rem 0", md: "5rem 0", lg: "6rem 0" },
+          borderRadius: "1.75rem",
+          width: "100%",
+          mt: "6rem",
+        }}
+      >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem" }}>
-          <Typography fontSize={"1rem"} fontWeight={"500"} lineHeight={"1.3"}>
+          <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
             <Box textAlign={"center"}>PLACEHOLDER</Box>
           </Typography>
-          <Typography variant="h3" fontSize={"3.25rem"} fontWeight={"500"} lineHeight={"1.3"}>
+          <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"500"} lineHeight={"1.3"}>
             <Box textAlign={"center"}>Placeholder</Box>
           </Typography>
-          <Typography variant="h3" fontSize={"1rem"} fontWeight={"500"} lineHeight={"1.45"}>
+          <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
             <Box textAlign={"center"}>Placeholder</Box>
           </Typography>
         </Box>
