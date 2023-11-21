@@ -65,7 +65,7 @@ export default function EvilChart(props: any) {
             color: "#ffffff",
           }}
         >
-          <Box sx={{ textAlign: "center", padding: "4rem 0 3rem 0" }}>Evil Rating</Box>
+          <Box sx={{ textAlign: "center", padding: "4rem 0 3rem 0" }}>Evil Meter</Box>
         </Typography>
         <Box sx={{ display: "flex" }}>
           <BarChart
