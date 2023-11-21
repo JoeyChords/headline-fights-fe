@@ -50,7 +50,7 @@ export default function EvilChart(props: any) {
           flexDirection: "column",
           justifyContent: "center",
           justifyItems: "center",
-          p: { xs: "0 1rem 2rem", sm: "0 1rem 2rem", md: "0 1rem 2rem", lg: "2rem 1rem 6rem", xl: "2rem 1rem 6rem" },
+          p: { xs: "0 1rem 2rem", sm: "0 1rem 2rem", md: "0 1rem 2rem", lg: "0rem 1rem 4rem", xl: "0rem 1rem 4rem" },
         }}
       >
         <Typography
@@ -68,7 +68,7 @@ export default function EvilChart(props: any) {
           <Box
             sx={{
               textAlign: "center",
-              padding: { xs: "4rem 0 0 0", sm: "4rem 0 0 0", md: "4rem 0 0 0", lg: "4rem 0 6rem 0", xl: "4rem 0 6rem 0" },
+              padding: { xs: "4rem 0 0 0", sm: "4rem 0 0 0", md: "4rem 0 0 0", lg: "4rem 0 3rem 0", xl: "4rem 0 3rem 0" },
             }}
           >
             Evil Meter
