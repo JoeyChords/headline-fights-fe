@@ -93,7 +93,7 @@ export default function SignIn() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign In
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -108,7 +108,13 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw" }}>
+              <Button
+                type="submit"
+                size="large"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+              >
                 Sign In
               </Button>
               <Grid container justifyContent="center">
