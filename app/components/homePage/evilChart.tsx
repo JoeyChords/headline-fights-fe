@@ -50,6 +50,7 @@ export default function EvilChart(props: any) {
           flexDirection: "column",
           justifyContent: "center",
           justifyItems: "center",
+          margin: "auto auto",
           p: { xs: "0 1rem 2rem", sm: "0 1rem 2rem", md: "0 1rem 2rem", lg: "0rem 1rem 4rem", xl: "0rem 1rem 4rem" },
         }}
       >

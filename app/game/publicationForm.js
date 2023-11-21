@@ -111,6 +111,12 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     setPublicationCorrect(null);
     setPublicationValue("");
     setDisabled(true);
+    setQuestion1Attribute("");
+    setQuestion1("");
+    setQuestion1Value("");
+    setQuestion2Attribute("");
+    setQuestion2("");
+    setQuestion2Value("");
     feedback = {};
     publicationCorrectProxy = undefined;
   };
