@@ -124,7 +124,16 @@ function AppBarLoggedOut() {
                 key={page}
                 href={route}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, ml: 1, color: "white", display: "block", textTransform: "capitalize", color: "black" }}
+                sx={{
+                  my: 2,
+                  ml: 1,
+                  color: "white",
+                  display: "block",
+                  textTransform: "capitalize",
+                  color: "black",
+                  borderRadius: "100vw",
+                  p: "0.25rem 1.5rem",
+                }}
               >
                 {page}
               </Button>

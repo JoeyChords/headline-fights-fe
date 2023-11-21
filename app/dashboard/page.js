@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import UserFeedback from "../game/classes/UserFeedback";
-import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -13,8 +12,8 @@ import Grid from "@mui/system/Unstable_Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
-import { deepPurple } from "@mui/material/colors";
 import HeadlineCount from "./components/HeadlineCount";
+import GuessAccuracyChartDashboard from "./components/guessAccuracyChartDashboard";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -42,22 +41,7 @@ export default function Dashboard() {
     },
   ]);
 
-  const chartSetting = {
-    yAxis: [
-      {
-        label: "Guess Accuracy % (Overall)",
-      },
-    ],
-
-    margin: {
-      left: 70,
-    },
-  };
   let dataset = publicationDataset;
-
-  const valueFormatter = (value) => `${value}%`;
-
-  const barColors = [deepPurple["A100"], "#212121"];
 
   const router = useRouter();
 
@@ -110,16 +94,16 @@ export default function Dashboard() {
                 <Paper
                   elevation={2}
                   direction="column"
-                  justifyContent="center"
                   sx={{
                     display: "flex",
                     mt: 3,
                     ml: 1,
                     mr: 1,
-                    p: 2,
-                    pt: 5,
-                    height: 380,
-                    width: 250,
+                    p: "2rem",
+                    aspectRatio: "1/1",
+                    width: "100%",
+                    borderRadius: "1.75rem",
+                    justifyContent: "center",
                   }}
                 >
                   <HeadlineCount total={totalRatings} pub1Total={pub1Total} pub2Total={pub2Total}></HeadlineCount>
@@ -133,21 +117,15 @@ export default function Dashboard() {
                     mt: 3,
                     ml: 1,
                     mr: 1,
-                    pb: 5,
-                    height: 380,
-                    width: 360,
+                    p: "2rem",
+                    aspectRatio: "1/1",
+                    width: "100%",
+                    borderRadius: "1.75rem",
+                    justifyContent: "center",
+                    justifyItems: "center",
                   }}
                 >
-                  <BarChart
-                    dataset={dataset}
-                    xAxis={[{ scaleType: "band", dataKey: "publication" }]}
-                    series={[
-                      { dataKey: "you", label: "You", valueFormatter },
-                      { dataKey: "crowd", label: "Crowd", valueFormatter },
-                    ]}
-                    {...chartSetting}
-                    colors={barColors}
-                  />
+                  <GuessAccuracyChartDashboard dataset={dataset}></GuessAccuracyChartDashboard>
                 </Paper>
               </Grid>
             </Grid>

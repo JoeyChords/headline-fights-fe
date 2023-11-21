@@ -108,7 +108,7 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}>
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw" }}>
                 Sign In
               </Button>
               <Grid container justifyContent="center">

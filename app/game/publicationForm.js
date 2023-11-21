@@ -6,10 +6,11 @@ import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import UserFeedback from "./classes/UserFeedback";
-import { deepPurple } from "@mui/material/colors";
-import { BarChart } from "@mui/x-charts/BarChart";
-import { axisClasses } from "@mui/x-charts";
 import { useRouter } from "next/navigation";
+import GuessAccuracyChart from "@/app/game/components/guessAccuracyChart";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -35,25 +36,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   let feedback = {};
   let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
 
-  const chartSetting = {
-    yAxis: [
-      {
-        label: "Guess Accuracy % (Overall)",
-      },
-    ],
-    width: 300,
-    height: 300,
-    sx: {
-      // [`.${axisClasses.left} .${axisClasses.label}`]: {
-      //   transform: "rotate(-90deg) translate(0px, -20px)",
-      // },
-    },
-  };
   let dataset = publicationDataset;
-
-  const valueFormatter = (value) => `${value}%`;
-
-  const barColors = [deepPurple["A100"], "#212121"];
 
   const handlePublicationRadioChange = (event) => {
     setPublicationValue(event.target.value);
@@ -112,58 +95,37 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   if (publicationCorrect) {
     return (
       <>
-        <h1 className="mt-6 md:mt-19">You got it right. Great job!</h1>
-        <div className="flex items-center justify-center">
-          <BarChart
-            dataset={dataset}
-            xAxis={[{ scaleType: "band", dataKey: "publication" }]}
-            series={[
-              { dataKey: "you", label: "You", valueFormatter },
-              { dataKey: "crowd", label: "Crowd", valueFormatter },
-            ]}
-            {...chartSetting}
-            colors={barColors}
-          />
-        </div>
-        <div className="mt-5">
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h1 className="mt-6 md:mt-19 mb-2">You got it right. Great job!</h1>
+          <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
+
           <Button
             onClick={getNextHeadline}
             variant="contained"
             size="large"
-            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" } }}
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem" }}
           >
             Next
           </Button>
-        </div>
+        </Box>
       </>
     );
   } else if (publicationCorrect === false) {
     return (
       <>
-        <h1 className="mt-6 md:mt-19">Wrong answer. Better luck next time.</h1>
-        <div className="flex items-center justify-center">
-          <BarChart
-            className="mr-auto ml-auto"
-            dataset={dataset}
-            xAxis={[{ scaleType: "band", dataKey: "publication" }]}
-            series={[
-              { dataKey: "you", label: "You", valueFormatter },
-              { dataKey: "crowd", label: "Crowd", valueFormatter },
-            ]}
-            {...chartSetting}
-            colors={barColors}
-          />
-        </div>
-        <div className="mt-5">
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h1 className="mt-6 md:mt-19">Wrong answer. Better luck next time.</h1>
+          <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
+
           <Button
             onClick={getNextHeadline}
             variant="contained"
             size="large"
-            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" } }}
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem" }}
           >
             Next
           </Button>
-        </div>
+        </Box>
       </>
     );
   }
@@ -171,7 +133,9 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   return (
     <form className="mt-6 md:mt-20" onSubmit={handleSubmit}>
       <FormControl variant="standard">
-        <FormLabel id="publication-radio-group-label">Guess the news source:</FormLabel>
+        <FormLabel id="publication-radio-group-label" sx={{ mb: "1rem" }}>
+          Guess the news source:
+        </FormLabel>
         <RadioGroup
           aria-labelledby="publication-radio-button-group"
           name="publication-radio-button-group"
@@ -182,7 +146,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           <FormControlLabel value="fox news" control={<Radio />} label="Fox News" />
         </RadioGroup>
         <Button
-          sx={{ mt: 1, mr: 1, fontSize: { lg: "1.25rem", xs: "1rem" }, textTransform: "capitalize" }}
+          sx={{ mt: "1rem", mr: 1, fontSize: { lg: "1.25rem", xs: "1rem" }, textTransform: "capitalize", borderRadius: "100vw", p: "0.25rem 1.5rem" }}
           type="submit"
           variant="contained"
           size="large"

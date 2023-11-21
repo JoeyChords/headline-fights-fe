@@ -127,7 +127,7 @@ export default function SignUp() {
                     <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
                   </Grid>
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}>
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw" }}>
                   Sign Up
                 </Button>
                 <Grid container justifyContent="center">
