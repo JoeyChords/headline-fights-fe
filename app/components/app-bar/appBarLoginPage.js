@@ -119,10 +119,22 @@ function AppBarLoginPage() {
           <Box sx={{ pr: 4, flexGrow: 1, flexDirection: "row-reverse", display: { xs: "none", md: "flex" } }}>
             {Object.entries(pages).map(([page, route]) => (
               <Button
+                variant="outlined"
                 key={page}
                 href={route}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block", textTransform: "capitalize" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  p: "0.25rem 1.5rem",
+                  borderColor: "#ffffff",
+                  "&:hover": {
+                    borderColor: "#ffffff",
+                  },
+                }}
               >
                 {page}
               </Button>

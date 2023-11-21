@@ -94,19 +94,26 @@ export default function Headline() {
 
   return (
     <>
-      <Container className="mt-6 md:mt-20" maxWidth="lg">
-        <Grid direction="row" justifyContent="center" container spacing={2}>
+      <Box component="section" sx={{ width: "100%" }}>
+        <Grid
+          direction="row"
+          maxWidth="lg"
+          justifyContent="center"
+          container
+          spacing={2}
+          sx={{ mx: "auto", display: "flex", mt: { xs: "1rem", lg: "2rem" } }}
+        >
           <Grid xs={12} md={6}>
-            <Card sx={{ boxShadow: 2 }}>
+            <Card sx={{ boxShadow: 2, borderRadius: "1.75rem" }}>
               <CardHeader title=<h2 className="font-bold text-2xl">{headlines.headline}</h2>></CardHeader>
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
-          <Grid className="text-center" xs={12} md={6}>
+          <Grid className="text-center" xs={12} md={6} sx={{ textAlign: "center" }}>
             <PublicationForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></PublicationForm>
           </Grid>
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 }

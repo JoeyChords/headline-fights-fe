@@ -112,7 +112,7 @@ export default function SignUp() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign up
+                Sign Up
               </Typography>
               <FormHelperText error={error}>{helperText}</FormHelperText>
               <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -127,7 +127,13 @@ export default function SignUp() {
                     <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
                   </Grid>
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}>
+                <Button
+                  type="submit"
+                  size="large"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                >
                   Sign Up
                 </Button>
                 <Grid container justifyContent="center">
