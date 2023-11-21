@@ -32,15 +32,38 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     },
   ]);
   const [disabled, setDisabled] = React.useState(true);
+  const [question1, setQuestion1] = React.useState("Placeholder");
+  const [question1Attribute, setQuestion1Attribute] = React.useState("");
+  const [question1Value, setQuestion1Value] = React.useState("");
+  const [question2, setQuestion2] = React.useState("Placeholder");
+  const [question2Attribute, setQuestion2Attribute] = React.useState("");
+  const [question2Value, setQuestion2Value] = React.useState("");
+
   const router = useRouter();
   let feedback = {};
   let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
 
   let dataset = publicationDataset;
 
+  const handleQuestion1RadioChange = (event) => {
+    setQuestion1Value(event.target.value);
+    if (question2Value != "" && publicationValue != "") {
+      setDisabled(false);
+    }
+  };
+
+  const handleQuestion2RadioChange = (event) => {
+    setQuestion2Value(event.target.value);
+    if (question1Value != "" && publicationValue != "") {
+      setDisabled(false);
+    }
+  };
+
   const handlePublicationRadioChange = (event) => {
     setPublicationValue(event.target.value);
-    setDisabled(false);
+    if (question1Value != "" && question2Value != "") {
+      setDisabled(false);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -131,9 +154,33 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   }
 
   return (
-    <form className="mt-6 md:mt-20" onSubmit={handleSubmit}>
+    <form className="" onSubmit={handleSubmit}>
       <FormControl variant="standard">
-        <FormLabel id="publication-radio-group-label" sx={{ mb: "1rem" }}>
+        <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
+          {question1}
+        </FormLabel>
+        <RadioGroup
+          aria-labelledby="publication-radio-button-group"
+          name="publication-radio-button-group"
+          value={question1Value}
+          onChange={handleQuestion1RadioChange}
+        >
+          <FormControlLabel value="true" control={<Radio />} label="True" />
+          <FormControlLabel value="false" control={<Radio />} label="False" />
+        </RadioGroup>
+        <FormLabel id="publication-radio-group-label" sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
+          {question2}
+        </FormLabel>
+        <RadioGroup
+          aria-labelledby="publication-radio-button-group"
+          name="publication-radio-button-group"
+          value={question2Value}
+          onChange={handleQuestion2RadioChange}
+        >
+          <FormControlLabel value="true" control={<Radio />} label="True" />
+          <FormControlLabel value="false" control={<Radio />} label="False" />
+        </RadioGroup>
+        <FormLabel id="publication-radio-group-label" sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
           Guess the news source:
         </FormLabel>
         <RadioGroup
@@ -146,7 +193,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           <FormControlLabel value="fox news" control={<Radio />} label="Fox News" />
         </RadioGroup>
         <Button
-          sx={{ mt: "1rem", mr: 1, fontSize: { lg: "1.25rem", xs: "1rem" }, textTransform: "capitalize", borderRadius: "100vw", p: "0.25rem 1.5rem" }}
+          sx={{ mt: "1rem", mr: 1, fontSize: { xs: "1.25rem", lg: "1rem" }, textTransform: "capitalize", borderRadius: "100vw", p: "0.25rem 1.5rem" }}
           type="submit"
           variant="contained"
           size="large"
