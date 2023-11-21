@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
+import StatsBox from "@/app/components/homePage/statsBox";
 import StatsComponent from "@/app/components/homePage/statsComponent";
 import CTAButton from "@/app/components/homePage/ctaButton";
 
@@ -36,19 +37,13 @@ export default function Stats(props: any) {
         </Box>
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem" }}>
           <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>
-            </Box>
+            <StatsBox component={<StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>}></StatsBox>
           </Grid>
           <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>
-            </Box>
+            <StatsBox component={<StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>}></StatsBox>
           </Grid>
           <Grid xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <Box sx={{ border: "1px solid black", display: "flex", width: "100%", borderRadius: "1.75rem", justifyContent: "center", p: "4rem 0" }}>
-              <StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>
-            </Box>
+            <StatsBox component={<StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>}></StatsBox>
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center" }}>

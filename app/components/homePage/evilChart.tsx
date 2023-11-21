@@ -7,7 +7,7 @@ import { createTheme, useTheme, ThemeProvider } from "@mui/material/styles";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1: string = config.PUB_1;
-const PUB_2: string = config.PUB_2;
+const PUB_2_SHORT: string = config.PUB_2_SHORT;
 
 const chartSetting = {
   xAxis: [
@@ -28,7 +28,7 @@ const dataset = [
   },
   {
     publication: 80,
-    publicationName: PUB_2,
+    publicationName: PUB_2_SHORT,
   },
 ];
 const barColors = [blueGrey[800]];
