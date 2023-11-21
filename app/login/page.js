@@ -128,7 +128,6 @@ export default function SignIn() {
           </Box>
         </Container>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </>
   );
 }
