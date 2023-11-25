@@ -42,22 +42,29 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   const [question2Attribute, setQuestion2Attribute] = React.useState("");
   const [question2Value, setQuestion2Value] = React.useState("");
 
-  const router = useRouter();
-
-  let feedback = {};
-  let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
-
-  function getAndSetQuestions() {
+  React.useEffect(() => {
+    let num1 = Math.floor(Math.random() * 2);
+    let num2 = Math.floor(Math.random() * 2);
+    while (num1 === num2) {
+      num2 = Math.floor(Math.random() * 2);
+    }
+    setPublicationCorrect(null);
+    setPublicationValue("");
+    setDisabled(true);
     setQuestion1Attribute(attributes[num1]);
     setQuestion1(questions[num1]);
-    console.log(question1);
     setQuestion1Foil(questionFoils[num1]);
     setQuestion1Value("");
     setQuestion2Attribute(attributes[num2]);
     setQuestion2(questions[1]);
     setQuestion2Foil(questionFoils[num2]);
     setQuestion2Value("");
-  }
+  }, []);
+
+  const router = useRouter();
+
+  let feedback = {};
+  let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
 
   let dataset = publicationDataset;
 
@@ -80,29 +87,8 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     if (question1Value != "" && question2Value != "") {
       setDisabled(false);
     }
+    console.log(event.target.value);
   };
-
-  React.useEffect(() => {
-    let num1 = Math.floor(Math.random() * 2);
-    let num2 = Math.floor(Math.random() * 2);
-    while (num1 === num2) {
-      num2 = Math.floor(Math.random() * 2);
-    }
-    setPublicationCorrect(null);
-    setPublicationValue("");
-    setDisabled(true);
-    feedback = {};
-    publicationCorrectProxy = undefined;
-    setQuestion1Attribute(attributes[num1]);
-    setQuestion1(questions[num1]);
-    console.log(question1);
-    setQuestion1Foil(questionFoils[num1]);
-    setQuestion1Value("");
-    setQuestion2Attribute(attributes[num2]);
-    setQuestion2(questions[1]);
-    setQuestion2Foil(questionFoils[num2]);
-    setQuestion2Value("");
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -146,6 +132,8 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const getNextHeadline = () => {
     fetchOnClick();
+    feedback = {};
+    publicationCorrectProxy = undefined;
   };
 
   if (publicationCorrect) {

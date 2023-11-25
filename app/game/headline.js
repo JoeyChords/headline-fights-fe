@@ -34,7 +34,7 @@ export default function Headline() {
       .then((res) => res.json())
       .then((response) => {
         if (response.isAuthenticated) {
-          setHeadline(response.headline);
+          setHeadlines(response.headline);
           setHeadline(response.headline.headline);
           setPhoto(response.headline.photo_source_url);
           setUser(response.user);
@@ -53,7 +53,7 @@ export default function Headline() {
       .then((res) => res.json())
       .then((response) => {
         if (response.isAuthenticated) {
-          setHeadline(response.headline);
+          setHeadlines(response.headline);
           setHeadline(response.headline.headline);
           setPhoto(response.headline.photo_source_url);
           setUser(response.user);
