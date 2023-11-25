@@ -44,13 +44,6 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const router = useRouter();
 
-  let num1 = Math.floor(Math.random() * 2);
-  let num2 = Math.floor(Math.random() * 2);
-  while (num1 === num2) {
-    num2 = Math.floor(Math.random() * 2);
-  }
-  console.log(questions[0]);
-
   let feedback = {};
   let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
 
@@ -88,6 +81,28 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       setDisabled(false);
     }
   };
+
+  React.useEffect(() => {
+    let num1 = Math.floor(Math.random() * 2);
+    let num2 = Math.floor(Math.random() * 2);
+    while (num1 === num2) {
+      num2 = Math.floor(Math.random() * 2);
+    }
+    setPublicationCorrect(null);
+    setPublicationValue("");
+    setDisabled(true);
+    feedback = {};
+    publicationCorrectProxy = undefined;
+    setQuestion1Attribute(attributes[num1]);
+    setQuestion1(questions[num1]);
+    console.log(question1);
+    setQuestion1Foil(questionFoils[num1]);
+    setQuestion1Value("");
+    setQuestion2Attribute(attributes[num2]);
+    setQuestion2(questions[1]);
+    setQuestion2Foil(questionFoils[num2]);
+    setQuestion2Value("");
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -131,14 +146,6 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const getNextHeadline = () => {
     fetchOnClick();
-    getAndSetQuestions();
-    setPublicationCorrect(null);
-    setPublicationValue("");
-    setDisabled(true);
-
-    console.log(question1);
-    feedback = {};
-    publicationCorrectProxy = undefined;
   };
 
   if (publicationCorrect) {
