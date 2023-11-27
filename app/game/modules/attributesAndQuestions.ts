@@ -22,7 +22,9 @@ export const surveyCriteria = [
     new SurveyCriteria("speculative", "Speculation", "The headline is speculating about things that may have happened or might happen in the future as though they are known.", "The headline is about events that have definitely happened or will definitely happen.", "Neither."),
     new SurveyCriteria("biased_tone","Tone", "The headline's tone seems slanted towards or against particular actors or issues.","The headline seems unopinionated.", "Neither."),
     new SurveyCriteria("no_nuance","Concision", "The headline presents a simple subject with a simple viewpoint.", "The headline presents a complex subject without a simple viewpoint.", "Neither."),
-    new SurveyCriteria("portrays_negatively","Coverage","The headline is a negative portrayal of a political party or ideology.", "The headline is a positive portrayal of a political party or ideology.", "Neither."),
+    new SurveyCriteria("portrays_negatively","Coverage","The headline includes a negative portrayal of a political party or ideology.", "The headline includes a positive portrayal of a political party or ideology.", "Neither."),
     new SurveyCriteria("distorts","Distortion","The headline distorts or manipulates facts to represent an opinion.", "The headline only presents facts.", "I'm not sure."),
-    new SurveyCriteria("partisan", "Partisan", "The headline supports either the conservative or liberal side of an issue.", "The headline does not support political views of an issue.", "Neither.")
+    new SurveyCriteria("partisan", "Partisan", "The headline supports either the conservative or liberal side of an issue.", "The headline does not support political views of an issue.", "Neither."),
+    new SurveyCriteria("bigoted", "Favoring or Attacking", "The headline favors or attacks a particular race, religion, gender, age, sexual orientation, ethnic group, or person.", "The headline concerns a particular race, religion, gender, age, sexual orientation, ethnic group, or person but does not play favorites.", "Neither."),
+    new SurveyCriteria("one_sided_content", "Content", "The headline presents one side of a conflict, political or otherwise.", "The headline presents both sides of a conflict.", "Neither."),
 ]

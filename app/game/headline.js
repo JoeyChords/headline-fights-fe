@@ -8,6 +8,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 import SurveyForm from "./surveyForm";
 import { useRouter } from "next/navigation";
 const config = require("/app/config");
@@ -95,13 +96,37 @@ export default function Headline() {
           spacing={2}
           sx={{ mx: "auto", display: "flex", mt: { xs: "1rem", lg: "2rem" } }}
         >
-          <Grid xs={12} md={6}>
-            <Card sx={{ boxShadow: { xs: 2, sm: 4 }, borderRadius: "1.75rem" }}>
+          <Grid xs={12} md={6} sx={{ verticalAlign: "middle", position: "relative" }}>
+            <Card
+              sx={{
+                boxShadow: { xs: 2, sm: 4 },
+                borderRadius: "1.75rem",
+                display: { md: "none" },
+              }}
+            >
+              <CardHeader title=<h2 className="font-bold text-2xl">{headline}</h2>></CardHeader>
+              <Image priority={true} alt="" src={photo} width={720} height={405} />
+            </Card>
+            <Card
+              sx={{
+                boxShadow: { xs: 2, sm: 4 },
+                borderRadius: "1.75rem",
+                width: "95%",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-52.5%, -50%)",
+                display: { xs: "none", md: "block" },
+              }}
+            >
               <CardHeader title=<h2 className="font-bold text-2xl">{headline}</h2>></CardHeader>
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
-          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "0 0 0 1.5rem" } }}>
+          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "2rem 0 2rem 1.5rem" } }}>
+            <Typography variant="h1" component={"h1"}>
+              <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.5rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
+            </Typography>
             <SurveyForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></SurveyForm>
           </Grid>
         </Grid>

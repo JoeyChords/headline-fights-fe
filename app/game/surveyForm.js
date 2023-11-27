@@ -8,7 +8,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import UserFeedback from "./classes/UserFeedback";
 import { useRouter } from "next/navigation";
 import GuessAccuracyChart from "@/app/game/components/guessAccuracyChart";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { surveyCriteria, SurveyCriteria } from "@/app/game/modules/attributesAndQuestions";
 
@@ -259,7 +258,6 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
         <Button
           sx={{
             mt: "1rem",
-            mb: "6rem",
             fontSize: { xs: "1.25rem", lg: "1rem" },
             textTransform: "capitalize",
             borderRadius: "100vw",
@@ -272,7 +270,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           size="large"
           disabled={disabled}
         >
-          Submit Guess
+          Submit
         </Button>
       </FormControl>
     </form>
