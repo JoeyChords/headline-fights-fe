@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import GuessAccuracyChart from "@/app/game/components/guessAccuracyChart";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { attributes, questions, questionFoils } from "@/app/game/modules/attributesAndQuestions";
+import { attributes, biasType, questions, questionFoils } from "@/app/game/modules/attributesAndQuestions";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -33,13 +33,15 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     },
   ]);
   const [disabled, setDisabled] = React.useState(true);
-  const [question1, setQuestion1] = React.useState("Placeholder");
-  const [question1Foil, setQuestion1Foil] = React.useState("Placeholder");
+  const [question1, setQuestion1] = React.useState("");
+  const [question1Foil, setQuestion1Foil] = React.useState("");
   const [question1Attribute, setQuestion1Attribute] = React.useState("");
+  const [question1BiasType, setQuestion1BiasType] = React.useState("");
   const [question1Value, setQuestion1Value] = React.useState("");
-  const [question2, setQuestion2] = React.useState("Placeholder");
-  const [question2Foil, setQuestion2Foil] = React.useState("Placeholder");
+  const [question2, setQuestion2] = React.useState("");
+  const [question2Foil, setQuestion2Foil] = React.useState("");
   const [question2Attribute, setQuestion2Attribute] = React.useState("");
+  const [question2BiasType, setQuestion2BiasType] = React.useState("");
   const [question2Value, setQuestion2Value] = React.useState("");
 
   React.useEffect(() => {
@@ -52,11 +54,13 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     setPublicationValue("");
     setDisabled(true);
     setQuestion1Attribute(attributes[num1]);
+    setQuestion1BiasType(biasType[num1]);
     setQuestion1(questions[num1]);
     setQuestion1Foil(questionFoils[num1]);
     setQuestion1Value("");
     setQuestion2Attribute(attributes[num2]);
-    setQuestion2(questions[1]);
+    setQuestion2BiasType(biasType[num2]);
+    setQuestion2(questions[num2]);
     setQuestion2Foil(questionFoils[num2]);
     setQuestion2Value("");
   }, []);
@@ -147,7 +151,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             onClick={getNextHeadline}
             variant="contained"
             size="large"
-            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem" }}
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem", mb: "6rem" }}
           >
             Next
           </Button>
@@ -165,7 +169,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             onClick={getNextHeadline}
             variant="contained"
             size="large"
-            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem" }}
+            sx={{ fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" }, borderRadius: "100vw", p: "0.25rem 1.5rem", mb: "6rem" }}
           >
             Next
           </Button>
@@ -175,10 +179,10 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   }
 
   return (
-    <form className="" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <FormControl variant="standard">
-        <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
-          {question1}
+        <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}>
+          {question1BiasType}:
         </FormLabel>
         <RadioGroup
           aria-labelledby="publication-radio-button-group"
@@ -186,12 +190,15 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           value={question1Value}
           onChange={handleQuestion1RadioChange}
         >
-          <FormControlLabel value="true" control={<Radio />} label={question1} />
-          <FormControlLabel value="false" control={<Radio />} label={question1Foil} />
-          <FormControlLabel value="neither" control={<Radio />} label="Neither" />
+          <FormControlLabel value="true" control={<Radio />} label={question1} sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
+          <FormControlLabel value="false" control={<Radio />} label={question1Foil} sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
+          <FormControlLabel value="neither" control={<Radio />} label="Neither" sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
         </RadioGroup>
-        <FormLabel id="publication-radio-group-label" sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
-          {question2}
+        <FormLabel
+          id="publication-radio-group-label"
+          sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+        >
+          {question2BiasType}:
         </FormLabel>
         <RadioGroup
           aria-labelledby="publication-radio-button-group"
@@ -199,11 +206,14 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           value={question2Value}
           onChange={handleQuestion2RadioChange}
         >
-          <FormControlLabel value="true" control={<Radio />} label={question2} />
-          <FormControlLabel value="false" control={<Radio />} label={question2Foil} />
-          <FormControlLabel value="neither" control={<Radio />} label="Neither" />
+          <FormControlLabel value="true" control={<Radio />} label={question2} sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
+          <FormControlLabel value="false" control={<Radio />} label={question2Foil} sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
+          <FormControlLabel value="neither" control={<Radio />} label="Neither" sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }} />
         </RadioGroup>
-        <FormLabel id="publication-radio-group-label" sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" } }}>
+        <FormLabel
+          id="publication-radio-group-label"
+          sx={{ mt: "1rem", textAlign: "center", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+        >
           Guess the news source:
         </FormLabel>
         <RadioGroup
@@ -212,11 +222,20 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           value={publicationValue}
           onChange={handlePublicationRadioChange}
         >
-          <FormControlLabel value="cnn" control={<Radio />} label="CNN" />
-          <FormControlLabel value="fox news" control={<Radio />} label="Fox News" />
+          <FormControlLabel value="cnn" control={<Radio />} label="CNN" sx={{ marginBottom: ".6rem" }} />
+          <FormControlLabel value="fox news" control={<Radio />} label="Fox News" sx={{ marginBottom: ".6rem" }} />
         </RadioGroup>
         <Button
-          sx={{ mt: "1rem", mr: 1, fontSize: { xs: "1.25rem", lg: "1rem" }, textTransform: "capitalize", borderRadius: "100vw", p: "0.25rem 1.5rem" }}
+          sx={{
+            mt: "1rem",
+            mb: "6rem",
+            fontSize: { xs: "1.25rem", lg: "1rem" },
+            textTransform: "capitalize",
+            borderRadius: "100vw",
+            p: "0.25rem 1.5rem",
+            width: "80%",
+            mx: "auto",
+          }}
           type="submit"
           variant="contained"
           size="large"
