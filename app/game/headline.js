@@ -94,7 +94,7 @@ export default function Headline() {
           justifyContent="center"
           container
           spacing={2}
-          sx={{ mx: "auto", display: "flex", mt: { xs: "1rem", lg: "2rem" } }}
+          sx={{ mx: "auto", display: "flex", mt: { xs: "1rem", lg: "2rem" }, mb: "2rem" }}
         >
           <Grid xs={12} md={6} sx={{ verticalAlign: "middle", position: "relative" }}>
             <Card
@@ -123,9 +123,9 @@ export default function Headline() {
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
-          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "2rem 0 2rem 1.5rem" } }}>
+          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 4rem", sm: "2rem 1.75rem 4rem" } }}>
             <Typography variant="h1" component={"h1"}>
-              <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.5rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
+              <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
             </Typography>
             <SurveyForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></SurveyForm>
           </Grid>
