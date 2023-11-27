@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 export default function StatsComponent(props: any) {
   return (
     <>
-      <Stack spacing={2}>
+      <Stack spacing={2} alignItems="center" justifyContent="center">
         <Typography align="center" component="p" variant="h1" sx={{ fontWeight: "bold", fontSize: { xs: "5rem" } }}>
           {props.total}
         </Typography>
