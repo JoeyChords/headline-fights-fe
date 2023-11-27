@@ -15,13 +15,13 @@ export default function HeroSection() {
         <AppBarHomePage></AppBarHomePage>
         <Grid container maxWidth="85rem" spacing={0} sx={{ mx: "auto", mt: "5rem", mb: "5rem", display: "flex" }}>
           <Grid xs={12} sm={6} sx={{ p: { xs: "1.25rem", sm: 3, lg: 5 } }}>
-            <Box>
+            <Box sx={{}}>
               <Typography
                 component="h1"
                 variant={"h1"}
                 sx={{
                   fontFamily: black_ops_one.style.fontFamily,
-                  fontSize: { lg: "6.5rem", md: "4rem", xs: "3rem" },
+                  fontSize: { xl: "6.5rem", lg: "5.3rem", md: "4rem", xs: "3rem" },
                   lineHeight: "1",
                 }}
               >
@@ -47,7 +47,7 @@ export default function HeroSection() {
               </Box>
             </Box>
           </Grid>
-          <Grid xs={12} sm={6} sx={{ p: { xs: 1.5, sm: 3, lg: 5 } }}>
+          <Grid xs={12} sm={6} sx={{ display: "flex", flexDirection: "column", p: { xs: 1.5, sm: 3, lg: 5 } }}>
             <EvilChart></EvilChart>
             <Box
               sx={{
