@@ -102,6 +102,8 @@ export default function Headline() {
                 boxShadow: { xs: 2, sm: 4 },
                 borderRadius: "1.75rem",
                 display: { md: "none" },
+                width: { xs: "95%", sm: "80%" },
+                mx: "auto",
               }}
             >
               <CardHeader title=<h2 className="font-bold text-2xl">{headline}</h2>></CardHeader>
@@ -119,15 +121,17 @@ export default function Headline() {
                 display: { xs: "none", md: "block" },
               }}
             >
-              <CardHeader title=<h2 className="font-bold text-2xl">{headline}</h2>></CardHeader>
+              <CardHeader width={720} title=<h2 className="font-bold text-2xl">{headline}</h2>></CardHeader>
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
           <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "2rem 1.75rem 0" } }}>
-            <Typography variant="h1" component={"h1"}>
-              <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
-            </Typography>
-            <SurveyForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></SurveyForm>
+            <Box sx={{ width: { xs: "95%", sm: "85%" }, mx: "auto" }}>
+              <Typography variant="h1" component={"h1"}>
+                <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
+              </Typography>
+              <SurveyForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></SurveyForm>
+            </Box>
           </Grid>
         </Grid>
       </Box>
