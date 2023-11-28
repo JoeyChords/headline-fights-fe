@@ -194,101 +194,103 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl variant="standard">
-        <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}>
-          {question1.biasType}:
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="publication-radio-button-group"
-          name="publication-radio-button-group"
-          value={question1Value}
-          onChange={handleQuestion1RadioChange}
-        >
-          <FormControlLabel
-            value="true"
-            control={<Radio size={"small"} />}
-            label={question1.question}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-          <FormControlLabel
-            value="false"
-            control={<Radio size={"small"} />}
-            label={question1.questionFoil}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-          <FormControlLabel
-            value="neither"
-            control={<Radio size={"small"} />}
-            label={question1.noneOfTheAbove}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-        </RadioGroup>
-        <FormLabel
-          id="publication-radio-group-label"
-          sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
-        >
-          {question2.biasType}:
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="publication-radio-button-group"
-          name="publication-radio-button-group"
-          value={question2Value}
-          onChange={handleQuestion2RadioChange}
-        >
-          <FormControlLabel
-            value="true"
-            control={<Radio size={"small"} />}
-            label={question2.question}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-          <FormControlLabel
-            value="false"
-            control={<Radio size={"small"} />}
-            label={question2.questionFoil}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-          <FormControlLabel
-            value="neither"
-            control={<Radio size={"small"} />}
-            label={question2.noneOfTheAbove}
-            sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
-          />
-        </RadioGroup>
-        <FormLabel
-          id="publication-radio-group-label"
-          sx={{ mt: "1rem", textAlign: { xs: "center", sm: "left" }, fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
-        >
-          Guess the news source:
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="publication-radio-button-group"
-          name="publication-radio-button-group"
-          value={publicationValue}
-          onChange={handlePublicationRadioChange}
-        >
-          <FormControlLabel value="cnn" control={<Radio size={"small"} />} label="CNN" sx={{ marginBottom: ".6rem" }} />
-          <FormControlLabel value="fox news" control={<Radio size={"small"} />} label="Fox News" sx={{ marginBottom: ".6rem" }} />
-        </RadioGroup>
-        <Button
-          sx={{
-            mt: "1rem",
-            fontSize: { xs: "1.25rem", lg: "1rem" },
-            textTransform: "capitalize",
-            borderRadius: "100vw",
-            p: "0.25rem 1.5rem",
-            width: "80%",
-            mx: "auto",
-            mb: { xs: "3rem", md: "1rem" },
-          }}
-          type="submit"
-          variant="contained"
-          size="large"
-          disabled={disabled}
-        >
-          Submit
-        </Button>
-      </FormControl>
-    </form>
+    <Box margin="auto" sx={{ p: { xs: 0, sm: "0 1rem", md: 0 } }}>
+      <form onSubmit={handleSubmit}>
+        <FormControl variant="standard">
+          <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}>
+            {question1.biasType}:
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="publication-radio-button-group"
+            name="publication-radio-button-group"
+            value={question1Value}
+            onChange={handleQuestion1RadioChange}
+          >
+            <FormControlLabel
+              value="true"
+              control={<Radio size={"small"} />}
+              label={question1.question}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+            <FormControlLabel
+              value="false"
+              control={<Radio size={"small"} />}
+              label={question1.questionFoil}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+            <FormControlLabel
+              value="neither"
+              control={<Radio size={"small"} />}
+              label={question1.noneOfTheAbove}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+          </RadioGroup>
+          <FormLabel
+            id="publication-radio-group-label"
+            sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+          >
+            {question2.biasType}:
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="publication-radio-button-group"
+            name="publication-radio-button-group"
+            value={question2Value}
+            onChange={handleQuestion2RadioChange}
+          >
+            <FormControlLabel
+              value="true"
+              control={<Radio size={"small"} />}
+              label={question2.question}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+            <FormControlLabel
+              value="false"
+              control={<Radio size={"small"} />}
+              label={question2.questionFoil}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+            <FormControlLabel
+              value="neither"
+              control={<Radio size={"small"} />}
+              label={question2.noneOfTheAbove}
+              sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
+            />
+          </RadioGroup>
+          <FormLabel
+            id="publication-radio-group-label"
+            sx={{ mt: "1rem", textAlign: { xs: "center", sm: "left" }, fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+          >
+            Guess the news source:
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="publication-radio-button-group"
+            name="publication-radio-button-group"
+            value={publicationValue}
+            onChange={handlePublicationRadioChange}
+          >
+            <FormControlLabel value="cnn" control={<Radio size={"small"} />} label="CNN" sx={{ marginBottom: ".6rem" }} />
+            <FormControlLabel value="fox news" control={<Radio size={"small"} />} label="Fox News" sx={{ marginBottom: ".6rem" }} />
+          </RadioGroup>
+          <Button
+            sx={{
+              mt: "1rem",
+              fontSize: { xs: "1.25rem", lg: "1rem" },
+              textTransform: "capitalize",
+              borderRadius: "100vw",
+              p: "0.25rem 1.5rem",
+              width: "80%",
+              mx: "auto",
+              mb: { xs: "3rem", md: "1rem" },
+            }}
+            type="submit"
+            variant="contained"
+            size="large"
+            disabled={disabled}
+          >
+            Submit
+          </Button>
+        </FormControl>
+      </form>
+    </Box>
   );
 }
