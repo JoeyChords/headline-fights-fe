@@ -11,7 +11,7 @@ export default function StatsBox(props: any) {
         justifyContent: "center",
         alignContent: "center",
         p: "4rem 1rem",
-        aspectRatio: "1/1",
+        aspectRatio: { xs: "1/1", md: "auto", lg: "1/1" },
       }}
     >
       {props.component}
