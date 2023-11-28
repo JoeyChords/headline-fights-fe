@@ -1,5 +1,6 @@
 "use client";
 import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -13,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import { grey } from "@mui/material/colors";
+import { deepPurple } from "@mui/material/colors";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -92,6 +94,7 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
+            <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h5">
               Sign In
             </Typography>

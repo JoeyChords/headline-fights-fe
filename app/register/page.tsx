@@ -108,9 +108,8 @@ export default function SignUp() {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar>
+              <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
+
               <Typography component="h1" variant="h5">
                 Sign Up
               </Typography>

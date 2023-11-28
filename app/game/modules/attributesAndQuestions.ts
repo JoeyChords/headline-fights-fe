@@ -27,4 +27,9 @@ export const surveyCriteria = [
     new SurveyCriteria("partisan", "Partisan", "The headline supports either the conservative or liberal side of an issue.", "The headline does not support political views of an issue.", "Neither."),
     new SurveyCriteria("bigoted", "Favoring or Attacking", "The headline favors or attacks a particular race, religion, gender, age, sexual orientation, ethnic group, or person.", "The headline concerns a particular race, religion, gender, age, sexual orientation, ethnic group, or person but does not play favorites.", "Neither."),
     new SurveyCriteria("one_sided_content", "Content", "The headline presents one side of a conflict, political or otherwise.", "The headline presents both sides of a conflict.", "Neither."),
+    new SurveyCriteria("clickbait", "Structural", "The headline subject seems like it has been chosen only because it is likely to sell something, be shared, or get clicks.", "The headline is newsworthy for other reasons than to generate revenue or get clicks and shares.", "I'm not sure."),
+    new SurveyCriteria("has_agenda","Gatekeeping","The headline concerns a known talking point of the Republican or Democratic party.","The headline is news that all readers would find relevant or be aware of.","I'm not sure."),
+    new SurveyCriteria("makes_decision","Decision-making","The headline clearly disapproves of something.","The writer of the headline does not seem to have made a decision on the subject.","I don't know."),
+    new SurveyCriteria("","Mainstream","","",""),
+    new SurveyCriteria("","False Equivalency","","","")
 ]

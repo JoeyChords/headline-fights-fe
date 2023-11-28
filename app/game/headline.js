@@ -87,14 +87,14 @@ export default function Headline() {
 
   return (
     <>
-      <Box component="section" sx={{ width: "100%" }}>
+      <Box component="section" sx={{ width: "100%", overflow: "auto" }}>
         <Grid
           direction="row"
           maxWidth="lg"
           justifyContent="center"
           container
           spacing={2}
-          sx={{ mx: "auto", display: "flex", mt: { xs: "1rem", lg: "2rem" }, mb: "2rem" }}
+          sx={{ mx: "auto", mb: "3rem", display: "flex", mt: { xs: "1rem", lg: "2rem" } }}
         >
           <Grid xs={12} md={6} sx={{ verticalAlign: "middle", position: "relative" }}>
             <Card
@@ -123,7 +123,7 @@ export default function Headline() {
               <Image priority={true} alt="" src={photo} width={720} height={405} />
             </Card>
           </Grid>
-          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 4rem", sm: "2rem 1.75rem 4rem" } }}>
+          <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "2rem 1.75rem 0" } }}>
             <Typography variant="h1" component={"h1"}>
               <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: "1.5rem" }}>Rate for Bias and Guess the Source</Box>
             </Typography>

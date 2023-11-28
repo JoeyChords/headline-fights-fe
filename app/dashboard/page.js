@@ -103,7 +103,8 @@ export default function Dashboard() {
                     aspectRatio: "1/1",
                     width: "100%",
                     borderRadius: "1.75rem",
-                    justifyContent: "center",
+
+                    position: "relative",
                   }}
                 >
                   <HeadlineCount total={totalRatings} pub1Total={pub1Total} pub2Total={pub2Total}></HeadlineCount>

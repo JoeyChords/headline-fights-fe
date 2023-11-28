@@ -9,6 +9,7 @@ import UserFeedback from "./classes/UserFeedback";
 import { useRouter } from "next/navigation";
 import GuessAccuracyChart from "@/app/game/components/guessAccuracyChart";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import { surveyCriteria, SurveyCriteria } from "@/app/game/modules/attributesAndQuestions";
 
 const config = require("/app/config");
@@ -132,7 +133,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     return (
       <>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <h1 className="mt-6 md:mt-19 mb-2">You got it right. Great job!</h1>
+          <h2 className="mt-6 md:mt-19 mb-2 text-center">You got the source right. Great job!</h2>
           <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
 
           <Button
@@ -143,12 +144,19 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
               fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" },
               borderRadius: "100vw",
               p: "0.25rem 1.5rem",
-              mb: "6rem",
+              mb: "3rem",
               width: "80%",
             }}
           >
             Next
           </Button>
+          <h2 className="text-center">
+            See the{" "}
+            <Link href={`/dashboard?name=${user.username}`} underline="always">
+              Dashboard
+            </Link>{" "}
+            for all your results.
+          </h2>
         </Box>
       </>
     );
@@ -156,7 +164,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     return (
       <>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <h1 className="mt-6 md:mt-19">Wrong answer. Better luck next time.</h1>
+          <h2 className="mt-6 md:mt-19 mb-2 text-center">You guessed the source wrong. Better luck next time.</h2>
           <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
 
           <Button
@@ -167,12 +175,19 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
               fontSize: { lg: "1.25rem", xs: "1rem", textTransform: "capitalize" },
               borderRadius: "100vw",
               p: "0.25rem 1.5rem",
-              mb: "6rem",
+              mb: "3rem",
               width: "80%",
             }}
           >
             Next
           </Button>
+          <h2 className="text-center">
+            See the{" "}
+            <Link href={`/dashboard?name=${user.username}`} underline="always">
+              Dashboard
+            </Link>{" "}
+            for all your results.
+          </h2>
         </Box>
       </>
     );
@@ -264,6 +279,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             p: "0.25rem 1.5rem",
             width: "80%",
             mx: "auto",
+            mb: { xs: "3rem", md: "1rem" },
           }}
           type="submit"
           variant="contained"
