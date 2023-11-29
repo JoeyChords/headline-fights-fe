@@ -22,7 +22,7 @@ export default function Stats(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>R&apos;s, D&apos;s, and Indy&apos;s</Box>
+            <Box textAlign={"center"}>Rs, Ds, and Indys</Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
             <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
@@ -33,7 +33,7 @@ export default function Stats(props: any) {
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
             <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
-              Headline Fights data is more accurate when it&apos;s large and diverse. All ideoligies are necessary and welcome.
+              Headline Fights data is more accurate when it&apos;s large and diverse. All ideologies are necessary and welcome.
             </Box>
           </Typography>
         </Box>
