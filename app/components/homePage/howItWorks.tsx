@@ -36,8 +36,8 @@ export default function HowItWorks(props: any) {
             </Box>
           </Typography>
         </Box>
-        <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", mb: "3.5rem" }}>
-          <Grid xs={12} sm={6} md={3} sx={{}}>
+        <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", mb: "3.5rem", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} lg={3}>
             <HowItWorksBox
               icon={<HideSourceOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></HideSourceOutlinedIcon>}
               component={
@@ -49,7 +49,7 @@ export default function HowItWorks(props: any) {
               }
             ></HowItWorksBox>
           </Grid>
-          <Grid xs={12} sm={6} md={3} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
             <HowItWorksBox
               icon={<ThumbUpOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></ThumbUpOutlinedIcon>}
               component={
@@ -61,7 +61,7 @@ export default function HowItWorks(props: any) {
               }
             ></HowItWorksBox>
           </Grid>
-          <Grid xs={12} sm={6} md={3} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
             <HowItWorksBox
               icon={<CalculateOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.8rem" }}></CalculateOutlinedIcon>}
               component={
@@ -73,7 +73,7 @@ export default function HowItWorks(props: any) {
               }
             ></HowItWorksBox>
           </Grid>
-          <Grid xs={12} sm={6} md={3} sx={{}}>
+          <Grid xs={12} sm={6} md={4} lg={3} sx={{}}>
             <HowItWorksBox
               icon={<PsychologyAltOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.75rem" }}></PsychologyAltOutlinedIcon>}
               component={

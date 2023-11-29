@@ -97,7 +97,16 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       publicationCorrectProxy = false;
     }
 
-    feedback = new UserFeedback(headlines.publication, publicationCorrectProxy, headlines._id, user.id);
+    feedback = new UserFeedback(
+      headlines.publication,
+      publicationCorrectProxy,
+      headlines._id,
+      user.id,
+      question1.attribute,
+      question1Value,
+      question2.attribute,
+      question2Value
+    );
 
     fetch(API_ENDPOINT + "/updateStatistics", {
       method: "POST",

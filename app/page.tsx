@@ -14,10 +14,25 @@ const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Home() {
+  interface Stats {
+    isAuthenticated: Boolean;
+    numUsers: number;
+    numPub1Ratings: number;
+    numPub2Ratings: number;
+    pub_1_total_bias: number;
+    pub_2_total_bias: number;
+  }
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userName, setUsername] = useState("");
   const router = useRouter();
-  const [stats, setStats] = useState({});
+  const [stats, setStats] = useState<Stats>({
+    isAuthenticated: false,
+    numUsers: 0,
+    numPub1Ratings: 0,
+    numPub2Ratings: 0,
+    pub_1_total_bias: 0,
+    pub_2_total_bias: 0,
+  });
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
@@ -39,7 +54,7 @@ export default function Home() {
       <>
         <main>
           <Box sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" }, height: "100%" }}>
-            <HeroSection></HeroSection>
+            <HeroSection pub1Bias={stats.pub_1_total_bias} pub2Bias={stats.pub_2_total_bias}></HeroSection>
             <HowItWorks></HowItWorks>
             <Stats props={stats}></Stats>
           </Box>

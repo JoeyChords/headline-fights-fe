@@ -8,7 +8,7 @@ import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
 import BiasChart from "@/app/components/homePage/biasChart";
 import CTAButton from "@/app/components/homePage/ctaButton";
 
-export default function HeroSection() {
+export default function HeroSection(props: { pub1Bias: number; pub2Bias: number }) {
   return (
     <>
       <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: { sm: "0", lg: "1rem" }, borderRadius: "1.75rem", width: "100%" }}>
@@ -51,7 +51,7 @@ export default function HeroSection() {
             </Box>
           </Grid>
           <Grid xs={12} sm={6} sx={{ display: "flex", flexDirection: "column", p: { xs: 1.5, sm: 3, lg: 5 } }}>
-            <BiasChart></BiasChart>
+            <BiasChart pub1Bias={props.pub1Bias} pub2Bias={props.pub2Bias}></BiasChart>
             <Box
               sx={{
                 textAlign: { xs: "center", sm: "left" },
