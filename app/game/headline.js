@@ -102,7 +102,7 @@ export default function Headline() {
               sx={{
                 boxShadow: { xs: 2, sm: 4 },
                 borderRadius: "1.75rem",
-                width: { xs: "95%", sm: "80%" },
+                width: { xs: "95%", sm: "80%", md: "95%" },
                 mx: "auto",
               }}
             >

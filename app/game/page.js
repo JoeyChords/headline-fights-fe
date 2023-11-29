@@ -48,7 +48,7 @@ export default function Home() {
               flexGrow: 1,
               height: "100vh",
               overflow: "auto",
-              pl: { md: "1.75rem" },
+              pl: { md: "1.75rem", lg: 0 },
             }}
           >
             <Headline></Headline>

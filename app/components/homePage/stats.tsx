@@ -22,27 +22,29 @@ export default function Stats(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>STATISTICS</Box>
+            <Box textAlign={"center"}>R&apos;s, D&apos;s, and Indy&apos;s</Box>
           </Typography>
-          <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"500"} lineHeight={"1.3"}>
+          <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
             <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
-              Bigger Is Better
+              More Ratings,
+              <br />
+              Less Bias
             </Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
             <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
-              Data is more accurate when it&apos;s large. That&apos;s why your ratings are so important.
+              Headline Fights data is more accurate when it&apos;s large and diverse. All ideoligies are necessary and welcome.
             </Box>
           </Typography>
         </Box>
-        <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem" }}>
-          <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox component={<StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>}></StatsBox>
           </Grid>
-          <Grid xs={12} md={6} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox component={<StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>}></StatsBox>
           </Grid>
-          <Grid xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox component={<StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>}></StatsBox>
           </Grid>
         </Grid>
