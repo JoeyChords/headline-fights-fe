@@ -28,11 +28,11 @@ export default function HowItWorks(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>How It Works</Box>
+            <Box textAlign={"center"}>How Rating Works</Box>
           </Typography>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.25rem" }} fontWeight={"500"} lineHeight={"1.45"}>
             <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
-              Your Truth reveals the Universal Truth
+              Recognizing Bias in the Media Becomes a Thoughtful Game
             </Box>
           </Typography>
         </Box>
@@ -56,7 +56,7 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"2."}
-                  explanation={"You rate the headline by various criteria, then guess where it came from."}
+                  explanation={"You rate the headline for known media bias types, then guess if it's from Fox News or CNN."}
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>
@@ -68,7 +68,7 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"3."}
-                  explanation={"We calculate your ratings both separately and along with everyone else's."}
+                  explanation={"We tell you if you're right, then calculate your ratings both separately and along with everyone else's."}
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>
@@ -80,7 +80,7 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"4."}
-                  explanation={"You get your bias-free personal results, as well as how they compare with the crowd."}
+                  explanation={"You see how you rate each publication for bias, then compare your results to the crowd's ratings."}
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>

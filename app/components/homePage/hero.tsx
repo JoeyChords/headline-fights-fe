@@ -5,7 +5,7 @@ import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import AppBarHomePage from "@/app/components/app-bar/appBarHomePage";
-import EvilChart from "@/app/components/homePage/evilChart";
+import BiasChart from "@/app/components/homePage/biasChart";
 import CTAButton from "@/app/components/homePage/ctaButton";
 
 export default function HeroSection() {
@@ -40,7 +40,10 @@ export default function HeroSection() {
                   mb: 5,
                 }}
               >
-                <Box>Headline Fights is a bias-free rating system that lets the crowd decide which news source is truly worse.</Box>
+                <Box>
+                  Headline Fights is a game that helps individuals learn to recognize bias in the news media by pitting CNN and Fox News headlines
+                  against each other.
+                </Box>
               </Typography>
               <Box sx={{ textAlign: { xs: "center", sm: "left" }, mb: { xs: "4rem", sm: 0 } }}>
                 <CTAButton cta={"Start Rating"}></CTAButton>
@@ -48,7 +51,7 @@ export default function HeroSection() {
             </Box>
           </Grid>
           <Grid xs={12} sm={6} sx={{ display: "flex", flexDirection: "column", p: { xs: 1.5, sm: 3, lg: 5 } }}>
-            <EvilChart></EvilChart>
+            <BiasChart></BiasChart>
             <Box
               sx={{
                 textAlign: { xs: "center", sm: "left" },

@@ -4,7 +4,7 @@ export default function StatsBox(props: any) {
   return (
     <Box
       sx={{
-        border: "1px solid black",
+        border: "1.5px solid black",
         display: "flex",
         width: "100%",
         borderRadius: "1.75rem",

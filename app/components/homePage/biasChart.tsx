@@ -12,7 +12,7 @@ const PUB_2_SHORT: string = config.PUB_2_SHORT;
 const chartSetting = {
   xAxis: [
     {
-      label: "Evil (%)",
+      label: "Bias (%)",
       min: 0,
       max: 100,
     },
@@ -35,7 +35,7 @@ const barColors = [blueGrey[800]];
 
 const valueFormatter = (value: number) => `${value}%`;
 
-export default function EvilChart(props: any) {
+export default function BiasChart(props: any) {
   const theme = useTheme();
   const newTheme = createTheme({ palette: { mode: "dark" } });
 
@@ -72,7 +72,7 @@ export default function EvilChart(props: any) {
               padding: { xs: "4rem 0 0 0", sm: "4rem 0 0 0", md: "4rem 0 0 0", lg: "4rem 0 3rem 0", xl: "4rem 0 3rem 0" },
             }}
           >
-            Evil Meter
+            Bias Meter
           </Box>
         </Typography>
         <Box sx={{ display: "flex" }}>
