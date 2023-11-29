@@ -10,6 +10,9 @@ import { useRouter } from "next/navigation";
 import GuessAccuracyChart from "@/app/game/components/guessAccuracyChart";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import { Typography } from "@mui/material";
+import { blueGrey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import { surveyCriteria, SurveyCriteria } from "@/app/game/modules/attributesAndQuestions";
 
 const config = require("/app/config");
@@ -152,7 +155,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           </Button>
           <h2 className="text-center">
             See the{" "}
-            <Link href={`/dashboard?name=${user.username}`} underline="always">
+            <Link href={`/dashboard?name=${user.username}`} underline="always" color={blueGrey[700]}>
               Dashboard
             </Link>{" "}
             for all your results.
@@ -183,7 +186,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           </Button>
           <h2 className="text-center">
             See the{" "}
-            <Link href={`/dashboard?name=${user.username}`} underline="always">
+            <Link href={`/dashboard?name=${user.username}`} underline="always" color={blueGrey[700]}>
               Dashboard
             </Link>{" "}
             for all your results.
@@ -195,6 +198,10 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   return (
     <Box margin="auto" sx={{ p: { xs: 0, sm: "0 1rem", md: 0 } }}>
+      <Typography variant="h1" component={"h1"}>
+        <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: ".5rem" }}>Rate for Bias and Guess the Source</Box>
+        <Box sx={{ textAlign: "center", fontWeight: 400, fontSize: "1rem", mb: "1.5rem", color: grey[800] }}>Consider the image in your rating</Box>
+      </Typography>
       <form onSubmit={handleSubmit}>
         <FormControl variant="standard">
           <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}>
