@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   description: "Headline Fights is a bias-free rating system that lets the crowd decide whether Fox News or CNN is truly worse.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
+
 export default function RootLayout(props: any) {
   const { children } = props;
   return (

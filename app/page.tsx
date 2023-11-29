@@ -38,7 +38,7 @@ export default function Home() {
     return (
       <>
         <main>
-          <Box className={"min-h-screen"} sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" }, height: "100vh" }}>
+          <Box sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" }, height: "100%" }}>
             <HeroSection></HeroSection>
             <HowItWorks></HowItWorks>
             <Stats props={stats}></Stats>
