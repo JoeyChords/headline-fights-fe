@@ -9,35 +9,35 @@ const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1: string = config.PUB_1;
 const PUB_2_SHORT: string = config.PUB_2_SHORT;
 
-const chartSetting = {
-  xAxis: [
-    {
-      label: "Bias (%)",
-      min: 0,
-      max: 100,
-    },
-  ],
-
-  height: 300,
-  width: 500,
-};
-const dataset = [
-  {
-    publication: 59,
-    publicationName: PUB_1,
-  },
-  {
-    publication: 80,
-    publicationName: PUB_2_SHORT,
-  },
-];
-const barColors = [blueGrey[800]];
-
-const valueFormatter = (value: number) => `${value}%`;
-
-export default function BiasChart(props: any) {
+export default function BiasChart(props: { pub1Bias: number; pub2Bias: number }) {
   const theme = useTheme();
   const newTheme = createTheme({ palette: { mode: "dark" } });
+
+  const chartSetting = {
+    xAxis: [
+      {
+        label: "Bias (%)",
+        min: 0,
+        max: 100,
+      },
+    ],
+
+    height: 300,
+    width: 500,
+  };
+  const dataset = [
+    {
+      publication: props.pub1Bias,
+      publicationName: PUB_1,
+    },
+    {
+      publication: props.pub2Bias,
+      publicationName: PUB_2_SHORT,
+    },
+  ];
+  const barColors = [blueGrey[800]];
+
+  const valueFormatter = (value: number) => `${value}%`;
 
   return (
     <ThemeProvider theme={newTheme}>
