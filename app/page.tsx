@@ -1,8 +1,6 @@
 "use client";
-import AppBarLoggedIn from "./components/app-bar/appBarLoggedIn";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -13,9 +11,9 @@ import HowItWorks from "./components/homePage/howItWorks";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
-export default function Home() {
+export default function Home(): JSX.Element {
   interface Stats {
-    isAuthenticated: Boolean;
+    isAuthenticated: boolean;
     numUsers: number;
     numPub1Ratings: number;
     numPub2Ratings: number;

@@ -15,6 +15,15 @@ import { blueGrey } from "@mui/material/colors";
 import { grey } from "@mui/material/colors";
 import { surveyCriteria, SurveyCriteria } from "@/app/game/modules/attributesAndQuestions";
 
+function RadioLabel({ trueOrFalse, label }) {
+  return (
+    <Box>
+      <span className="font-bold">{trueOrFalse}</span>
+      {label}
+    </Box>
+  );
+}
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
@@ -213,7 +222,10 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       </Typography>
       <form onSubmit={handleSubmit}>
         <FormControl variant="standard">
-          <FormLabel id="publication-radio-group-label" sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}>
+          <FormLabel
+            id="publication-radio-group-label"
+            sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem", fontWeight: "700", color: "#000000" }}
+          >
             {question1.biasType}:
           </FormLabel>
           <RadioGroup
@@ -225,25 +237,32 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             <FormControlLabel
               value="true"
               control={<Radio size={"small"} />}
-              label={question1.question}
+              label={<RadioLabel trueOrFalse={"True: "} label={question1.question}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
             <FormControlLabel
               value="false"
               control={<Radio size={"small"} />}
-              label={question1.questionFoil}
+              label={<RadioLabel trueOrFalse={"False: "} label={question1.questionFoil}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
             <FormControlLabel
               value="neither"
               control={<Radio size={"small"} />}
-              label={question1.noneOfTheAbove}
+              label={<RadioLabel trueOrFalse={"Not Applicable: "} label={question1.noneOfTheAbove}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
           </RadioGroup>
           <FormLabel
             id="publication-radio-group-label"
-            sx={{ mt: "1rem", textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+            sx={{
+              mt: "1rem",
+              textAlign: "left",
+              fontSize: { xs: "1.25rem", lg: "1rem" },
+              marginBottom: ".6rem",
+              fontWeight: "700",
+              color: "#000000",
+            }}
           >
             {question2.biasType}:
           </FormLabel>
@@ -256,25 +275,32 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             <FormControlLabel
               value="true"
               control={<Radio size={"small"} />}
-              label={question2.question}
+              label={<RadioLabel trueOrFalse={"True: "} label={question2.question}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
             <FormControlLabel
               value="false"
               control={<Radio size={"small"} />}
-              label={question2.questionFoil}
+              label={<RadioLabel trueOrFalse={"False: "} label={question2.questionFoil}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
             <FormControlLabel
               value="neither"
               control={<Radio size={"small"} />}
-              label={question2.noneOfTheAbove}
+              label={<RadioLabel trueOrFalse={"Not Applicable: "} label={question2.noneOfTheAbove}></RadioLabel>}
               sx={{ marginBottom: { xs: ".75rem", sm: ".6rem" } }}
             />
           </RadioGroup>
           <FormLabel
             id="publication-radio-group-label"
-            sx={{ mt: "1rem", textAlign: { xs: "center", sm: "left" }, fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem" }}
+            sx={{
+              mt: "1rem",
+              textAlign: { xs: "center", sm: "left" },
+              fontSize: { xs: "1.25rem", lg: "1rem" },
+              marginBottom: ".6rem",
+              fontWeight: "700",
+              color: "#000000",
+            }}
           >
             Guess the news source:
           </FormLabel>

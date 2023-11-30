@@ -5,7 +5,7 @@ const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
 
-export default function GuessAccuracyChartDashboard(props: any) {
+export default function GuessAccuracyChart(props: any) {
   const chartSetting = {
     yAxis: [
       {
@@ -39,13 +39,13 @@ export default function GuessAccuracyChartDashboard(props: any) {
           fontSize: ".75rem !important",
         },
         "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
-          fontSize: ".75rem !important",
+          fontSize: "1rem !important",
         },
         "& .MuiChartsAxis-bottom .MuiChartsAxis-label text": {
           fontSize: "1rem !important",
         },
         "& .MuiChartsAxis-left .MuiChartsAxis-label text": {
-          fontSize: ".75rem !important",
+          fontSize: "1rem !important",
         },
       }}
     />
