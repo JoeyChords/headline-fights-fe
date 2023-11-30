@@ -24,7 +24,6 @@ function AppBarLoggedIn(props) {
   const name = useSearchParams().get("name");
   const settings = {
     Dashboard: props.name != null ? `/dashboard?name=${props.name}` : `/dashboard?name=${name}`,
-    Settings: props.name != null ? `/settings?name=${props.name}` : `/settings?name=${name}`,
     Logout: props.name != null ? `/logout?name=${props.name}` : `/logout?name=${name}`,
   };
 

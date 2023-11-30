@@ -12,8 +12,9 @@ import Grid from "@mui/system/Unstable_Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
-import HeadlineCount from "./components/HeadlineCount";
-import GuessAccuracyChartDashboard from "./components/guessAccuracyChartDashboard";
+import HeadlineCount from "./components/headlineCount";
+import GuessAccuracyChart from "./components/guessAccuracyChart";
+import PersonalBiasChart from "./components/personalBiasChart";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -27,6 +28,10 @@ export default function Dashboard() {
   const [totalRatings, setTotalRatings] = useState("");
   const [pub1Total, setPub1Total] = useState("");
   const [pub2Total, setPub2Total] = useState("");
+  const [pub1CrowdBias, setPub1CrowdBias] = useState(0);
+  const [pub2CrowdBias, setPub2CrowdBias] = useState(0);
+  const [pub1PersonalBias, setPub1PersonalBias] = useState(0);
+  const [pub2PersonalBias, setPub2PersonalBias] = useState(0);
 
   const [publicationDataset, setPublicationDataset] = useState([
     {
@@ -49,7 +54,6 @@ export default function Dashboard() {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
         if (response.isAuthenticated) {
           setIsLoggedIn(true);
           setUsername(response.user.username);
@@ -68,6 +72,10 @@ export default function Dashboard() {
               publication: PUB_2,
             },
           ]);
+          setPub1CrowdBias(response.pub_1_crowd_total_bias);
+          setPub2CrowdBias(response.pub_2_crowd_total_bias);
+          setPub1PersonalBias(response.pub_1_personal_bias.total_bias);
+          setPub2PersonalBias(response.pub_2_personal_bias.total_bias);
         } else {
           router.push("/login");
         }
@@ -126,7 +134,31 @@ export default function Dashboard() {
                     justifyItems: "center",
                   }}
                 >
-                  <GuessAccuracyChartDashboard dataset={dataset}></GuessAccuracyChartDashboard>
+                  <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
+                </Paper>
+              </Grid>
+              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+                <Paper
+                  elevation={2}
+                  sx={{
+                    display: "flex",
+                    mt: 3,
+                    ml: 1,
+                    mr: 1,
+                    p: "2rem",
+                    aspectRatio: "1/1",
+                    width: "100%",
+                    borderRadius: "1.75rem",
+                    justifyContent: "center",
+                    justifyItems: "center",
+                  }}
+                >
+                  <PersonalBiasChart
+                    pub1CrowdBias={pub1CrowdBias}
+                    pub2CrowdBias={pub2CrowdBias}
+                    pub1PersonalBias={pub1PersonalBias}
+                    pub2PersonalBias={pub2PersonalBias}
+                  ></PersonalBiasChart>
                 </Paper>
               </Grid>
             </Grid>
