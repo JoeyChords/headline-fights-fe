@@ -10,7 +10,7 @@ export default function PersonalBiasChart(props: {
   pub2CrowdBias: number;
   pub1PersonalBias: number;
   pub2PersonalBias: number;
-}) {
+}): JSX.Element {
   const chartSetting = {
     xAxis: [
       {

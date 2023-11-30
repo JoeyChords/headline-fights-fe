@@ -1,37 +1,29 @@
 "use client";
-import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
+import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import UserFeedback from "../game/classes/UserFeedback";
-import { axisClasses } from "@mui/x-charts";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import { grey } from "@mui/material/colors";
 import HeadlineCount from "./components/headlineCount";
 import GuessAccuracyChart from "./components/guessAccuracyChart";
 import PersonalBiasChart from "./components/personalBiasChart";
+import AllBiasesChart from "./components/allBiasesChart";
+import { Stats, initialStats } from "./interfaces/Stats";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
 
-export default function Dashboard() {
+export default function Dashboard(): JSX.Element {
   const queryName = useSearchParams().get("name");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUsername] = useState("");
-  const [totalRatings, setTotalRatings] = useState("");
-  const [pub1Total, setPub1Total] = useState("");
-  const [pub2Total, setPub2Total] = useState("");
-  const [pub1CrowdBias, setPub1CrowdBias] = useState(0);
-  const [pub2CrowdBias, setPub2CrowdBias] = useState(0);
-  const [pub1PersonalBias, setPub1PersonalBias] = useState(0);
-  const [pub2PersonalBias, setPub2PersonalBias] = useState(0);
+  const [stats, setStats] = useState<Stats>(initialStats);
 
   const [publicationDataset, setPublicationDataset] = useState([
     {
@@ -56,10 +48,6 @@ export default function Dashboard() {
       .then((response) => {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);
-          setUsername(response.user.username);
-          setTotalRatings(response.publicationStats.totalRatingsCount);
-          setPub1Total(response.publicationStats.pub1RatingsCount);
-          setPub2Total(response.publicationStats.pub2RatingsCount);
           setPublicationDataset([
             {
               you: response.publicationStats.userPub1Percent,
@@ -72,10 +60,7 @@ export default function Dashboard() {
               publication: PUB_2,
             },
           ]);
-          setPub1CrowdBias(response.pub_1_crowd_total_bias);
-          setPub2CrowdBias(response.pub_2_crowd_total_bias);
-          setPub1PersonalBias(response.pub_1_personal_bias.total_bias);
-          setPub2PersonalBias(response.pub_2_personal_bias.total_bias);
+          setStats(response);
         } else {
           router.push("/login");
         }
@@ -85,7 +70,7 @@ export default function Dashboard() {
   if (isLoggedIn) {
     return (
       <>
-        <AppBarLoggedIn name={userName}></AppBarLoggedIn>
+        <AppBarLoggedIn name={stats.user.username}></AppBarLoggedIn>
         <Box
           component="main"
           sx={{
@@ -98,10 +83,9 @@ export default function Dashboard() {
         >
           <Container maxWidth="lg">
             <Grid container spacing={2}>
-              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+              <Grid justifyContent="center" xs={12} sm={6} md={6} lg={4}>
                 <Paper
                   elevation={2}
-                  direction="column"
                   sx={{
                     display: "flex",
                     mt: 3,
@@ -111,14 +95,17 @@ export default function Dashboard() {
                     aspectRatio: "1/1",
                     width: "100%",
                     borderRadius: "1.75rem",
-
                     position: "relative",
                   }}
                 >
-                  <HeadlineCount total={totalRatings} pub1Total={pub1Total} pub2Total={pub2Total}></HeadlineCount>
+                  <HeadlineCount
+                    total={stats.publicationStats.totalRatingsCount}
+                    pub1Total={stats.publicationStats.pub1RatingsCount}
+                    pub2Total={stats.publicationStats.pub2RatingsCount}
+                  ></HeadlineCount>
                 </Paper>
               </Grid>
-              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+              <Grid justifyContent="center" xs={12} sm={6} md={6} lg={4}>
                 <Paper
                   elevation={2}
                   sx={{
@@ -137,7 +124,7 @@ export default function Dashboard() {
                   <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
                 </Paper>
               </Grid>
-              <Grid container justifyContent="center" xs={12} sm={6} md={6} lg={4}>
+              <Grid justifyContent="center" xs={12} sm={6} md={6} lg={4}>
                 <Paper
                   elevation={2}
                   sx={{
@@ -154,11 +141,28 @@ export default function Dashboard() {
                   }}
                 >
                   <PersonalBiasChart
-                    pub1CrowdBias={pub1CrowdBias}
-                    pub2CrowdBias={pub2CrowdBias}
-                    pub1PersonalBias={pub1PersonalBias}
-                    pub2PersonalBias={pub2PersonalBias}
+                    pub1CrowdBias={stats.pub_1_crowd_total_bias}
+                    pub2CrowdBias={stats.pub_2_crowd_total_bias}
+                    pub1PersonalBias={stats.pub_1_personal_bias.total_bias}
+                    pub2PersonalBias={stats.pub_2_personal_bias.total_bias}
                   ></PersonalBiasChart>
+                </Paper>
+              </Grid>
+              <Grid justifyContent="center" xs={12}>
+                <Paper
+                  elevation={2}
+                  sx={{
+                    display: "flex",
+                    mt: 3,
+                    ml: 1,
+                    mr: 1,
+                    p: "2rem",
+                    borderRadius: "1.75rem",
+                    justifyContent: "center",
+                    justifyItems: "center",
+                  }}
+                >
+                  <AllBiasesChart></AllBiasesChart>
                 </Paper>
               </Grid>
             </Grid>
@@ -170,7 +174,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
+      <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
       <Box
         component="main"
         sx={{
