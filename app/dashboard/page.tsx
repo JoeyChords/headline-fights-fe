@@ -148,7 +148,7 @@ export default function Dashboard(): JSX.Element {
                   ></PersonalBiasChart>
                 </Paper>
               </Grid>
-              {/* <Grid justifyContent="center" xs={12}>
+              <Grid justifyContent="center" xs={12}>
                 <Paper
                   elevation={2}
                   sx={{
@@ -164,7 +164,7 @@ export default function Dashboard(): JSX.Element {
                 >
                   <AllBiasesChart></AllBiasesChart>
                 </Paper>
-              </Grid> */}
+              </Grid>
             </Grid>
           </Container>
         </Box>
