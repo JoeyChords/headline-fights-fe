@@ -163,22 +163,8 @@ export default function Dashboard(): JSX.Element {
   return (
     <>
       <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: grey[100],
-          display: "flex",
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        <Container sx={{ mt: 15 }} maxWidth="lg">
-          <Box justifyContent="center" sx={{ display: "flex" }}>
-            <CircularProgress color="secondary" />
-          </Box>
-          <p className="text-center mt-5">Loading...</p>
-        </Container>
+      <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
+        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
       </Box>
     </>
   );

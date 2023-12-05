@@ -41,8 +41,8 @@ export default function HeroSection(props: { pub1Bias: number; pub2Bias: number 
                 }}
               >
                 <Box>
-                  Headline Fights is a game that helps individuals learn to recognize bias in the news media by pitting CNN and Fox News headlines
-                  against each other.
+                  Headline Fights is a game that helps players learn to recognize bias in the news media by pitting CNN and Fox News headlines against
+                  each other.
                 </Box>
               </Typography>
               <Box sx={{ textAlign: { xs: "center", sm: "left" }, mb: { xs: "4rem", sm: 0 } }}>

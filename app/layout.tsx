@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Headline Fights",
-  description: "Headline Fights is a bias-free rating system that lets the crowd decide whether Fox News or CNN is truly worse.",
+  description:
+    "Headline Fights is a game that helps players learn to recognize bias in the news media by pitting CNN and Fox News headlines against each other.",
 };
 
 export const viewport = {

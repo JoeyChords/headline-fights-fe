@@ -25,25 +25,10 @@ export default function Logout() {
 
   return (
     <>
-      <main>
-        <AppBarLoggedIn></AppBarLoggedIn>
-        <Box
-          component="main"
-          sx={{
-            bgcolor: grey[100],
-            display: "flex",
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-            flexDirection: "column",
-          }}
-        >
-          <Box justifyContent="center" sx={{ display: "flex", mt: 20 }}>
-            <CircularProgress color="secondary" />
-          </Box>
-          <h1 className="text-center mt-5 font-bold text-2xl">Logging out...</h1>
-        </Box>
-      </main>
+      <AppBarLoggedIn></AppBarLoggedIn>
+      <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
+        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+      </Box>
     </>
   );
 }

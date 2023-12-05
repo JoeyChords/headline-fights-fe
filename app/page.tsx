@@ -56,8 +56,8 @@ export default function Home(): JSX.Element {
             p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" },
             display: "flex",
             flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
+            // height: "100vh",
+            // overflow: "auto",
             flexDirection: "column",
           }}
         >
@@ -71,7 +71,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Box justifyContent="center" sx={{ bgcolor: "black", height: "100vh", overflow: "auto", position: "relative" }}>
+      <Box justifyContent="center" sx={{ bgcolor: "black", height: "100vh", position: "relative" }}>
         <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
       </Box>
     </>
