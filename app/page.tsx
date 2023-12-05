@@ -54,10 +54,7 @@ export default function Home(): JSX.Element {
           sx={{
             bgcolor: "black",
             p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" },
-            display: "flex",
-            flexGrow: 1,
-            width: "100%",
-            flexDirection: "column",
+            minWidth: "100%",
           }}
         >
           <HeroSection pub1Bias={stats.pub_1_total_bias} pub2Bias={stats.pub_2_total_bias}></HeroSection>
