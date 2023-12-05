@@ -71,14 +71,9 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <main>
-        <Container sx={{ mt: 15 }} maxWidth="lg">
-          <Box justifyContent="center" sx={{ display: "flex" }}>
-            <CircularProgress color="secondary" />
-          </Box>
-          <p className="text-center mt-5">Loading...</p>
-        </Container>
-      </main>
+      <Box justifyContent="center" sx={{ bgcolor: "black", height: "100vh", overflow: "auto", position: "relative" }}>
+        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+      </Box>
     </>
   );
 }
