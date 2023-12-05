@@ -70,7 +70,8 @@ export default function Headline() {
   if (isLoading)
     return (
       <>
-        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+        <style>{"body { background-color: #f5f5f5; }"}</style>
+        <Box sx={{ mt: { xs: "-58px", sm: "-64px" }, height: "100vh", width: "100%", position: "relative" }}>
           <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
         </Box>
       </>
@@ -78,7 +79,8 @@ export default function Headline() {
   if (!headline)
     return (
       <>
-        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+        <style>{"body { background-color: #f5f5f5; }"}</style>
+        <Box justifyContent="center" sx={{ height: "100vh", width: "100%", position: "relative" }}>
           <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
             <p className="text-center">No headlines to show</p>
           </Box>

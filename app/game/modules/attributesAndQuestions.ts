@@ -21,7 +21,7 @@ export const surveyCriteria = [
     new SurveyCriteria("undue_weight_bias","Undue Weight","The headline gives more importance to the topic than it should.", "The headline contains important news.", "I'm not sure."),
     new SurveyCriteria("speculative_content", "Speculation", "The headline is speculating about things that may have happened, might currently be happening, or might happen in the future.", "The headline is about events that have definitely happened, are happening, or will definitely happen.", "Neither."),
     new SurveyCriteria("tonality_bias","Tone", "The headline's tone seems slanted towards or against particular actors or issues.","The headline's tone does not seem to be slanted.", "Neither."),
-    new SurveyCriteria("concision_bias","Concision", "The headline presents a simple subject with a simple viewpoint.", "The headline presents a simple subject but doesn't have a clear viewpoint.", "Neither."),
+    new SurveyCriteria("concision_bias","Concision", "The headline presents a simple subject from a simple viewpoint.", "The headline presents a simple subject but doesn't have a point of view.", "Neither."),
     new SurveyCriteria("coverage_bias","Coverage","The headline includes a negative portrayal of a political party or ideology.", "The headline includes a positive portrayal of a political party or ideology.", "Neither."),
     new SurveyCriteria("distortion_bias","Distortion","The headline distorts or manipulates facts to represent an opinion.", "The headline only presents facts.", "I'm not sure."),
     new SurveyCriteria("partisan_bias", "Partisan", "The headline supports either the conservative or liberal side of an issue.", "The headline does not support political views of an issue.", "Neither."),

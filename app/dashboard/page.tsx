@@ -70,17 +70,9 @@ export default function Dashboard(): JSX.Element {
   if (isLoggedIn) {
     return (
       <>
+        <style>{"body { background-color: #f5f5f5; }"}</style>
         <AppBarLoggedIn name={stats.user.username}></AppBarLoggedIn>
-        <Box
-          component="main"
-          sx={{
-            bgcolor: grey[100],
-            display: "flex",
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "hidden",
-          }}
-        >
+        <Box component="main">
           <Container maxWidth="lg">
             <Grid container spacing={3} sx={{ mt: "1rem" }}>
               <Grid justifyContent="center" xs={12} sm={6} md={6} lg={4}>
@@ -162,6 +154,7 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <>
+      <style>{"body { background-color: #f5f5f5; }"}</style>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
         <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
         <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />

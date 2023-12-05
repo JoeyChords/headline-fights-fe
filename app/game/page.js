@@ -38,13 +38,9 @@ export default function Home() {
   if (isLoggedIn) {
     return (
       <>
+        <style>{"body { background-color: #f5f5f5; }"}</style>
         <main>
-          <Box
-            component="main"
-            sx={{
-              bgcolor: grey[100],
-            }}
-          >
+          <Box component="main">
             <AppBarLoggedIn name={userName}></AppBarLoggedIn>
             <Headline></Headline>
           </Box>
@@ -54,10 +50,10 @@ export default function Home() {
   }
   return (
     <>
+      <style>{"body { background-color: #f5f5f5; }"}</style>
       <main>
-        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+        <Box justifyContent="center" sx={{ height: "100vh", width: "100%", position: "relative" }}>
           <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-
           <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
         </Box>
       </main>

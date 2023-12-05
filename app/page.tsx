@@ -50,11 +50,10 @@ export default function Home(): JSX.Element {
   if (!isLoggedIn) {
     return (
       <>
+        <style>{"body { background-color: black; }"}</style>
         <Box
           sx={{
-            bgcolor: "black",
             p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" },
-            minWidth: "100%",
           }}
         >
           <HeroSection pub1Bias={stats.pub_1_total_bias} pub2Bias={stats.pub_2_total_bias}></HeroSection>
@@ -67,7 +66,8 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Box justifyContent="center" sx={{ bgcolor: "black", height: "100vh", width: "100%", position: "relative" }}>
+      <style>{"body { background-color: black; }"}</style>
+      <Box justifyContent="center" sx={{ height: "100vh", width: "100%", position: "relative" }}>
         <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
       </Box>
     </>
