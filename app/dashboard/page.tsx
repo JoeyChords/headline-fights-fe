@@ -79,7 +79,6 @@ export default function Dashboard(): JSX.Element {
                 <Paper
                   elevation={2}
                   sx={{
-                    display: "flex",
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
@@ -98,13 +97,10 @@ export default function Dashboard(): JSX.Element {
                 <Paper
                   elevation={2}
                   sx={{
-                    display: "flex",
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
                     borderRadius: "1.75rem",
-                    justifyContent: "center",
-                    justifyItems: "center",
                   }}
                 >
                   <GuessAccuracyChart dataset={dataset}></GuessAccuracyChart>
@@ -114,13 +110,10 @@ export default function Dashboard(): JSX.Element {
                 <Paper
                   elevation={2}
                   sx={{
-                    display: "flex",
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
                     borderRadius: "1.75rem",
-                    justifyContent: "center",
-                    justifyItems: "center",
                   }}
                 >
                   <PersonalBiasChart
