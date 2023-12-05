@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Headline Fights is a bias-free rating system that lets the crowd decide which news source is truly worse.",
     start_url: '/',
     display: 'standalone',
-    background_color: '#000',
-    theme_color: '#000',
+    background_color: '#000000',
+    theme_color: '#000000',
     icons: [
       {
         src: '/favicon.ico',
