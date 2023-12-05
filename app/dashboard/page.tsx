@@ -82,15 +82,12 @@ export default function Dashboard(): JSX.Element {
           }}
         >
           <Container maxWidth="lg">
-            <Grid container spacing={2}>
+            <Grid container spacing={3} sx={{ mt: "1rem" }}>
               <Grid justifyContent="center" xs={12} sm={6} md={6} lg={4}>
                 <Paper
                   elevation={2}
                   sx={{
                     display: "flex",
-                    mt: 3,
-                    ml: 1,
-                    mr: 1,
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
@@ -110,9 +107,6 @@ export default function Dashboard(): JSX.Element {
                   elevation={2}
                   sx={{
                     display: "flex",
-                    mt: 3,
-                    ml: 1,
-                    mr: 1,
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
@@ -129,9 +123,6 @@ export default function Dashboard(): JSX.Element {
                   elevation={2}
                   sx={{
                     display: "flex",
-                    mt: 3,
-                    ml: 1,
-                    mr: 1,
                     p: "2rem",
                     aspectRatio: "1/1",
                     width: "100%",
@@ -153,9 +144,6 @@ export default function Dashboard(): JSX.Element {
                   elevation={2}
                   sx={{
                     display: "flex",
-                    mt: 3,
-                    ml: 1,
-                    mr: 1,
                     p: "2rem",
                     borderRadius: "1.75rem",
                     justifyContent: "center",
