@@ -21,7 +21,7 @@ export default function RootLayout(props: any) {
   const { children } = props;
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-full">
         <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
       </body>
     </html>
