@@ -51,7 +51,17 @@ export default function Home(): JSX.Element {
     return (
       <>
         <main>
-          <Box sx={{ bgcolor: "black", p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" }, height: "100vh", overflow: "auto" }}>
+          <Box
+            sx={{
+              bgcolor: "black",
+              p: { xs: ".5rem", md: ".9rem", lg: "1.25rem" },
+              display: "flex",
+              flexGrow: 1,
+              height: "100vh",
+              overflow: "auto",
+              flexDirection: "column",
+            }}
+          >
             <HeroSection pub1Bias={stats.pub_1_total_bias} pub2Bias={stats.pub_2_total_bias}></HeroSection>
             <HowItWorks></HowItWorks>
             <Stats props={stats}></Stats>
