@@ -44,10 +44,6 @@ export default function Home() {
             component="main"
             sx={{
               bgcolor: grey[100],
-              display: "flex",
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto",
               pl: { md: "1.75rem", lg: 0 },
             }}
           >
@@ -60,23 +56,10 @@ export default function Home() {
   return (
     <>
       <main>
-        <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-        <Box
-          component="main"
-          sx={{
-            bgcolor: grey[100],
-            display: "flex",
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
-          <Container sx={{ mt: 30 }} maxWidth="lg">
-            <Box justifyContent="center" sx={{ display: "flex" }}>
-              <CircularProgress color="secondary" />
-            </Box>
-            <p className="text-center mt-5">Loading...</p>
-          </Container>
+        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+          <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
+
+          <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
         </Box>
       </main>
     </>

@@ -25,8 +25,8 @@ export default function Logout() {
 
   return (
     <>
-      <AppBarLoggedIn></AppBarLoggedIn>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
+        <AppBarLoggedIn></AppBarLoggedIn>
         <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
       </Box>
     </>

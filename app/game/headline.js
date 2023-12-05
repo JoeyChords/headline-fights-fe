@@ -12,6 +12,7 @@ import { grey } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 import SurveyForm from "./surveyForm";
 import { useRouter } from "next/navigation";
+import { TurnedIn } from "@mui/icons-material";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -69,20 +70,19 @@ export default function Headline() {
   if (isLoading)
     return (
       <>
-        <Container sx={{ mt: 30 }} maxWidth="lg">
-          <Box justifyContent="center" sx={{ display: "flex" }}>
-            <CircularProgress color="secondary" />
-          </Box>
-          <p className="text-center mt-5">Loading...</p>
-        </Container>
+        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+          <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+        </Box>
       </>
     );
-  if (!headlines)
+  if (!headline)
     return (
       <>
-        <Container sx={{ mt: 30 }} maxWidth="lg">
-          <p className="text-center">No headlines to show</p>
-        </Container>
+        <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", width: "100%", position: "relative" }}>
+          <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            <p className="text-center">No headlines to show</p>
+          </Box>
+        </Box>
       </>
     );
 
