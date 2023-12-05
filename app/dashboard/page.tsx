@@ -78,7 +78,7 @@ export default function Dashboard(): JSX.Element {
             display: "flex",
             flexGrow: 1,
             height: "100vh",
-            overflow: "auto",
+            overflow: "hidden",
           }}
         >
           <Container maxWidth="lg">
@@ -162,8 +162,8 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <>
-      <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
+        <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
         <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
       </Box>
     </>

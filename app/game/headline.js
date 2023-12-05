@@ -97,7 +97,7 @@ export default function Headline() {
           spacing={2}
           sx={{ mx: "auto", mb: "3rem", display: "flex", mt: { xs: "1rem", lg: "2rem" } }}
         >
-          <Grid xs={12} md={6} sx={{ verticalAlign: "middle", pt: { md: "1.75rem" } }}>
+          <Grid xs={12} md={6} sx={{ verticalAlign: "middle", pt: { md: "1.75rem" }, pl: { md: "2.5rem", lg: 0 } }}>
             <Card
               sx={{
                 boxShadow: { xs: 2, sm: 4 },

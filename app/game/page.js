@@ -39,14 +39,13 @@ export default function Home() {
     return (
       <>
         <main>
-          <AppBarLoggedIn name={userName}></AppBarLoggedIn>
           <Box
             component="main"
             sx={{
               bgcolor: grey[100],
-              pl: { md: "1.75rem", lg: 0 },
             }}
           >
+            <AppBarLoggedIn name={userName}></AppBarLoggedIn>
             <Headline></Headline>
           </Box>
         </main>
