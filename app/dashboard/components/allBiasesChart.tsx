@@ -1,6 +1,9 @@
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
+const config = require("/app/config");
+const PUB_1 = config.PUB_1;
+const PUB_2_SHORT = config.PUB_2_SHORT;
 
 export default function AllBiasesChart(props: {
   biasType1: string;
@@ -45,39 +48,39 @@ export default function AllBiasesChart(props: {
 
   const dataset = [
     {
-      london: 59,
-      paris: 57,
-      newYork: 86,
-      seoul: 21,
-      month: "Jan",
+      youPub1: props.pub1PersonalBias1,
+      crowdPub1: props.pub1CrowdBias1,
+      youPub2: props.pub2PersonalBias1,
+      crowdPub2: props.pub2CrowdBias1,
+      biasType: props.biasType1,
     },
     {
-      london: 50,
-      paris: 52,
-      newYork: 78,
-      seoul: 28,
-      month: "Fev",
+      youPub1: props.pub1PersonalBias2,
+      crowdPub1: props.pub1CrowdBias2,
+      youPub2: props.pub2PersonalBias2,
+      crowdPub2: props.pub2CrowdBias2,
+      biasType: props.biasType2,
     },
     {
-      london: 47,
-      paris: 53,
-      newYork: 106,
-      seoul: 41,
-      month: "Mar",
+      youPub1: props.pub1PersonalBias3,
+      crowdPub1: props.pub1CrowdBias3,
+      youPub2: props.pub2PersonalBias3,
+      crowdPub2: props.pub2CrowdBias3,
+      biasType: props.biasType3,
     },
     {
-      london: 54,
-      paris: 56,
-      newYork: 92,
-      seoul: 73,
-      month: "Apr",
+      youPub1: props.pub1PersonalBias4,
+      crowdPub1: props.pub1CrowdBias4,
+      youPub2: props.pub2PersonalBias4,
+      crowdPub2: props.pub2CrowdBias4,
+      biasType: props.biasType4,
     },
     {
-      london: 57,
-      paris: 69,
-      newYork: 92,
-      seoul: 99,
-      month: "May",
+      youPub1: props.pub1PersonalBias5,
+      crowdPub1: props.pub1CrowdBias5,
+      youPub2: props.pub2PersonalBias5,
+      crowdPub2: props.pub2CrowdBias5,
+      biasType: props.biasType5,
     },
   ];
 
@@ -86,12 +89,12 @@ export default function AllBiasesChart(props: {
   return (
     <BarChart
       dataset={dataset}
-      xAxis={[{ scaleType: "band", dataKey: "month" }]}
+      xAxis={[{ scaleType: "band", dataKey: "biasType" }]}
       series={[
-        { dataKey: "london", label: "London", valueFormatter },
-        { dataKey: "paris", label: "Paris", valueFormatter },
-        { dataKey: "newYork", label: "New York", valueFormatter },
-        { dataKey: "seoul", label: "Seoul", valueFormatter },
+        { dataKey: "youPub1", label: `You (${PUB_1})`, valueFormatter },
+        { dataKey: "crowdPub1", label: `Crowd (${PUB_2_SHORT})`, valueFormatter },
+        { dataKey: "youPub2", label: `You (${PUB_2_SHORT})`, valueFormatter },
+        { dataKey: "crowdPub2", label: `Crowd (${PUB_2_SHORT})`, valueFormatter },
       ]}
       {...chartSetting}
     />
