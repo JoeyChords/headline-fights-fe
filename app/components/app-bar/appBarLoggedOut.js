@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -118,7 +119,25 @@ function AppBarLoggedOut() {
           {/* Web view login buttons */}
           <Box sx={{ pr: 4, flexGrow: 1, flexDirection: "row-reverse", display: { xs: "none", md: "flex" } }}>
             {Object.entries(pages).map(([page, route]) => (
-              <Button key={page} href={route} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              <Button
+                variant="outlined"
+                key={page}
+                href={route}
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  p: "0.25rem 1.5rem",
+                  ml: 1,
+                  borderColor: "#ffffff",
+                  "&:hover": {
+                    borderColor: "#ffffff",
+                  },
+                }}
+              >
                 {page}
               </Button>
             ))}
