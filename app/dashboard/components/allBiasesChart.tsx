@@ -2,15 +2,40 @@ import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
 
-export default function AllBiasesChart(): JSX.Element {
+export default function AllBiasesChart(props: {
+  biasType1: string;
+  pub1CrowdBias1: number;
+  pub2CrowdBias1: number;
+  pub1PersonalBias1: number;
+  pub2PersonalBias1: number;
+  biasType2: string;
+  pub1CrowdBias2: number;
+  pub2CrowdBias2: number;
+  pub1PersonalBias2: number;
+  pub2PersonalBias2: number;
+  biasType3: string;
+  pub1CrowdBias3: number;
+  pub2CrowdBias3: number;
+  pub1PersonalBias3: number;
+  pub2PersonalBias3: number;
+  biasType4: string;
+  pub1CrowdBias4: number;
+  pub2CrowdBias4: number;
+  pub1PersonalBias4: number;
+  pub2PersonalBias4: number;
+  biasType5: string;
+  pub1CrowdBias5: number;
+  pub2CrowdBias5: number;
+  pub1PersonalBias5: number;
+  pub2PersonalBias5: number;
+}): JSX.Element {
   const chartSetting = {
     yAxis: [
       {
         label: "rainfall (mm)",
       },
     ],
-    width: 800,
-    height: 300,
+
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
         transform: "translate(-20px, 0)",
@@ -53,55 +78,6 @@ export default function AllBiasesChart(): JSX.Element {
       newYork: 92,
       seoul: 99,
       month: "May",
-    },
-    {
-      london: 60,
-      paris: 63,
-      newYork: 103,
-      seoul: 144,
-      month: "June",
-    },
-    {
-      london: 59,
-      paris: 60,
-      newYork: 105,
-      seoul: 319,
-      month: "July",
-    },
-    {
-      london: 65,
-      paris: 60,
-      newYork: 106,
-      seoul: 249,
-      month: "Aug",
-    },
-    {
-      london: 51,
-      paris: 51,
-      newYork: 95,
-      seoul: 131,
-      month: "Sept",
-    },
-    {
-      london: 60,
-      paris: 65,
-      newYork: 97,
-      seoul: 55,
-      month: "Oct",
-    },
-    {
-      london: 67,
-      paris: 64,
-      newYork: 76,
-      seoul: 48,
-      month: "Nov",
-    },
-    {
-      london: 61,
-      paris: 70,
-      newYork: 103,
-      seoul: 25,
-      month: "Dec",
     },
   ];
 

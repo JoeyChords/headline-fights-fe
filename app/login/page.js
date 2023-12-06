@@ -74,11 +74,11 @@ export default function SignIn() {
 
   return (
     <>
+      <style>{"body { background-color: #f5f5f5; }"}</style>
       <AppBarLoginPage></AppBarLoginPage>
       <Box
         component="main"
         sx={{
-          bgcolor: grey[100],
           display: "flex",
           flexGrow: 1,
           height: "100vh",
