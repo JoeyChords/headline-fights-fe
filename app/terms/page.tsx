@@ -13,9 +13,9 @@ export default function TermsOfService() {
             <Box textAlign={"center"} fontWeight={"bold"}>
               TERMS OF SERVICE
             </Box>
-            <br></br>
-            <br></br>
           </Typography>
+          <br></br>
+          <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
             <Box>Last Updated: 12/06/23</Box>
           </Typography>
