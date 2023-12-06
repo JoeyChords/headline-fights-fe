@@ -12,17 +12,14 @@ import { grey } from "@mui/material/colors";
 import HeadlineCount from "./components/headlineCount";
 import GuessAccuracyChart from "./components/guessAccuracyChart";
 import PersonalBiasChart from "./components/personalBiasChart";
-import AllBiasesChart from "./components/allBiasesChart";
 import SingleBiasTypeChart from "./components/singleBiasTypeChart";
 import { Stats, initialStats } from "./interfaces/Stats";
 import { Typography } from "@mui/material";
-import { Divider } from "@mui/material";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
-const PUB_2_SHORT = config.PUB_2_SHORT;
 
 export default function Dashboard(): JSX.Element {
   const queryName = useSearchParams().get("name");
