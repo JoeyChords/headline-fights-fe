@@ -1,5 +1,5 @@
 "use client";
-import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,6 +13,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
+import Footer from "@/app/components/footer/footer.tsx";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -21,55 +22,45 @@ export default function SignIn() {
   const [error, setError] = React.useState(true);
   const router = useRouter();
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      try {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
+  const handleSubmit = useCallback(async (event) => {
+    try {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
 
-        const userInput = {
-          email: normalizeEmail(data.get("email")),
-          password: data.get("password"),
-        };
+      const userInput = {
+        email: normalizeEmail(data.get("email")),
+        message: data.get("message"),
+        name: data.get("name"),
+      };
 
-        let response = await fetch(`${API_ENDPOINT}/login`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInput),
-        });
-        response = await response.text();
+      let response = await fetch("/api/contact", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      });
 
-        if (response == "Unauthorized") {
-          setHelperText("Something is wrong with your email or password");
-        } else {
-          response = await JSON.parse(response);
-          if (response.isSignedIn == "True") {
-            setError(false);
-            setHelperText("Loading...");
-            router.push(`/game?name=${response.user}`);
-          }
-        }
-      } catch (err) {
-        setHelperText("Something went wrong");
-      }
-    },
-    [router]
-  );
+      // response = await response.text();
+
+      // if (response == "error") {
+      //   setHelperText("Something went wrong. Message not sent.");
+      // } else {
+      //   response = await JSON.parse(response);
+      //   if (response.isSignedIn == "True") {
+      //     setError(false);
+      //     setHelperText("Loading...");
+      //   }
+      // }
+    } catch (err) {
+      setHelperText("Something went wrong");
+    }
+  });
 
   return (
     <>
       <style>{"body { background-color: #f5f5f5; }"}</style>
-      <AppBarLoginPage></AppBarLoginPage>
-      <Box
-        component="main"
-        sx={{
-          display: "flex",
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
+      <AppBarLoggedOut></AppBarLoggedOut>
+      <Box component="main">
         <Container maxWidth="xs">
           <Box
             sx={{
@@ -80,22 +71,14 @@ export default function SignIn() {
             }}
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
-            <Typography component="h1" variant="h5">
-              Sign In
+            <Typography component="h1" variant="h4" fontWeight={500}>
+              Contact Us
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField margin="normal" required fullWidth id="name" label="Your Name" name="name" autoComplete="name" autoFocus />
               <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+              <TextField margin="normal" required fullWidth multiline name="message" label="Message" type="message" id="message" />
               <Button
                 type="submit"
                 size="large"
@@ -103,19 +86,13 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
-                Sign In
+                Submit
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Container>
       </Box>
+      <Footer></Footer>
     </>
   );
 }
