@@ -26,7 +26,7 @@ export default function Footer() {
           bgcolor: "#000000",
           mt: "6rem",
           p: "4rem 4rem 0",
-          position: "absolute",
+          position: { sm: "none", md: "absolute" },
           bottom: 0,
           width: "100%",
         }}
