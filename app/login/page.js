@@ -13,7 +13,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
-import Footer from "@/app/components/footer/footer.tsx";
+import Footer from "@/app/components/footer/footer";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
