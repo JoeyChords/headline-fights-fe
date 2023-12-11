@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import AppBarLoggedOut from "../components/app-bar/appBarLoggedOut";
 import { Container } from "@mui/material";
+import Footer from "@/app/components/footer/footer";
 
 export default function TermsOfService() {
   return (
@@ -281,6 +282,7 @@ export default function TermsOfService() {
           <br></br>
         </Container>
       </Box>
+      <Footer></Footer>
     </>
   );
 }

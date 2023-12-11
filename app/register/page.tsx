@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import normalizeEmail from "validator/lib/normalizeEmail";
+import Footer from "@/app/components/footer/footer.tsx";
 import { grey } from "@mui/material/colors";
 
 const config = require("/app/config");
@@ -88,16 +89,7 @@ export default function SignUp() {
     <>
       <ThemeProvider theme={theme}>
         <AppBarRegisterPage></AppBarRegisterPage>
-        <Box
-          component="main"
-          sx={{
-            bgcolor: grey[100],
-            display: "flex",
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
+        <Box component="main">
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -110,7 +102,7 @@ export default function SignUp() {
             >
               <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
 
-              <Typography component="h1" variant="h5">
+              <Typography component="h1" variant="h4" fontWeight={500}>
                 Sign Up
               </Typography>
               <FormHelperText error={error}>{helperText}</FormHelperText>
@@ -146,6 +138,7 @@ export default function SignUp() {
             </Box>
           </Container>
         </Box>
+        <Footer></Footer>
       </ThemeProvider>
     </>
   );
