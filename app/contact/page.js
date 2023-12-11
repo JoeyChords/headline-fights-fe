@@ -80,7 +80,7 @@ export default function SignIn() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              height: "31rem",
+              height: "49rem",
             }}
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
