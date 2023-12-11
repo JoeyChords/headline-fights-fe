@@ -72,7 +72,7 @@ export default function SignIn() {
     <>
       <style>{"body { background-color: #f5f5f5; }"}</style>
       <AppBarLoggedOut></AppBarLoggedOut>
-      <Box component="main" sx={{ height: "100vh", overflow: "auto" }}>
+      <Box component="main">
         <Container maxWidth="xs">
           <Box
             sx={{
@@ -80,6 +80,7 @@ export default function SignIn() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              height: "31rem",
             }}
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
