@@ -225,7 +225,7 @@ export default function Privacy() {
               Tru Mega Lab LLC
             </Typography>
             <Typography variant="body1" className="email">
-              contact@trumegalab.com
+              contact@headlinefights.com
             </Typography>
             <Typography variant="body1" className="country">
               United States

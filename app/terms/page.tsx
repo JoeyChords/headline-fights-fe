@@ -33,7 +33,7 @@ export default function TermsOfService() {
           <Typography variant="body1">
             If you access or use the Service, it means you agree to be bound by all of the terms below. So, before you use the Service, please read
             all of the terms. If you don&apos;t agree to all of the terms below, please do not use the Service. Also, if a term does not make sense to
-            you, please let us know by e-mailing contact@trumegalab.com.
+            you, please let us know by e-mailing contact@headlinefights.com.
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
@@ -277,7 +277,7 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="body1">
-            Questions or comments about the Service may be directed to us at the email address contact@trumegalab.com.
+            Questions or comments about the Service may be directed to us at the email address contact@headlinefights.com.
           </Typography>
           <br></br>
         </Container>
