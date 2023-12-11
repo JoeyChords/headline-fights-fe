@@ -1,5 +1,5 @@
 "use client";
-import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,6 +13,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
+import Footer from "@/app/components/footer/footer.tsx";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -60,16 +61,8 @@ export default function SignIn() {
   return (
     <>
       <style>{"body { background-color: #f5f5f5; }"}</style>
-      <AppBarLoginPage></AppBarLoginPage>
-      <Box
-        component="main"
-        sx={{
-          display: "flex",
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
+      <AppBarLoggedOut></AppBarLoggedOut>
+      <Box component="main">
         <Container maxWidth="xs">
           <Box
             sx={{
@@ -80,22 +73,14 @@ export default function SignIn() {
             }}
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
-            <Typography component="h1" variant="h5">
-              Sign In
+            <Typography component="h1" variant="h4" fontWeight={500}>
+              Contact Us
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField margin="normal" required fullWidth id="name" label="Your Name" name="name" autoComplete="name" autoFocus />
               <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+              <TextField margin="normal" required fullWidth multiline name="message" label="Message" type="message" id="message" />
               <Button
                 type="submit"
                 size="large"
@@ -103,19 +88,13 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
-                Sign In
+                Submit
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Container>
       </Box>
+      <Footer></Footer>
     </>
   );
 }

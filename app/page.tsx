@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import HeroSection from "./components/homePage/hero";
 import Stats from "./components/homePage/stats";
 import HowItWorks from "./components/homePage/howItWorks";
+import Footer from "./components/homePage/footer";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -59,6 +60,7 @@ export default function Home(): JSX.Element {
           <HeroSection pub1Bias={stats.pub_1_total_bias} pub2Bias={stats.pub_2_total_bias}></HeroSection>
           <HowItWorks></HowItWorks>
           <Stats props={stats}></Stats>
+          <Footer></Footer>
         </Box>
       </>
     );
