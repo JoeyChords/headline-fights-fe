@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer.tsx";
+import isEmail from "validator/lib/isEmail";
+
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -22,8 +24,10 @@ export default function SignIn() {
   const [error, setError] = React.useState(true);
   const router = useRouter();
 
-  const handleSubmit = useCallback(async (event) => {
-    try {
+  const handleSubmit = useCallback(
+    async (event) => {
+      setError(false);
+      setHelperText("Sending...");
       event.preventDefault();
       const data = new FormData(event.currentTarget);
 
@@ -33,34 +37,42 @@ export default function SignIn() {
         name: data.get("name"),
       };
 
-      let response = await fetch("/api/contact", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userInput),
-      });
+      if (isEmail(userInput.email)) {
+        let response = await fetch("/api/contact", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userInput),
+        });
 
-      // response = await response.text();
+        response = await response.text();
+        response = await JSON.parse(response);
+        const statusCode = response.emailResponse.response.slice(0, 3);
+        console.log(response.emailResponse.response.slice(0, 3));
 
-      // if (response == "error") {
-      //   setHelperText("Something went wrong. Message not sent.");
-      // } else {
-      //   response = await JSON.parse(response);
-      //   if (response.isSignedIn == "True") {
-      //     setError(false);
-      //     setHelperText("Loading...");
-      //   }
-      // }
-    } catch (err) {
-      setHelperText("Something went wrong");
-    }
-  });
+        if (statusCode === "550") {
+          setHelperText("Something went wrong. Message not sent.");
+        } else if (statusCode === "250") {
+          setError(false);
+          setHelperText("Thank you. Your message has been sent.");
+
+          document.getElementById("contact-form").reset();
+        } else {
+          setHelperText("Something went wrong. Message not sent.");
+        }
+      } else {
+        setError(true);
+        setHelperText("Please enter a valid email address");
+      }
+    },
+    [router]
+  );
 
   return (
     <>
       <style>{"body { background-color: #f5f5f5; }"}</style>
       <AppBarLoggedOut></AppBarLoggedOut>
-      <Box component="main">
+      <Box component="main" sx={{ height: "100vh", overflow: "auto" }}>
         <Container maxWidth="xs">
           <Box
             sx={{
@@ -75,7 +87,7 @@ export default function SignIn() {
               Contact Us
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" id="contact-form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField margin="normal" required fullWidth id="name" label="Your Name" name="name" autoComplete="name" autoFocus />
               <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
               <TextField margin="normal" required fullWidth multiline name="message" label="Message" type="message" id="message" />
