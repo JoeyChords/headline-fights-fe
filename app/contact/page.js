@@ -22,41 +22,39 @@ export default function SignIn() {
   const [error, setError] = React.useState(true);
   const router = useRouter();
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      try {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
+  const handleSubmit = useCallback(async (event) => {
+    try {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
 
-        const userInput = {
-          email: normalizeEmail(data.get("email")),
-          password: data.get("password"),
-        };
+      const userInput = {
+        email: normalizeEmail(data.get("email")),
+        message: data.get("message"),
+        name: data.get("name"),
+      };
 
-        let response = await fetch(`${API_ENDPOINT}/login`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInput),
-        });
-        response = await response.text();
+      let response = await fetch("/api/contact", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      });
 
-        if (response == "Unauthorized") {
-          setHelperText("Something is wrong with your email or password");
-        } else {
-          response = await JSON.parse(response);
-          if (response.isSignedIn == "True") {
-            setError(false);
-            setHelperText("Loading...");
-            router.push(`/game?name=${response.user}`);
-          }
-        }
-      } catch (err) {
-        setHelperText("Something went wrong");
-      }
-    },
-    [router]
-  );
+      // response = await response.text();
+
+      // if (response == "error") {
+      //   setHelperText("Something went wrong. Message not sent.");
+      // } else {
+      //   response = await JSON.parse(response);
+      //   if (response.isSignedIn == "True") {
+      //     setError(false);
+      //     setHelperText("Loading...");
+      //   }
+      // }
+    } catch (err) {
+      setHelperText("Something went wrong");
+    }
+  });
 
   return (
     <>
