@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ThemeRegistry from "./ThemeRegistry";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout(props: any) {
         <ThemeRegistry options={{ key: "mui" }}>
           {children}
           <Analytics />
+          <SpeedInsights />
         </ThemeRegistry>
       </body>
     </html>
