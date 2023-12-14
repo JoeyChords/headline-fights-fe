@@ -2,6 +2,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ThemeRegistry from "./ThemeRegistry";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout(props: any) {
   return (
     <html lang="en">
       <body className="min-h-full">
-        <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
+        <ThemeRegistry options={{ key: "mui" }}>
+          {children}
+          <Analytics />
+        </ThemeRegistry>
       </body>
     </html>
   );
