@@ -62,7 +62,7 @@ export default function SignUp() {
         res.json().then((response) => {
           //Check to see if the email address is available
           if (response.available == "True") {
-            router.push("/login");
+            router.push(`/verify?email=${userInput.email}`);
           } else if (response.validEmail == "False") {
             setError(true);
             setHelperText("Please enter a valid email address");

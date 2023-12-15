@@ -1,5 +1,4 @@
 "use client";
-import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,11 +13,15 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
-
+import { useSearchParams } from "next/navigation";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
+import { getMaxListeners } from "events";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
+  const email = useSearchParams().get("email");
+
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const router = useRouter();
@@ -30,27 +33,28 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: normalizeEmail(data.get("email")),
-          password: data.get("password"),
+          email: normalizeEmail(email),
+          code: data.get("code"),
         };
 
-        let response = await fetch(`${API_ENDPOINT}/login`, {
+        let response = await fetch(`${API_ENDPOINT}/verify`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
         response = await response.text();
+        response = await JSON.parse(response);
 
-        if (response == "Unauthorized") {
-          setHelperText("Something is wrong with your email or password");
-        } else {
-          response = await JSON.parse(response);
-          if (response.isSignedIn == "True") {
+        if (response.submitted_in_time) {
+          if (response.email_verified) {
+            router.push(`/game?name=${response.name}`);
+          } else {
             setError(false);
-            setHelperText("Loading...");
-            router.push(`/game?name=${response.user}`);
+            setHelperText("Something is wrong with the code.");
           }
+        } else {
+          setHelperText("The code has expired. Please try logging in again to receive a new one.");
         }
       } catch (err) {
         setHelperText("Something went wrong");
@@ -62,7 +66,7 @@ export default function SignIn() {
   return (
     <>
       <style>{"body { background-color: #f5f5f5; }"}</style>
-      <AppBarLoginPage></AppBarLoginPage>
+      <AppBarLoggedOut></AppBarLoggedOut>
       <Box component="main">
         <Container maxWidth="xs">
           <Box
@@ -75,19 +79,18 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Sign In
+              Verify Email
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
+                name="code"
+                label="Verification Code"
+                type="text"
+                id="code"
                 autoComplete="current-password"
               />
               <Button
@@ -97,7 +100,7 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
-                Sign In
+                Submit
               </Button>
               <Grid container justifyContent="center">
                 <Grid item>
