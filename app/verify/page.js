@@ -79,7 +79,10 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Verify Email
+              Verify Your Email
+            </Typography>
+            <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
+              A code has been sent to your email address. Enter the code to finish signing up.
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -102,13 +105,6 @@ export default function SignIn() {
               >
                 Submit
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Container>

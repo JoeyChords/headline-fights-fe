@@ -22,9 +22,14 @@ export default function Home() {
       fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
         .then((res) => res.json())
         .then((response) => {
+          console.log(response);
           if (response.isAuthenticated) {
-            setIsLoggedIn(true);
-            setUsername(response.user.username);
+            if (response.email_verified) {
+              setIsLoggedIn(true);
+              setUsername(response.user.username);
+            } else {
+              router.push(`/verify?email=${response.user.email}`);
+            }
           } else {
             router.push("/login");
           }
