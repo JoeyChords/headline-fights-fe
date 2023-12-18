@@ -48,20 +48,24 @@ export default function Dashboard(): JSX.Element {
       .then((res) => res.json())
       .then((response) => {
         if (response.isAuthenticated) {
-          setIsLoggedIn(true);
-          setPublicationDataset([
-            {
-              you: response.publicationStats.userPub1Percent,
-              crowd: response.publicationStats.crowdPub1Percent,
-              publication: PUB_1,
-            },
-            {
-              you: response.publicationStats.userPub2Percent,
-              crowd: response.publicationStats.crowdPub2Percent,
-              publication: PUB_2,
-            },
-          ]);
-          setStats(response);
+          if (response.email_verified) {
+            setIsLoggedIn(true);
+            setPublicationDataset([
+              {
+                you: response.publicationStats.userPub1Percent,
+                crowd: response.publicationStats.crowdPub1Percent,
+                publication: PUB_1,
+              },
+              {
+                you: response.publicationStats.userPub2Percent,
+                crowd: response.publicationStats.crowdPub2Percent,
+                publication: PUB_2,
+              },
+            ]);
+            setStats(response);
+          } else {
+            router.push(`/verify?email=${response.user.email}`);
+          }
         } else {
           router.push("/login");
         }

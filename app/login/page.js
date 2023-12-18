@@ -42,14 +42,18 @@ export default function SignIn() {
         });
         response = await response.text();
 
-        if (response == "Unauthorized") {
+        if (response === "Unauthorized") {
           setHelperText("Something is wrong with your email or password");
         } else {
           response = await JSON.parse(response);
-          if (response.isSignedIn == "True") {
-            setError(false);
-            setHelperText("Loading...");
-            router.push(`/game?name=${response.user}`);
+          if (response.email_verified) {
+            if (response.isSignedIn === "True") {
+              setError(false);
+              setHelperText("Loading...");
+              router.push(`/game?name=${response.user}`);
+            }
+          } else {
+            router.push(`/verify?email=${userInput.email}`);
           }
         }
       } catch (err) {
