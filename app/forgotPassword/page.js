@@ -12,7 +12,7 @@ import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
-import { deepPurple } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
@@ -73,9 +73,9 @@ export default function ForgotPassword() {
               Forgot Password
             </Typography>
             <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
-              Enter the email you signed up with and we will send instructions on how to reset your password.
+              Enter the email you used to sign up and we will send instructions on how to reset your password.
             </Typography>
-            <FormHelperText error={error} color={deepPurple["A100"]} sx={{ color: "green" }}>
+            <FormHelperText error={error} sx={{ color: green["A700"] }}>
               {helperText}
             </FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -87,7 +87,7 @@ export default function ForgotPassword() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
-                Submit
+                Email Me
               </Button>
             </Box>
           </Box>

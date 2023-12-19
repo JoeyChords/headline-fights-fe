@@ -9,7 +9,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import normalizeEmail from "validator/lib/normalizeEmail";
+import isStrongPassword from "validator/lib/isStrongPassword";
 import Footer from "@/app/components/footer/footer";
 import { useSearchParams } from "next/navigation";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
@@ -18,6 +18,7 @@ const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
   const email = useSearchParams().get("email");
+  const token = useSearchParams().get("token");
 
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
@@ -30,30 +31,37 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: normalizeEmail(email),
-          code: data.get("code"),
+          email: email,
+          token: token,
+          password: data.get("password"),
         };
+        if (isStrongPassword(userInput.password)) {
+          let response = await fetch(`${API_ENDPOINT}/resetPassword`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userInput),
+          });
+          response = await response.text();
+          response = await JSON.parse(response);
 
-        let response = await fetch(`${API_ENDPOINT}/verify`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInput),
-        });
-        response = await response.text();
-        response = await JSON.parse(response);
-
-        if (response.submitted_in_time) {
-          if (response.email_verified) {
-            router.push(`/game?name=${response.name}`);
+          if (response.submitted_in_time) {
+            router.push("/login");
+          } else if (!response.submitted_in_time && user_exists) {
+            setError(true);
+            setHelperText("The link has expired.");
           } else {
-            setError(false);
-            setHelperText("Something is wrong with the code.");
+            setError(true);
+            setHelperText("Something went wrong");
           }
         } else {
-          setHelperText("The code has expired. Please try logging in again to receive a new one.");
+          setError(true);
+          setHelperText(
+            "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+          );
         }
       } catch (err) {
+        setError(true);
         setHelperText("Something went wrong");
       }
     },
@@ -76,14 +84,23 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Verify Your Email
+              Reset Password
             </Typography>
             <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
-              A code has been sent to your email address. Enter the code to finish signing up.
+              Enter a new strong password.
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="code" label="Verification Code" type="text" id="code" />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
               <Button
                 type="submit"
                 size="large"
@@ -91,7 +108,7 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
-                Submit
+                Set Password
               </Button>
             </Box>
           </Box>
