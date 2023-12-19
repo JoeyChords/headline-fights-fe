@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
+import Stack from "@mui/material/Stack";
 
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
@@ -103,13 +104,15 @@ export default function SignIn() {
               >
                 Sign In
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
+              <Stack>
+                <Link href="/register" variant="body2" mx={"auto"} mb=".5rem">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+
+                <Link href="/forgotPassword" variant="body2" mx={"auto"}>
+                  {"I forgot my password"}
+                </Link>
+              </Stack>
             </Box>
           </Box>
         </Container>

@@ -11,14 +11,12 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
-import { useSearchParams } from "next/navigation";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
+import { deepPurple } from "@mui/material/colors";
 const config = require("/app/config");
 const API_ENDPOINT = config.API_ENDPOINT;
 
-export default function SignIn() {
-  const email = useSearchParams().get("email");
-
+export default function ForgotPassword() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const router = useRouter();
@@ -30,11 +28,10 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: normalizeEmail(email),
-          code: data.get("code"),
+          email: normalizeEmail(data.get("email")),
         };
 
-        let response = await fetch(`${API_ENDPOINT}/verify`, {
+        let response = await fetch(`${API_ENDPOINT}/forgotPassword`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -43,15 +40,12 @@ export default function SignIn() {
         response = await response.text();
         response = await JSON.parse(response);
 
-        if (response.submitted_in_time) {
-          if (response.email_verified) {
-            router.push(`/game?name=${response.name}`);
-          } else {
-            setError(false);
-            setHelperText("Something is wrong with the code.");
-          }
+        if (response.email_sent) {
+          setError(false);
+          setHelperText("Your email has been sent.");
         } else {
-          setHelperText("The code has expired. Please try logging in again to receive a new one.");
+          setError(true);
+          setHelperText("Something is wrong with your email address.");
         }
       } catch (err) {
         setHelperText("Something went wrong");
@@ -76,14 +70,16 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Verify Your Email
+              Forgot Password
             </Typography>
             <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
-              A code has been sent to your email address. Enter the code to finish signing up.
+              Enter the email you signed up with and we will send instructions on how to reset your password.
             </Typography>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
+            <FormHelperText error={error} color={deepPurple["A100"]} sx={{ color: "green" }}>
+              {helperText}
+            </FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="code" label="Verification Code" type="text" id="code" />
+              <TextField margin="normal" required fullWidth name="email" label="Email" type="email" id="email" autoComplete="email" />
               <Button
                 type="submit"
                 size="large"
