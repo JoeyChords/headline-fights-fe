@@ -18,26 +18,21 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!queryName) {
-      fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
-        .then((res) => res.json())
-        .then((response) => {
-          console.log(response);
-          if (response.isAuthenticated) {
-            if (response.email_verified) {
-              setIsLoggedIn(true);
-              setUsername(response.user.username);
-            } else {
-              router.push(`/verify?email=${response.user.email}`);
-            }
+    fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+        if (response.isAuthenticated) {
+          if (response.email_verified) {
+            setIsLoggedIn(true);
+            setUsername(response.user.username);
           } else {
-            router.push("/login");
+            router.push(`/verify?email=${response.user.email}`);
           }
-        });
-    } else {
-      setUsername(queryName);
-      setIsLoggedIn(true);
-    }
+        } else {
+          router.push("/login");
+        }
+      });
   }, [router, queryName]);
 
   if (isLoggedIn) {
