@@ -20,12 +20,12 @@ export default function Footer() {
   const [footerPosition, setFooterPosition] = useState("none");
 
   useEffect(() => {
-    setFooterPosition(screen.height > 740 ? "absolute" : "none");
+    setFooterPosition(window.innerHeight > 740 ? "absolute" : "none");
     console.log("screen: " + screen.orientation.type);
-    screen.orientation.addEventListener("change", function (e) {
-      if (screen.height < 740 && footerPosition === "absolute") {
+    window.screen.orientation.addEventListener("change", function (e) {
+      if (window.innerHeight < 740 && footerPosition === "absolute") {
         setFooterPosition("none");
-      } else if (screen.height > 740 && footerPosition === "none") {
+      } else if (window.innerHeight > 740 && footerPosition === "none") {
         setFooterPosition("absolute");
       }
     });
