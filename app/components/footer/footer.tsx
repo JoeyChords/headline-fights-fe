@@ -17,14 +17,14 @@ function Copyright(props: any) {
 }
 
 export default function Footer() {
-  const [footerPosition, setFooterPosition] = useState({ xs: "none", md: "absolute" });
+  const [footerPosition, setFooterPosition] = useState({ xs: "none", sm: "absolute" });
 
   useEffect(() => {
     window.screen.orientation.addEventListener("change", function (e) {
-      if (window.innerHeight < 740 && footerPosition.md === "absolute") {
-        setFooterPosition({ xs: "none", md: "none" });
-      } else if (window.innerHeight > 740 && footerPosition.md === "none") {
-        setFooterPosition({ xs: "none", md: "absolute" });
+      if (window.innerHeight < 740 && footerPosition.sm === "absolute") {
+        setFooterPosition({ xs: "none", sm: "none" });
+      } else if (window.innerHeight > 740 && footerPosition.sm === "none") {
+        setFooterPosition({ xs: "none", sm: "absolute" });
       }
     });
   }, [footerPosition]);
