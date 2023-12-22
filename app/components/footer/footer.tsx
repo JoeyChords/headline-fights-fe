@@ -1,3 +1,4 @@
+"use client";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { black_ops_one } from "@/app/fonts";
