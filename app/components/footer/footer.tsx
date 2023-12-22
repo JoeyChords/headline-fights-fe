@@ -1,12 +1,9 @@
 import { Box } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 import { black_ops_one } from "@/app/fonts";
 import { Link } from "@mui/material";
-import { Avatar } from "@mui/material";
 import { Grid } from "@mui/material";
-import { Stack } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
+import { useEffect, useState } from "react";
 
 function Copyright(props: any) {
   return (
@@ -19,13 +16,19 @@ function Copyright(props: any) {
 }
 
 export default function Footer() {
-  let footerPosition = screen.height > 740 ? "absolute" : "none";
-  console.log("screen: " + screen.orientation.type);
-  screen.orientation.addEventListener("change", function (e) {
-    if (screen.height < 740 && footerPosition === "absolute") {
-      location.reload();
-    }
-  });
+  const [footerPosition, setFooterPosition] = useState("none");
+
+  useEffect(() => {
+    setFooterPosition(screen.height > 740 ? "absolute" : "none");
+    console.log("screen: " + screen.orientation.type);
+    screen.orientation.addEventListener("change", function (e) {
+      if (screen.height < 740 && footerPosition === "absolute") {
+        setFooterPosition("none");
+      } else if (screen.height > 740 && footerPosition === "none") {
+        setFooterPosition("absolute");
+      }
+    });
+  }, [footerPosition]);
 
   return (
     <>
