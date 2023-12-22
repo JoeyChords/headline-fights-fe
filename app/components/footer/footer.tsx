@@ -19,6 +19,14 @@ function Copyright(props: any) {
 }
 
 export default function Footer() {
+  let footerPosition = screen.height > 740 ? "absolute" : "none";
+  console.log("screen: " + screen.orientation.type);
+  screen.orientation.addEventListener("change", function (e) {
+    if (screen.height < 740 && footerPosition === "absolute") {
+      location.reload();
+    }
+  });
+
   return (
     <>
       <Box
@@ -26,7 +34,7 @@ export default function Footer() {
           bgcolor: "#000000",
           mt: "6rem",
           p: "4rem 4rem 0",
-          position: { sm: "none", md: "absolute" },
+          position: footerPosition,
           bottom: 0,
           width: "100%",
         }}
