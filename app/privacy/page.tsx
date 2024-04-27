@@ -3,7 +3,7 @@ import AppBarLoggedOut from "../components/app-bar/appBarLoggedOut";
 import { Container } from "@mui/material";
 import { List } from "@mui/material";
 import { ListItemText } from "@mui/material";
-import Footer from "@/app/components/footer/footer";
+import TermsFooter from "@/app/components/terms-and-privacy-footer/terms-and-privacy-footer";
 
 export default function Privacy() {
   return (
@@ -234,7 +234,7 @@ export default function Privacy() {
           <br></br>
         </Container>
       </Box>
-      <Footer></Footer>
+      <TermsFooter></TermsFooter>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import AppBarLoggedOut from "../components/app-bar/appBarLoggedOut";
 import { Container } from "@mui/material";
-import Footer from "@/app/components/footer/footer";
+import TermsFooter from "@/app/components/terms-and-privacy-footer/terms-and-privacy-footer";
 
 export default function TermsOfService() {
   return (
@@ -282,7 +282,7 @@ export default function TermsOfService() {
           <br></br>
         </Container>
       </Box>
-      <Footer></Footer>
+      <TermsFooter></TermsFooter>
     </>
   );
 }
