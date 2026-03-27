@@ -14,7 +14,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 - Pinned the frontend runtime to Node 24 for local and deploy consistency.
 - Migrated the contact flow from Nodemailer/SendGrid to Resend.
-- Switched frontend API configuration to environment-driven local and development behavior via [app/config.js](./app/config.js).
+- Switched frontend API configuration to `NEXT_PUBLIC_API_ENDPOINT` via [app/config.js](./app/config.js).
 - Upgraded the frontend dependency stack and build configuration for current Next.js and Tailwind compatibility.
 - Restored the UI to the MUI 5 and React 18 stack to preserve the original visual behavior.
 - Moved the Tailwind config to [tailwind.config.mjs](./tailwind.config.mjs) and wired it from [app/globals.css](./app/globals.css).
