@@ -13,9 +13,8 @@ export default function Logout() {
 
   useEffect(() => {
     fetch(API_ENDPOINT + "/logout", {
-      method: "GET",
+      method: "POST",
       credentials: "include",
-      cache: "no-store",
     })
       .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then(() => {

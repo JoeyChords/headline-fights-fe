@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.1.3] - 2026-03-27
+
+### Security
+
+- Changed [app/logout/page.js](./app/logout/page.js) logout fetch from GET to POST to match the API change.
+- Added per-IP rate limiting (5 requests per hour) and input validation to [app/api/contact/route.js](./app/api/contact/route.js) — name, email, and message are required, typed, and length-capped (100 / 254 / 2000 chars) before the Resend call is made.
+
 ## [1.1.2] - 2026-03-27
 
 ### Security
