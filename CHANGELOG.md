@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.2.0] - 2026-03-27
+
+### Added
+
+- ESLint configured with `eslint-config-next` (includes TypeScript and React rules) and `eslint-config-prettier` — replaces the placeholder `lint` script.
+- Prettier configured with project-consistent settings (double quotes, 2-space indent, 120-char width) — `format` and `format:check` scripts added.
+- Vitest 4 + `@vitejs/plugin-react` + `@testing-library/react` set up for unit testing — replaces the placeholder `test` script; `test:watch` and `test:coverage` scripts added.
+- `__mocks__/next/navigation.ts` and `__mocks__/next/image.tsx` manual mocks for use in component tests.
+- `TS_CONVERSION.md` — phased plan and per-file checklist for the incremental JS → TypeScript migration.
+
+### Changed
+
+- Formatted all source files with Prettier as a one-time baseline.
+
 ## [1.1.3] - 2026-03-27
 
 ### Security

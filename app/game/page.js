@@ -22,7 +22,10 @@ export default function Home() {
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           if (response.email_verified) {
@@ -59,7 +62,10 @@ export default function Home() {
       <main>
         <Box justifyContent="center" sx={{ height: "100vh", width: "100%", position: "relative" }}>
           <AppBarLoggedIn name={queryName ? queryName : userName}></AppBarLoggedIn>
-          <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+          <CircularProgress
+            color="secondary"
+            sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+          />
         </Box>
       </main>
     </>

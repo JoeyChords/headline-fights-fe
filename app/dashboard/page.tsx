@@ -48,7 +48,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           if (response.email_verified) {
@@ -455,7 +458,10 @@ export default function Dashboard() {
       <style>{"body { background-color: #f5f5f5; }"}</style>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
         <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
-        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+        <CircularProgress
+          color="secondary"
+          sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+        />
       </Box>
     </>
   );

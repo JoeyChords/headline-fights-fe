@@ -27,12 +27,24 @@ export default function HowItWorks(props: any) {
         }}
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
-          <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
+          <Typography
+            variant="h3"
+            color={"#ffffff"}
+            fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }}
+            fontWeight={"700"}
+            lineHeight={"1.3"}
+          >
             <Box component="span" sx={{ display: "block", textAlign: "center" }}>
               How Rating Works
             </Box>
           </Typography>
-          <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.25rem" }} fontWeight={"500"} lineHeight={"1.45"}>
+          <Typography
+            variant="h3"
+            color={"#ffffff"}
+            fontSize={{ xs: "1.25rem" }}
+            fontWeight={"500"}
+            lineHeight={"1.45"}
+          >
             <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
               Recognizing Bias in the Media Becomes a Thoughtful Game
             </Box>
@@ -41,7 +53,9 @@ export default function HowItWorks(props: any) {
         <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", mb: "3.5rem", justifyContent: "center" }}>
           <Grid xs={12} sm={6} md={4} lg={3}>
             <HowItWorksBox
-              icon={<HideSourceOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></HideSourceOutlinedIcon>}
+              icon={
+                <HideSourceOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></HideSourceOutlinedIcon>
+              }
               component={
                 <HowItWorksComponent
                   total={10}
@@ -58,31 +72,43 @@ export default function HowItWorks(props: any) {
                 <HowItWorksComponent
                   total={10}
                   title={"2."}
-                  explanation={"You rate the headline for known media bias types, then guess if it's from Fox News or CNN."}
+                  explanation={
+                    "You rate the headline for known media bias types, then guess if it's from Fox News or CNN."
+                  }
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} lg={3} sx={{ display: "flex", justifyContent: "center" }}>
             <HowItWorksBox
-              icon={<CalculateOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.8rem" }}></CalculateOutlinedIcon>}
+              icon={
+                <CalculateOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.8rem" }}></CalculateOutlinedIcon>
+              }
               component={
                 <HowItWorksComponent
                   total={10}
                   title={"3."}
-                  explanation={"We tell you if you're right, then calculate your ratings both separately and along with everyone else's."}
+                  explanation={
+                    "We tell you if you're right, then calculate your ratings both separately and along with everyone else's."
+                  }
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} lg={3} sx={{}}>
             <HowItWorksBox
-              icon={<PsychologyAltOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3.75rem" }}></PsychologyAltOutlinedIcon>}
+              icon={
+                <PsychologyAltOutlinedIcon
+                  sx={{ color: deepPurple["A100"], fontSize: "3.75rem" }}
+                ></PsychologyAltOutlinedIcon>
+              }
               component={
                 <HowItWorksComponent
                   total={10}
                   title={"4."}
-                  explanation={"You see how you rate each publication for bias, then compare your results to the crowd's ratings."}
+                  explanation={
+                    "You see how you rate each publication for bias, then compare your results to the crowd's ratings."
+                  }
                 ></HowItWorksComponent>
               }
             ></HowItWorksBox>

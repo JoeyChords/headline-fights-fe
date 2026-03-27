@@ -93,14 +93,29 @@ export default function ForgotPassword() {
               {helperText}
             </FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="email" label="Email" type="email" id="email" autoComplete="email" />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="email"
+                label="Email"
+                type="email"
+                id="email"
+                autoComplete="email"
+              />
               <Button
                 type="submit"
                 size="large"
                 fullWidth
                 variant="contained"
                 disabled={isLoading}
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
               >
                 Email Me
               </Button>

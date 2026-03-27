@@ -132,7 +132,13 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 disabled={isLoading}
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
               >
                 Set Password
               </Button>

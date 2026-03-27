@@ -10,7 +10,10 @@ const PUB_2 = config.PUB_2;
 export default function HeadlineCount(props: any) {
   return (
     <>
-      <Stack spacing={2} sx={{ position: "absolute", width: "100%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+      <Stack
+        spacing={2}
+        sx={{ position: "absolute", width: "100%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+      >
         <Typography align="center" variant="h5">
           Headlines Rated
         </Typography>

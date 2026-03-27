@@ -20,7 +20,10 @@ export default function Settings() {
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/settings`, { method: "GET", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);

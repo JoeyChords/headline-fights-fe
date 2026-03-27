@@ -115,7 +115,11 @@ export default function SignUp() {
                 alignItems: "center",
               }}
             >
-              <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
+              <Avatar
+                variant="square"
+                src="/logo-icon-512x512.png"
+                sx={{ mb: ".75rem", width: 56, height: 56 }}
+              ></Avatar>
 
               <Typography component="h1" variant="h4" fontWeight={500}>
                 Sign Up
@@ -127,10 +131,26 @@ export default function SignUp() {
                     <TextField required fullWidth id="name" label="Name" name="name" autoComplete="name" />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth id="email" type="email" label="Email Address" name="email" autoComplete="email" />
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      type="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" />
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                    />
                   </Grid>
                 </Grid>
                 <Button
@@ -139,7 +159,13 @@ export default function SignUp() {
                   fullWidth
                   variant="contained"
                   disabled={isLoading}
-                  sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    textTransform: "capitalize",
+                    borderRadius: "100vw",
+                    fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                  }}
                 >
                   Sign Up
                 </Button>

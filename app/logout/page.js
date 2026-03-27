@@ -16,7 +16,10 @@ export default function Logout() {
       method: "POST",
       credentials: "include",
     })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then(() => {
         sessionStorage.clear();
         router.push("/login");
@@ -32,7 +35,10 @@ export default function Logout() {
       <style>{"body { background-color: #f5f5f5; }"}</style>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
         <AppBarLoggedIn></AppBarLoggedIn>
-        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+        <CircularProgress
+          color="secondary"
+          sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+        />
       </Box>
     </>
   );

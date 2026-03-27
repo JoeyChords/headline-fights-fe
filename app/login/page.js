@@ -97,7 +97,16 @@ export default function SignIn() {
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
@@ -114,7 +123,13 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 disabled={isLoading}
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
               >
                 Sign In
               </Button>

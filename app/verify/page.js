@@ -102,14 +102,28 @@ export default function SignIn() {
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="code" label="Verification Code" type="text" id="code" />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="code"
+                label="Verification Code"
+                type="text"
+                id="code"
+              />
               <Button
                 type="submit"
                 size="large"
                 fullWidth
                 variant="contained"
                 disabled={isLoading}
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
               >
                 Submit
               </Button>

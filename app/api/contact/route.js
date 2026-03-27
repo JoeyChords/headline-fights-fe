@@ -30,9 +30,15 @@ export async function POST(request) {
   const CONTACT_MESSAGE = bodyContent.message;
 
   if (
-    typeof CONTACT_NAME !== "string" || !CONTACT_NAME.trim() || CONTACT_NAME.length > 100 ||
-    typeof CONTACT_EMAIL !== "string" || !CONTACT_EMAIL.trim() || CONTACT_EMAIL.length > 254 ||
-    typeof CONTACT_MESSAGE !== "string" || !CONTACT_MESSAGE.trim() || CONTACT_MESSAGE.length > 2000
+    typeof CONTACT_NAME !== "string" ||
+    !CONTACT_NAME.trim() ||
+    CONTACT_NAME.length > 100 ||
+    typeof CONTACT_EMAIL !== "string" ||
+    !CONTACT_EMAIL.trim() ||
+    CONTACT_EMAIL.length > 254 ||
+    typeof CONTACT_MESSAGE !== "string" ||
+    !CONTACT_MESSAGE.trim() ||
+    CONTACT_MESSAGE.length > 2000
   ) {
     return NextResponse.json({ error: "Invalid input." }, { status: 400 });
   }

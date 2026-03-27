@@ -122,7 +122,10 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(feedback),
     })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setPublicationDataset([
@@ -217,10 +220,23 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   return (
     <Box margin="auto" sx={{ p: { xs: 0, sm: "0 1rem", md: 0 } }}>
       <Typography variant="h1" component={"h1"}>
-        <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: ".5rem" }}>
+        <Box
+          component="span"
+          sx={{ display: "block", textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: ".5rem" }}
+        >
           Rate for Bias and Guess the Source
         </Box>
-        <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: 400, fontSize: "1rem", mb: "1.5rem", color: grey[800] }}>
+        <Box
+          component="span"
+          sx={{
+            display: "block",
+            textAlign: "center",
+            fontWeight: 400,
+            fontSize: "1rem",
+            mb: "1.5rem",
+            color: grey[800],
+          }}
+        >
           Consider the image in your rating
         </Box>
       </Typography>
@@ -228,7 +244,13 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
         <FormControl variant="standard">
           <FormLabel
             id="publication-radio-group-label"
-            sx={{ textAlign: "left", fontSize: { xs: "1.25rem", lg: "1rem" }, marginBottom: ".6rem", fontWeight: "700", color: "#000000" }}
+            sx={{
+              textAlign: "left",
+              fontSize: { xs: "1.25rem", lg: "1rem" },
+              marginBottom: ".6rem",
+              fontWeight: "700",
+              color: "#000000",
+            }}
           >
             {question1.biasType}:
           </FormLabel>
@@ -314,8 +336,18 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
             value={publicationValue}
             onChange={handlePublicationRadioChange}
           >
-            <FormControlLabel value="cnn" control={<Radio size={"small"} />} label="CNN" sx={{ marginBottom: ".6rem" }} />
-            <FormControlLabel value="fox news" control={<Radio size={"small"} />} label="Fox News" sx={{ marginBottom: ".6rem" }} />
+            <FormControlLabel
+              value="cnn"
+              control={<Radio size={"small"} />}
+              label="CNN"
+              sx={{ marginBottom: ".6rem" }}
+            />
+            <FormControlLabel
+              value="fox news"
+              control={<Radio size={"small"} />}
+              label="Fox News"
+              sx={{ marginBottom: ".6rem" }}
+            />
           </RadioGroup>
           <Button
             sx={{

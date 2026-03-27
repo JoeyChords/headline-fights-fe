@@ -34,7 +34,10 @@ export default function Headline() {
       method: "POST",
       credentials: "include",
     })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setHeadlines(response.headline);
@@ -54,7 +57,10 @@ export default function Headline() {
    */
   useEffect(() => {
     fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setHeadlines(response.headline);
@@ -74,7 +80,10 @@ export default function Headline() {
       <>
         <style>{"body { background-color: #f5f5f5; }"}</style>
         <Box sx={{ mt: { xs: "-58px", sm: "-64px" }, height: "100vh", width: "100%", position: "relative" }}>
-          <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+          <CircularProgress
+            color="secondary"
+            sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+          />
         </Box>
       </>
     );

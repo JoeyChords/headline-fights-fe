@@ -17,44 +17,42 @@ export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      setError(false);
-      setHelperText("Sending...");
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
+  const handleSubmit = useCallback(async (event) => {
+    setError(false);
+    setHelperText("Sending...");
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-      const userInput = {
-        email: normalizeEmail(data.get("email")),
-        message: data.get("message"),
-        name: data.get("name"),
-      };
+    const userInput = {
+      email: normalizeEmail(data.get("email")),
+      message: data.get("message"),
+      name: data.get("name"),
+    };
 
-      if (isEmail(userInput.email)) {
-        const response = await fetch("/api/contact", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInput),
-        });
+    if (isEmail(userInput.email)) {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      });
 
-        const payload = await response.json();
+      const payload = await response.json();
 
-        if (response.ok && payload.data?.id) {
-          setError(false);
-          setHelperText("Thank you. Your message has been sent.");
+      if (response.ok && payload.data?.id) {
+        setError(false);
+        setHelperText("Thank you. Your message has been sent.");
 
-          document.getElementById("contact-form").reset();
-        } else {
-          setError(true);
-          setHelperText("Something went wrong. Message not sent.");
-        }
+        document.getElementById("contact-form").reset();
       } else {
         setError(true);
-        setHelperText("Please enter a valid email address");
+        setHelperText("Something went wrong. Message not sent.");
       }
+    } else {
+      setError(true);
+      setHelperText("Please enter a valid email address");
     }
-  );
+  });
 
   return (
     <>
@@ -76,15 +74,48 @@ export default function SignIn() {
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" id="contact-form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth id="name" label="Your Name" name="name" autoComplete="name" autoFocus />
-              <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-              <TextField margin="normal" required fullWidth multiline name="message" label="Message" type="message" id="message" />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Your Name"
+                name="name"
+                autoComplete="name"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                multiline
+                name="message"
+                label="Message"
+                type="message"
+                id="message"
+              />
               <Button
                 type="submit"
                 size="large"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
               >
                 Submit
               </Button>
