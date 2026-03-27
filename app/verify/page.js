@@ -22,7 +22,9 @@ export default function SignIn() {
   const router = useRouter();
 
   useEffect(() => {
-    setEmail(new URLSearchParams(window.location.search).get("email") ?? "");
+    const pendingEmail = sessionStorage.getItem("pendingVerifyEmail") ?? "";
+    setEmail(pendingEmail);
+    sessionStorage.removeItem("pendingVerifyEmail");
   }, []);
 
   const handleSubmit = useCallback(
@@ -36,18 +38,26 @@ export default function SignIn() {
           code: data.get("code"),
         };
 
-        let response = await fetch(`${API_ENDPOINT}/verify`, {
+        const rawResponse = await fetch(`${API_ENDPOINT}/verify`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
-        response = await response.text();
-        response = await JSON.parse(response);
+        if (rawResponse.status === 429) {
+          setHelperText("Too many attempts. Please try again later.");
+          return;
+        }
+        if (!rawResponse.ok) {
+          setHelperText("Something went wrong");
+          return;
+        }
+        const response = await rawResponse.json();
 
         if (response.submitted_in_time) {
           if (response.email_verified) {
-            router.push(`/game?name=${response.name}`);
+            sessionStorage.setItem("userName", response.name);
+            router.push("/game");
           } else {
             setError(false);
             setHelperText("Something is wrong with the code.");

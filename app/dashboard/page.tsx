@@ -43,16 +43,17 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    setQueryName(new URLSearchParams(window.location.search).get("name") ?? "");
+    setQueryName(sessionStorage.getItem("userName") ?? "");
   }, []);
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then((response) => {
         if (response.isAuthenticated) {
           if (response.email_verified) {
             setIsLoggedIn(true);
+            sessionStorage.setItem("userName", response.user.username);
             setPublicationDataset([
               {
                 you: response.publicationStats.userPub1Percent,
@@ -67,12 +68,14 @@ export default function Dashboard() {
             ]);
             setStats(response);
           } else {
-            router.push(`/verify?email=${response.user.email}`);
+            sessionStorage.setItem("pendingVerifyEmail", response.user.email);
+            router.push("/verify");
           }
         } else {
           router.push("/login");
         }
-      });
+      })
+      .catch(() => router.push("/login"));
   }, [router, queryName]);
 
   if (isLoggedIn) {

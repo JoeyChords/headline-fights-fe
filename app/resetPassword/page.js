@@ -10,6 +10,8 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import isStrongPassword from "validator/lib/isStrongPassword";
+import isEmail from "validator/lib/isEmail";
+import isUUID from "validator/lib/isUUID";
 import Footer from "@/app/components/footer/footer";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
 import config from "@/app/config";
@@ -39,19 +41,31 @@ export default function SignIn() {
           token: token,
           password: data.get("password"),
         };
+        if (!isEmail(userInput.email) || !isUUID(userInput.token)) {
+          setError(true);
+          setHelperText("This reset link is invalid or has expired.");
+          return;
+        }
         if (isStrongPassword(userInput.password)) {
-          let response = await fetch(`${API_ENDPOINT}/resetPassword`, {
+          const rawResponse = await fetch(`${API_ENDPOINT}/resetPassword`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userInput),
           });
-          response = await response.text();
-          response = await JSON.parse(response);
+          if (rawResponse.status === 429) {
+            setHelperText("Too many attempts. Please wait before trying again.");
+            return;
+          }
+          if (!rawResponse.ok) {
+            setHelperText("Something went wrong");
+            return;
+          }
+          const response = await rawResponse.json();
 
           if (response.submitted_in_time) {
             router.push("/login");
-          } else if (!response.submitted_in_time && user_exists) {
+          } else if (!response.submitted_in_time && response.user_exists) {
             setError(true);
             setHelperText("The link has expired.");
           } else {

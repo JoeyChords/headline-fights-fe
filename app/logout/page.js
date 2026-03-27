@@ -17,8 +17,13 @@ export default function Logout() {
       credentials: "include",
       cache: "no-store",
     })
-      .then((res) => res.json())
-      .then((response) => {
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then(() => {
+        sessionStorage.clear();
+        router.push("/login");
+      })
+      .catch(() => {
+        sessionStorage.clear();
         router.push("/login");
       });
   });

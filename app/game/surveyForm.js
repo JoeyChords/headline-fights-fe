@@ -92,7 +92,6 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
     if (question1Value != "" && question2Value != "") {
       setDisabled(false);
     }
-    console.log(event.target.value);
   };
 
   const handleSubmit = (event) => {

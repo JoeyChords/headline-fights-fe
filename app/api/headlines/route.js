@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const res = await fetch(process.env.API_BASE_URL + "/headlines?accessToken=" + process.env.DATA_API_KEY, {
+  const res = await fetch(process.env.API_BASE_URL + "/headlines", {
     method: "POST",
     credentials: "include",
   });

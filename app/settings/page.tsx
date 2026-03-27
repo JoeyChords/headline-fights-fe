@@ -15,26 +15,23 @@ export default function Settings() {
   const router = useRouter();
 
   useEffect(() => {
-    setQueryName(new URLSearchParams(window.location.search).get("name") ?? "");
+    setQueryName(sessionStorage.getItem("userName") ?? "");
   }, []);
 
   useEffect(() => {
-    if (!queryName) {
-      fetch(`${API_ENDPOINT}/settings`, { method: "GET", credentials: "include" })
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.isAuthenticated) {
-            setIsLoggedIn(true);
-            setUsername(response.user.username);
-          } else {
-            router.push("/login");
-          }
-        });
-    } else {
-      setUsername(queryName);
-      setIsLoggedIn(true);
-    }
-  }, [router, queryName]);
+    fetch(`${API_ENDPOINT}/settings`, { method: "GET", credentials: "include" })
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((response) => {
+        if (response.isAuthenticated) {
+          setIsLoggedIn(true);
+          setUsername(response.user.username);
+          sessionStorage.setItem("userName", response.user.username);
+        } else {
+          router.push("/login");
+        }
+      })
+      .catch(() => router.push("/login"));
+  }, [router]);
 
   if (isLoggedIn) {
     return (

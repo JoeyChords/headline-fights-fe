@@ -20,10 +20,10 @@ function AppBarLoggedIn(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const name = props.name ?? "";
-  const gamePath = name ? `/game?name=${name}` : "/game";
+  const gamePath = "/game";
   const settings = {
-    Dashboard: name ? `/dashboard?name=${name}` : "/dashboard",
-    Logout: name ? `/logout?name=${name}` : "/logout",
+    Dashboard: "/dashboard",
+    Logout: "/logout",
   };
 
   const handleOpenUserMenu = (event) => {

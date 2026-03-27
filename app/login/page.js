@@ -35,27 +35,35 @@ export default function SignIn() {
           password: data.get("password"),
         };
 
-        let response = await fetch(`${API_ENDPOINT}/login`, {
+        const rawResponse = await fetch(`${API_ENDPOINT}/login`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
-        response = await response.text();
-
-        if (response === "Unauthorized") {
+        if (rawResponse.status === 429) {
+          setHelperText("Too many login attempts. Please try again later.");
+          return;
+        }
+        if (rawResponse.status === 401) {
           setHelperText("Something is wrong with your email or password");
-        } else {
-          response = await JSON.parse(response);
-          if (response.email_verified) {
-            if (response.isSignedIn === "True") {
-              setError(false);
-              setHelperText("Loading...");
-              router.push(`/game?name=${response.user}`);
-            }
-          } else {
-            router.push(`/verify?email=${userInput.email}`);
+          return;
+        }
+        if (!rawResponse.ok) {
+          setHelperText("Something went wrong");
+          return;
+        }
+        const response = await rawResponse.json();
+        if (response.email_verified) {
+          if (response.isSignedIn === "True") {
+            setError(false);
+            setHelperText("Loading...");
+            sessionStorage.setItem("userName", response.user);
+            router.push("/game");
           }
+        } else {
+          sessionStorage.setItem("pendingVerifyEmail", userInput.email);
+          router.push("/verify");
         }
       } catch (err) {
         setHelperText("Something went wrong");

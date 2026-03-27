@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.1.1] - 2026-03-27
+
+### Security
+
+- Removed unused `DATA_API_KEY` from the headlines API route URL — the key was being leaked in request URLs with no corresponding validation on the server.
+- Replaced email address URL query parameters (`?email=`) with `sessionStorage` across login, register, game, and dashboard — email is no longer exposed in browser history, referrer headers, or server logs.
+- Replaced username URL query parameters (`?name=`) with `sessionStorage` across all pages and the app bar — username no longer appears in URLs or logs.
+- Fixed auth bypass in [app/settings/page.tsx](./app/settings/page.tsx) — the page previously skipped the API authentication check if a `?name=` query parameter was present, allowing unauthenticated access.
+- Added HTTP status validation to every `fetch` call — non-OK responses (including 429 Too Many Requests) no longer fail silently or attempt to parse non-JSON error bodies.
+- Added user-visible rate limit messages (429 handling) on login, verify, forgotPassword, and resetPassword pages.
+- Added email and UUID format validation in [app/resetPassword/page.js](./app/resetPassword/page.js) before the reset request is sent to the API.
+- Fixed undefined `user_exists` reference in [app/resetPassword/page.js](./app/resetPassword/page.js) — corrected to `response.user_exists`.
+- Removed `console.log` statements from [app/game/page.js](./app/game/page.js), [app/game/surveyForm.js](./app/game/surveyForm.js), [app/api/home/route.js](./app/api/home/route.js), and [app/api/logout/route.js](./app/api/logout/route.js).
+- `sessionStorage.removeItem("userName")` is now called on logout to clear client-side state.
+
 ## [1.1.0] - 2026-03-26
 
 ### Added

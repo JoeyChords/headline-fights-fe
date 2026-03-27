@@ -31,14 +31,21 @@ export default function ForgotPassword() {
           email: normalizeEmail(data.get("email")),
         };
 
-        let response = await fetch(`${API_ENDPOINT}/forgotPassword`, {
+        const rawResponse = await fetch(`${API_ENDPOINT}/forgotPassword`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
-        response = await response.text();
-        response = await JSON.parse(response);
+        if (rawResponse.status === 429) {
+          setHelperText("Too many attempts. Please wait before trying again.");
+          return;
+        }
+        if (!rawResponse.ok) {
+          setHelperText("Something went wrong");
+          return;
+        }
+        const response = await rawResponse.json();
 
         if (response.email_sent) {
           setError(false);

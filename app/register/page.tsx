@@ -62,7 +62,8 @@ export default function SignUp() {
         res.json().then((response) => {
           //Check to see if the email address is available
           if (response.available == "True") {
-            router.push(`/verify?email=${userInput.email}`);
+            sessionStorage.setItem("pendingVerifyEmail", userInput.email);
+            router.push("/verify");
           } else if (response.validEmail == "False") {
             setError(true);
             setHelperText("Please enter a valid email address");

@@ -35,17 +35,19 @@ export default function Home() {
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then((response) => {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);
           setUsername(response.user.username);
-          router.push("/game?name=" + userName);
+          sessionStorage.setItem("userName", response.user.username);
+          router.push("/game");
         } else {
           setIsLoggedIn(false);
           setStats(response);
         }
-      });
+      })
+      .catch(() => setIsLoggedIn(false));
   }, [router, userName]);
 
   if (!isLoggedIn) {

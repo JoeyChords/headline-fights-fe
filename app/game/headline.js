@@ -34,7 +34,7 @@ export default function Headline() {
       method: "POST",
       credentials: "include",
     })
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then((response) => {
         if (response.isAuthenticated) {
           setHeadlines(response.headline);
@@ -45,7 +45,8 @@ export default function Headline() {
         } else {
           router.push("/login");
         }
-      });
+      })
+      .catch(() => router.push("/login"));
   };
 
   /**
@@ -53,7 +54,7 @@ export default function Headline() {
    */
   useEffect(() => {
     fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then((response) => {
         if (response.isAuthenticated) {
           setHeadlines(response.headline);
@@ -64,7 +65,8 @@ export default function Headline() {
         } else {
           router.push("/login");
         }
-      });
+      })
+      .catch(() => router.push("/login"));
   }, [router]);
 
   if (isLoading)
