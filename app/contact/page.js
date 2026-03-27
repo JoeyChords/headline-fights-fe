@@ -3,26 +3,19 @@ import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer.tsx";
 import isEmail from "validator/lib/isEmail";
 
-const config = require("/app/config");
-const API_ENDPOINT = config.API_ENDPOINT;
-
 export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
-  const router = useRouter();
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -38,34 +31,29 @@ export default function SignIn() {
       };
 
       if (isEmail(userInput.email)) {
-        let response = await fetch("/api/contact", {
+        const response = await fetch("/api/contact", {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
 
-        response = await response.text();
-        response = await JSON.parse(response);
-        const statusCode = response.emailResponse.response.slice(0, 3);
-        console.log(response.emailResponse.response.slice(0, 3));
+        const payload = await response.json();
 
-        if (statusCode === "550") {
-          setHelperText("Something went wrong. Message not sent.");
-        } else if (statusCode === "250") {
+        if (response.ok && payload.data?.id) {
           setError(false);
           setHelperText("Thank you. Your message has been sent.");
 
           document.getElementById("contact-form").reset();
         } else {
+          setError(true);
           setHelperText("Something went wrong. Message not sent.");
         }
       } else {
         setError(true);
         setHelperText("Please enter a valid email address");
       }
-    },
-    [router]
+    }
   );
 
   return (

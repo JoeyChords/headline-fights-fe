@@ -1,11 +1,14 @@
 import "./globals.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
 import { Metadata } from "next";
-import { Inter } from "next/font/google";
 import ThemeRegistry from "./ThemeRegistry";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Headline Fights",

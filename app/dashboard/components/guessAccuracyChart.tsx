@@ -1,6 +1,6 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 import { deepPurple } from "@mui/material/colors";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;

@@ -1,12 +1,11 @@
-import { Inter, Black_Ops_One } from "next/font/google";
+import "@fontsource/black-ops-one";
 
-export const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
+export const inter = {
+  className: "",
+};
 
-export const black_ops_one = Black_Ops_One({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400"],
-});
+export const black_ops_one = {
+  style: {
+    fontFamily: '"Black Ops One", cursive',
+  },
+};

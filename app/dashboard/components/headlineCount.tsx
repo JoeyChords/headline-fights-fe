@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;

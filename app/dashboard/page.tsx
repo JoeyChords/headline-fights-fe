@@ -2,7 +2,6 @@
 import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -16,13 +15,13 @@ import SingleBiasTypeChart from "./components/singleBiasTypeChart";
 import { Stats, initialStats } from "./interfaces/Stats";
 import { Typography } from "@mui/material";
 
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
 
-export default function Dashboard(): JSX.Element {
-  const queryName = useSearchParams().get("name");
+export default function Dashboard() {
+  const [queryName, setQueryName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [stats, setStats] = useState<Stats>(initialStats);
 
@@ -42,6 +41,10 @@ export default function Dashboard(): JSX.Element {
   let dataset = publicationDataset;
 
   const router = useRouter();
+
+  useEffect(() => {
+    setQueryName(new URLSearchParams(window.location.search).get("name") ?? "");
+  }, []);
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })

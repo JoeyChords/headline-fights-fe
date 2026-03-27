@@ -4,7 +4,6 @@ import { deepPurple } from "@mui/material/colors";
 import { blueGrey } from "@mui/material/colors";
 import { grey } from "@mui/material/colors";
 import Box from "@mui/material/Box";
-import Grid from "@mui/system/Unstable_Grid";
 import HowItWorksComponent from "@/app/components/homePage/howItWorksComponent";
 import HideSourceOutlinedIcon from "@mui/icons-material/HideSourceOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";

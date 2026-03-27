@@ -9,10 +9,10 @@ import Stats from "./components/homePage/stats";
 import HowItWorks from "./components/homePage/howItWorks";
 import Footer from "./components/homePage/footer";
 
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
-export default function Home(): JSX.Element {
+export default function Home() {
   interface Stats {
     isAuthenticated: boolean;
     numUsers: number;

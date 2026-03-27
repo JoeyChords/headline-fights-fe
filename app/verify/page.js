@@ -8,20 +8,22 @@ import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
-import { useSearchParams } from "next/navigation";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
-  const email = useSearchParams().get("email");
-
+  const [email, setEmail] = React.useState("");
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    setEmail(new URLSearchParams(window.location.search).get("email") ?? "");
+  }, []);
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -57,7 +59,7 @@ export default function SignIn() {
         setHelperText("Something went wrong");
       }
     },
-    [router]
+    [email, router]
   );
 
   return (

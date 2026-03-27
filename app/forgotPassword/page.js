@@ -13,7 +13,7 @@ import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
 import { green } from "@mui/material/colors";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function ForgotPassword() {

@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import AppBarLoggedIn from "/app/components/app-bar/appBarLoggedIn.js";
+import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Logout() {

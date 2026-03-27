@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { black_ops_one } from "/app/fonts";
+import { black_ops_one } from "@/app/fonts";
 import { deepPurple } from "@mui/material/colors";
 
 const pages = { Login: "/login", Signup: "/register" };

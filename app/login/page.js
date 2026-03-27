@@ -1,5 +1,5 @@
 "use client";
-import AppBarLoginPage from "/app/components/app-bar/appBarLoginPage.js";
+import AppBarLoginPage from "@/app/components/app-bar/appBarLoginPage.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -16,7 +16,7 @@ import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
 import Stack from "@mui/material/Stack";
 
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {

@@ -11,14 +11,16 @@ export default function TermsOfService() {
       <Box component="main">
         <Container maxWidth="md" sx={{ mt: "4rem" }}>
           <Typography variant="h2">
-            <Box textAlign={"center"} fontWeight={"bold"}>
+            <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: "bold" }}>
               TERMS OF SERVICE
             </Box>
           </Typography>
           <br></br>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>Last Updated: 12/06/23</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              Last Updated: 12/06/23
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -27,7 +29,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Accepting these Terms</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Accepting these Terms
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -37,7 +41,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Changes to these Terms</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Changes to these Terms
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -57,7 +63,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Privacy Policy</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Privacy Policy
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -66,7 +74,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Third-Party Services</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Third-Party Services
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -77,7 +87,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Creating Accounts</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Creating Accounts
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -88,7 +100,9 @@ export default function TermsOfService() {
           <Typography variant="body1">If you discover or suspect any Service security breaches, please let us know as soon as possible.</Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Your Content & Conduct</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Your Content & Conduct
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -137,7 +151,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Tru Mega Lab Materials</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Tru Mega Lab Materials
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -155,7 +171,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Hyperlinks and Third Party Content</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Hyperlinks and Third Party Content
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -177,7 +195,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Unavoidable Legal Stuff</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Unavoidable Legal Stuff
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -205,7 +225,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Copyright Complaints</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Copyright Complaints
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -215,7 +237,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Governing Law</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Governing Law
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -224,7 +248,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Jurisdiction</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Jurisdiction
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -235,7 +261,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Jurisdiction</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Jurisdiction
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -246,7 +274,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Termination</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Termination
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -254,7 +284,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Entire Agreement</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Entire Agreement
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -263,7 +295,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Feedback</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Feedback
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">
@@ -273,7 +307,9 @@ export default function TermsOfService() {
           </Typography>
           <br></br>
           <Typography variant="h6" fontWeight={"bold"}>
-            <Box>## Questions & Contact Information</Box>
+            <Box component="span" sx={{ display: "block" }}>
+              ## Questions & Contact Information
+            </Box>
           </Typography>
           <br></br>
           <Typography variant="body1">

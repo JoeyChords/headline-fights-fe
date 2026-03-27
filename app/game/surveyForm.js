@@ -24,7 +24,7 @@ function RadioLabel({ trueOrFalse, label }) {
   );
 }
 
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
@@ -217,8 +217,12 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
   return (
     <Box margin="auto" sx={{ p: { xs: 0, sm: "0 1rem", md: 0 } }}>
       <Typography variant="h1" component={"h1"}>
-        <Box sx={{ textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: ".5rem" }}>Rate for Bias and Guess the Source</Box>
-        <Box sx={{ textAlign: "center", fontWeight: 400, fontSize: "1rem", mb: "1.5rem", color: grey[800] }}>Consider the image in your rating</Box>
+        <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: 700, fontSize: "1.25rem", mb: ".5rem" }}>
+          Rate for Bias and Guess the Source
+        </Box>
+        <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: 400, fontSize: "1rem", mb: "1.5rem", color: grey[800] }}>
+          Consider the image in your rating
+        </Box>
       </Typography>
       <form onSubmit={handleSubmit}>
         <FormControl variant="standard">

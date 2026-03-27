@@ -22,17 +22,19 @@ export default function Stats(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>Rs, Ds, and Indys</Box>
+            <Box component="span" sx={{ display: "block", textAlign: "center" }}>
+              Rs, Ds, and Indys
+            </Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
-            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+            <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
               More Ratings,
               <br />
               Less Bias
             </Box>
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
-            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+            <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
               Headline Fights data is more accurate when it&apos;s large and diverse. All ideologies are necessary and welcome.
             </Box>
           </Typography>

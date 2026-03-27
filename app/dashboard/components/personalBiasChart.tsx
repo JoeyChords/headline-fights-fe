@@ -1,6 +1,6 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 import { deepPurple } from "@mui/material/colors";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1: string = config.PUB_1;
 const PUB_2_SHORT: string = config.PUB_2_SHORT;
@@ -10,7 +10,7 @@ export default function PersonalBiasChart(props: {
   pub2CrowdBias: number;
   pub1PersonalBias: number;
   pub2PersonalBias: number;
-}): JSX.Element {
+}) {
   const chartSetting = {
     xAxis: [
       {

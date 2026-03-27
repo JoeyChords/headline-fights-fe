@@ -13,7 +13,7 @@ import { Typography } from "@mui/material";
 import SurveyForm from "./surveyForm";
 import { useRouter } from "next/navigation";
 import { TurnedIn } from "@mui/icons-material";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function Headline() {

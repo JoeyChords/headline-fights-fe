@@ -28,10 +28,12 @@ export default function HowItWorks(props: any) {
       >
         <Box maxWidth="35rem" sx={{ width: "100%", mx: "auto", mb: "3.5rem", p: "0 1rem" }}>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
-            <Box textAlign={"center"}>How Rating Works</Box>
+            <Box component="span" sx={{ display: "block", textAlign: "center" }}>
+              How Rating Works
+            </Box>
           </Typography>
           <Typography variant="h3" color={"#ffffff"} fontSize={{ xs: "1.25rem" }} fontWeight={"500"} lineHeight={"1.45"}>
-            <Box textAlign={"center"} sx={{ mt: ".5rem" }}>
+            <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
               Recognizing Bias in the Media Becomes a Thoughtful Game
             </Box>
           </Typography>

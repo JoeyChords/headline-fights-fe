@@ -14,7 +14,7 @@ export default function Privacy() {
       <Box component="main">
         <Container maxWidth="md" sx={{ mt: "4rem" }}>
           <Typography variant="h2">
-            <Box textAlign={"center"} fontWeight={"bold"}>
+            <Box component="span" sx={{ display: "block", textAlign: "center", fontWeight: "bold" }}>
               Privacy Policy
             </Box>
           </Typography>
@@ -22,7 +22,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-information-we-collect">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>What information do we collect?</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                What information do we collect?
+              </Box>
             </Typography>
             <br></br>
             <Typography variant="body1">
@@ -41,7 +43,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-information-use">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>What do we use your information for?</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                What do we use your information for?
+              </Box>
             </Typography>
             <br></br>
             <Typography variant="body1">Any of the information we collect from you may be used in one of the following ways:</Typography>
@@ -80,7 +84,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-protection">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>How do we protect your information?</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                How do we protect your information?
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -102,7 +108,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-cookies">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Do we use cookies?</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Do we use cookies?
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -127,7 +135,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-disclose-third-party">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Do we disclose any information to outside parties?</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Do we disclose any information to outside parties?
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -141,7 +151,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-third-party-links">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Third party links</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Third party links
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -153,7 +165,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-california">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>California Online Privacy Protection Act Compliance</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                California Online Privacy Protection Act Compliance
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -169,7 +183,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-coppa-complicance">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Children&apos;s Online Privacy Protection Act Compliance</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Children&apos;s Online Privacy Protection Act Compliance
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -180,7 +196,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-online">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Online Privacy Policy Only</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Online Privacy Policy Only
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -190,7 +208,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-consent">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Your Consent</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Your Consent
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -198,7 +218,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-changes">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Changes to our Privacy Policy</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Changes to our Privacy Policy
+              </Box>
             </Typography>
           </Box>
           <br></br>
@@ -209,7 +231,9 @@ export default function Privacy() {
           <br></br>
           <Box component={"section"} id="privacy-contact-us">
             <Typography variant="h6" fontWeight={"bold"}>
-              <Box>Contacting Us</Box>
+              <Box component="span" sx={{ display: "block" }}>
+                Contacting Us
+              </Box>
             </Typography>
           </Box>
           <br></br>

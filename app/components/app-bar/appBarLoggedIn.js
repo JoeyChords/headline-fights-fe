@@ -11,8 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { deepPurple } from "@mui/material/colors";
-import { useSearchParams } from "next/navigation";
-import { black_ops_one } from "/app/fonts";
+import { black_ops_one } from "@/app/fonts";
 var capitalize = require("lodash/capitalize");
 
 const pages = { Login: "/register", Signup: "/signup" };
@@ -20,11 +19,11 @@ const pages = { Login: "/register", Signup: "/signup" };
 function AppBarLoggedIn(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  //Get username from URL
-  const name = useSearchParams().get("name");
+  const name = props.name ?? "";
+  const gamePath = name ? `/game?name=${name}` : "/game";
   const settings = {
-    Dashboard: props.name != null ? `/dashboard?name=${props.name}` : `/dashboard?name=${name}`,
-    Logout: props.name != null ? `/logout?name=${props.name}` : `/logout?name=${name}`,
+    Dashboard: name ? `/dashboard?name=${name}` : "/dashboard",
+    Logout: name ? `/logout?name=${name}` : "/logout",
   };
 
   const handleOpenUserMenu = (event) => {
@@ -44,7 +43,7 @@ function AppBarLoggedIn(props) {
             variant="h6"
             noWrap
             component="a"
-            href={`/game?name=${useSearchParams().get("name")}`}
+            href={gamePath}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -64,7 +63,7 @@ function AppBarLoggedIn(props) {
             variant="h5"
             noWrap
             component="a"
-            href={`/game?name=${useSearchParams().get("name")}`}
+            href={gamePath}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -86,7 +85,7 @@ function AppBarLoggedIn(props) {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={{ bgcolor: deepPurple["A100"] }} alt={capitalize(name)}>
-                  {props.name != null ? capitalize(props.name).slice(0, 1) : capitalize(name).slice(0, 1)}
+                  {capitalize(name).slice(0, 1)}
                 </Avatar>
               </IconButton>
             </Tooltip>
@@ -106,7 +105,7 @@ function AppBarLoggedIn(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Typography class="text-center text-xs">{props.name}</Typography>
+              <Typography className="text-center text-xs">{name}</Typography>
               {Object.entries(settings).map(([setting, path]) => (
                 <MenuItem component={Link} href={path} key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

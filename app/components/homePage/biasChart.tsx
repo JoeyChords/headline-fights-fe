@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import { black_ops_one } from "@/app/fonts";
 import { blueGrey } from "@mui/material/colors";
 import { createTheme, useTheme, ThemeProvider } from "@mui/material/styles";
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1: string = config.PUB_1;
 const PUB_2_SHORT: string = config.PUB_2_SHORT;

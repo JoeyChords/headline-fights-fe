@@ -19,7 +19,7 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
 
-const config = require("/app/config");
+import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 function Copyright(props: any) {

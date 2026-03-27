@@ -25,9 +25,15 @@ export default function HeroSection(props: { pub1Bias: number; pub2Bias: number 
                   lineHeight: "1",
                 }}
               >
-                <Box>CNN</Box>
-                <Box>VS</Box>
-                <Box>Fox News</Box>
+                <Box component="span" sx={{ display: "block" }}>
+                  CNN
+                </Box>
+                <Box component="span" sx={{ display: "block" }}>
+                  VS
+                </Box>
+                <Box component="span" sx={{ display: "block" }}>
+                  Fox News
+                </Box>
               </Typography>
               <Typography
                 component="div"

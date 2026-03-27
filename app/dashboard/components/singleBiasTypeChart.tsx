@@ -3,7 +3,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts";
 import { deepPurple } from "@mui/material/colors";
 import { grey } from "@mui/material/colors";
-const config = require("/app/config");
+import config from "@/app/config";
 const PUB_1 = config.PUB_1;
 const PUB_2_SHORT = config.PUB_2_SHORT;
 
@@ -13,7 +13,7 @@ export default function SingleBiasTypeChart(props: {
   pub2CrowdBias: number;
   pub1PersonalBias: number;
   pub2PersonalBias: number;
-}): JSX.Element {
+}) {
   const chartSetting = {
     yAxis: [
       {
