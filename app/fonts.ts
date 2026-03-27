@@ -1,3 +1,4 @@
+// @ts-ignore — no type declarations for this fontsource package
 import "@fontsource/black-ops-one";
 
 export const inter = {

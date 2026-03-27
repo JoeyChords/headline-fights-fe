@@ -9,32 +9,21 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { black_ops_one } from "@/app/fonts";
 
-const pages = { Login: "/login", Signup: "/register" };
-const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/" };
+const pages = { Login: "/login" };
 
-function AppBarLoggedOut() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+function AppBarRegisterPage() {
+  const [anchorElNav, setAnchorElNav] = React.useState<HTMLElement | null>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -131,7 +120,6 @@ function AppBarLoggedOut() {
                   textTransform: "capitalize",
                   borderRadius: "100vw",
                   p: "0.25rem 1.5rem",
-                  ml: 1,
                   borderColor: "#ffffff",
                   "&:hover": {
                     borderColor: "#ffffff",
@@ -142,11 +130,10 @@ function AppBarLoggedOut() {
               </Button>
             ))}
           </Box>
-          {/* Avatar settings menu for both web and mobile */}
           <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default AppBarLoggedOut;
+export default AppBarRegisterPage;

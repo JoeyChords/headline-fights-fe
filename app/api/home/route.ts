@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
-  const res = await fetch(process.env.API_BASE_URL + "/", {
+export async function GET(): Promise<NextResponse> {
+  const res = await fetch((process.env.API_BASE_URL ?? "") + "/", {
     method: "GET",
-    crossDomain: true,
-    xhrFields: { withCredentials: true },
     mode: "cors",
     credentials: "include",
   });

@@ -8,46 +8,39 @@ import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
-import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut";
+import { green } from "@mui/material/colors";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
-export default function SignIn() {
-  const [email, setEmail] = React.useState("");
+export default function ForgotPassword() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const pendingEmail = sessionStorage.getItem("pendingVerifyEmail") ?? "";
-    setEmail(pendingEmail);
-    sessionStorage.removeItem("pendingVerifyEmail");
-  }, []);
-
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       try {
         event.preventDefault();
         setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: normalizeEmail(email),
-          code: data.get("code"),
+          email: normalizeEmail(String(data.get("email") ?? "")) || "",
         };
 
-        const rawResponse = await fetch(`${API_ENDPOINT}/verify`, {
+        const rawResponse = await fetch(`${API_ENDPOINT}/forgotPassword`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInput),
         });
         if (rawResponse.status === 429) {
-          setHelperText("Too many attempts. Please try again later.");
+          setHelperText("Too many attempts. Please wait before trying again.");
           setIsLoading(false);
           return;
         }
@@ -56,19 +49,15 @@ export default function SignIn() {
           setIsLoading(false);
           return;
         }
-        const response = await rawResponse.json();
+        const response = (await rawResponse.json()) as { email_sent?: boolean };
 
-        if (response.submitted_in_time) {
-          if (response.email_verified) {
-            sessionStorage.setItem("userName", response.name);
-            router.push("/game");
-          } else {
-            setError(false);
-            setHelperText("Something is wrong with the code.");
-            setIsLoading(false);
-          }
+        if (response.email_sent) {
+          setError(false);
+          setHelperText("Your email has been sent.");
+          setIsLoading(false);
         } else {
-          setHelperText("The code has expired. Please try logging in again to receive a new one.");
+          setError(true);
+          setHelperText("Something is wrong with your email address.");
           setIsLoading(false);
         }
       } catch (err) {
@@ -76,7 +65,7 @@ export default function SignIn() {
         setIsLoading(false);
       }
     },
-    [email, router]
+    [router]
   );
 
   return (
@@ -95,21 +84,24 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Verify Your Email
+              Forgot Password
             </Typography>
-            <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
-              A code has been sent to your email address. Enter the code to finish signing up.
+            <Typography component="p" variant="body1" textAlign={"center"} mt=".75rem">
+              Enter the email you used to sign up and we will send instructions on how to reset your password.
             </Typography>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
+            <FormHelperText error={error} sx={{ color: green["A700"] }}>
+              {helperText}
+            </FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="code"
-                label="Verification Code"
-                type="text"
-                id="code"
+                name="email"
+                label="Email"
+                type="email"
+                id="email"
+                autoComplete="email"
               />
               <Button
                 type="submit"
@@ -125,7 +117,7 @@ export default function SignIn() {
                   fontSize: { lg: "1.25rem", xs: "1.25rem" },
                 }}
               >
-                Submit
+                Email Me
               </Button>
             </Box>
           </Box>

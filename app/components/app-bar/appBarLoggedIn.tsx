@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,21 +13,23 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { deepPurple } from "@mui/material/colors";
 import { black_ops_one } from "@/app/fonts";
-var capitalize = require("lodash/capitalize");
 
-const pages = { Login: "/register", Signup: "/signup" };
+const capitalize = require("lodash/capitalize") as (s: string) => string;
 
-function AppBarLoggedIn(props) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const name = props.name ?? "";
-  const gamePath = "/game";
-  const settings = {
-    Dashboard: "/dashboard",
-    Logout: "/logout",
-  };
+const gamePath = "/game";
+const settings = {
+  Dashboard: "/dashboard",
+  Logout: "/logout",
+};
 
-  const handleOpenUserMenu = (event) => {
+interface AppBarLoggedInProps {
+  name?: string;
+}
+
+function AppBarLoggedIn({ name = "" }: AppBarLoggedInProps) {
+  const [anchorElUser, setAnchorElUser] = React.useState<HTMLElement | null>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 

@@ -1,10 +1,9 @@
 "use client";
-import AppBarLoginPage from "@/app/components/app-bar/appBarLoginPage.js";
+import AppBarLoginPage from "@/app/components/app-bar/appBarLoginPage";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -26,15 +25,15 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       try {
         event.preventDefault();
         setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: normalizeEmail(data.get("email")),
-          password: data.get("password"),
+          email: normalizeEmail(String(data.get("email") ?? "")) || "",
+          password: String(data.get("password") ?? ""),
         };
 
         const rawResponse = await fetch(`${API_ENDPOINT}/login`, {
@@ -58,11 +57,15 @@ export default function SignIn() {
           setIsLoading(false);
           return;
         }
-        const response = await rawResponse.json();
+        const response = (await rawResponse.json()) as {
+          email_verified?: boolean;
+          isSignedIn?: string;
+          user?: string;
+        };
         if (response.email_verified) {
           if (response.isSignedIn === "True") {
             setError(false);
-            sessionStorage.setItem("userName", response.user);
+            sessionStorage.setItem("userName", response.user ?? "");
             router.push("/game");
           }
         } else {

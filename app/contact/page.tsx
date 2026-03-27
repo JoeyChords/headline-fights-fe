@@ -1,5 +1,5 @@
 "use client";
-import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,23 +10,24 @@ import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
-import Footer from "@/app/components/footer/footer.tsx";
+import Footer from "@/app/components/footer/footer";
 import isEmail from "validator/lib/isEmail";
 
 export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
 
-  const handleSubmit = useCallback(async (event) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     setError(false);
     setHelperText("Sending...");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
+    const email = normalizeEmail(String(data.get("email") ?? "")) || "";
     const userInput = {
-      email: normalizeEmail(data.get("email")),
-      message: data.get("message"),
-      name: data.get("name"),
+      email,
+      message: String(data.get("message") ?? ""),
+      name: String(data.get("name") ?? ""),
     };
 
     if (isEmail(userInput.email)) {
@@ -37,13 +38,13 @@ export default function SignIn() {
         body: JSON.stringify(userInput),
       });
 
-      const payload = await response.json();
+      const payload = (await response.json()) as { data?: { id?: string } };
 
       if (response.ok && payload.data?.id) {
         setError(false);
         setHelperText("Thank you. Your message has been sent.");
 
-        document.getElementById("contact-form").reset();
+        (document.getElementById("contact-form") as HTMLFormElement).reset();
       } else {
         setError(true);
         setHelperText("Something went wrong. Message not sent.");
@@ -52,7 +53,7 @@ export default function SignIn() {
       setError(true);
       setHelperText("Please enter a valid email address");
     }
-  });
+  }, []);
 
   return (
     <>

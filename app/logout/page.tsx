@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
+import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";

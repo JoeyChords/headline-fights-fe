@@ -1,19 +1,17 @@
-// This to nested server side component so env works
-
 import { NextResponse } from "next/server";
 
-export async function POST() {
-  const res = await fetch(process.env.API_BASE_URL + "/headlines", {
+export async function POST(): Promise<Response | NextResponse> {
+  const res = await fetch((process.env.API_BASE_URL ?? "") + "/headlines", {
     method: "POST",
     credentials: "include",
   });
-  const cookieData = res.headers.getSetCookie();
 
   if (!res.ok) {
     return new Response(null, { status: res.status });
   }
-  var data = await res.json();
-  data = JSON.stringify(data[0]);
+
+  const json = (await res.json()) as unknown[];
+  const data = JSON.stringify(json[0]);
 
   return new Response(data, {
     status: 200,

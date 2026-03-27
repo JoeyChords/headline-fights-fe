@@ -31,8 +31,8 @@ files that were already converted, moving toward a fully strict, well-typed code
 
 Simple modules with no JSX. Convert to `.ts`. Tests verify exports have the expected shape.
 
-- [ ] `app/config.js` → `config.ts`
-- [ ] `app/fonts.js` → `fonts.ts`
+- [x] `app/config.js` → `config.ts`
+- [x] `app/fonts.js` → `fonts.ts`
 
 ---
 
@@ -41,12 +41,12 @@ Simple modules with no JSX. Convert to `.ts`. Tests verify exports have the expe
 Pure Next.js Route Handlers — no React, no JSX. Convert to `.ts`.
 Tests mock the upstream `fetch` or Resend client and verify response shape and status codes.
 
-- [ ] `app/api/contact/route.js` → `route.ts`
-- [ ] `app/api/home/route.js` → `route.ts`
-- [ ] `app/api/login/route.js` → `route.ts`
-- [ ] `app/api/logout/route.js` → `route.ts`
-- [ ] `app/api/register/route.js` → `route.ts`
-- [ ] `app/api/headlines/route.js` → `route.ts`
+- [x] `app/api/contact/route.js` → `route.ts`
+- [x] `app/api/home/route.js` → `route.ts`
+- [x] `app/api/login/route.js` → `route.ts`
+- [x] `app/api/logout/route.js` → `route.ts`
+- [x] `app/api/register/route.js` → `route.ts`
+- [x] `app/api/headlines/route.js` → `route.ts`
 
 ---
 
@@ -55,12 +55,12 @@ Tests mock the upstream `fetch` or Resend client and verify response shape and s
 Ordered by complexity (simplest first). All use `useRouter` and `fetch`.
 Tests cover: render, key UI elements, form submit (mock fetch), redirect, error state.
 
-- [ ] `app/logout/page.js` → `page.tsx` _(no form, just redirect)_
-- [ ] `app/contact/page.js` → `page.tsx` _(simple contact form)_
-- [ ] `app/forgotPassword/page.js` → `page.tsx`
-- [ ] `app/verify/page.js` → `page.tsx`
-- [ ] `app/login/page.js` → `page.tsx`
-- [ ] `app/resetPassword/page.js` → `page.tsx` _(URL param parsing via useEffect)_
+- [x] `app/logout/page.js` → `page.tsx` _(no form, just redirect)_
+- [x] `app/contact/page.js` → `page.tsx` _(simple contact form)_
+- [x] `app/forgotPassword/page.js` → `page.tsx`
+- [x] `app/verify/page.js` → `page.tsx`
+- [x] `app/login/page.js` → `page.tsx`
+- [x] `app/resetPassword/page.js` → `page.tsx` _(URL param parsing via useEffect)_
 
 ---
 
@@ -69,11 +69,11 @@ Tests cover: render, key UI elements, form submit (mock fetch), redirect, error 
 Shared across every page. Convert to `.tsx`. Once typed, pages that import them benefit
 from prop checking. Tests: render with required props, key interactive elements.
 
-- [ ] `app/components/app-bar/appBarLoggedOut.js` → `appBarLoggedOut.tsx`
-- [ ] `app/components/app-bar/appBarLoginPage.js` → `appBarLoginPage.tsx`
-- [ ] `app/components/app-bar/appBarRegisterPage.js` → `appBarRegisterPage.tsx`
-- [ ] `app/components/app-bar/appBarHomePage.js` → `appBarHomePage.tsx`
-- [ ] `app/components/app-bar/appBarLoggedIn.js` → `appBarLoggedIn.tsx`
+- [x] `app/components/app-bar/appBarLoggedOut.js` → `appBarLoggedOut.tsx`
+- [x] `app/components/app-bar/appBarLoginPage.js` → `appBarLoginPage.tsx`
+- [x] `app/components/app-bar/appBarRegisterPage.js` → `appBarRegisterPage.tsx`
+- [x] `app/components/app-bar/appBarHomePage.js` → `appBarHomePage.tsx`
+- [x] `app/components/app-bar/appBarLoggedIn.js` → `appBarLoggedIn.tsx`
 
 ---
 

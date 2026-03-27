@@ -1,11 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const rateLimitMap = new Map();
+interface RateLimitEntry {
+  count: number;
+  resetTime: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitEntry>();
 const RATE_LIMIT = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
-function checkRateLimit(ip) {
+function checkRateLimit(ip: string): boolean {
   const now = Date.now();
   const entry = rateLimitMap.get(ip);
   if (!entry || now > entry.resetTime) {
@@ -17,14 +22,14 @@ function checkRateLimit(ip) {
   return true;
 }
 
-export async function POST(request) {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   const ip = request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "unknown";
   if (!checkRateLimit(ip)) {
     return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const bodyContent = await request.json();
+  const bodyContent = (await request.json()) as Record<string, unknown>;
   const CONTACT_EMAIL = bodyContent.email;
   const CONTACT_NAME = bodyContent.name;
   const CONTACT_MESSAGE = bodyContent.message;
@@ -44,8 +49,8 @@ export async function POST(request) {
   }
 
   const { data, error } = await resend.emails.send({
-    from: process.env.SENDER_EMAIL,
-    to: process.env.MY_EMAIL,
+    from: process.env.SENDER_EMAIL ?? "",
+    to: process.env.MY_EMAIL ?? "",
     subject: "Message From Contact Us Page",
     text: "Contact Name: " + CONTACT_NAME + "\n\n" + "Contact Email: " + CONTACT_EMAIL + "\n\n" + CONTACT_MESSAGE,
   });

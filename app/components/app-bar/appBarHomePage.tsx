@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,33 +9,22 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { black_ops_one } from "@/app/fonts";
 import { deepPurple } from "@mui/material/colors";
 
 const pages = { Login: "/login", Signup: "/register" };
-const settings = { Dashboard: "/dashboard", Settings: "/settings", Logout: "/" };
 
 function AppBarLoggedOut() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<HTMLElement | null>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -67,7 +57,7 @@ function AppBarLoggedOut() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="black"
+              sx={{ color: "black" }}
             >
               <MenuIcon />
             </IconButton>
@@ -127,10 +117,9 @@ function AppBarLoggedOut() {
                 sx={{
                   my: 2,
                   ml: 1,
-                  color: "white",
+                  color: "black",
                   display: "block",
                   textTransform: "capitalize",
-                  color: "black",
                   borderRadius: "100vw",
                   p: "0.25rem 1.5rem",
                 }}
@@ -139,7 +128,6 @@ function AppBarLoggedOut() {
               </Button>
             ))}
           </Box>
-          {/* Avatar settings menu for both web and mobile */}
           <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>

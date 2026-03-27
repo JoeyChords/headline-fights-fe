@@ -9,88 +9,79 @@ import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
-import isStrongPassword from "validator/lib/isStrongPassword";
-import isEmail from "validator/lib/isEmail";
-import isUUID from "validator/lib/isUUID";
+import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
-import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut.js";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
   const [email, setEmail] = React.useState("");
-  const [token, setToken] = React.useState("");
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setEmail(params.get("email") ?? "");
-    setToken(params.get("token") ?? "");
+    const pendingEmail = sessionStorage.getItem("pendingVerifyEmail") ?? "";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEmail(pendingEmail);
+    sessionStorage.removeItem("pendingVerifyEmail");
   }, []);
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       try {
         event.preventDefault();
+        setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
-          email: email,
-          token: token,
-          password: data.get("password"),
+          email: normalizeEmail(email) || "",
+          code: String(data.get("code") ?? ""),
         };
-        if (!isEmail(userInput.email) || !isUUID(userInput.token)) {
-          setError(true);
-          setHelperText("This reset link is invalid or has expired.");
+
+        const rawResponse = await fetch(`${API_ENDPOINT}/verify`, {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userInput),
+        });
+        if (rawResponse.status === 429) {
+          setHelperText("Too many attempts. Please try again later.");
+          setIsLoading(false);
           return;
         }
-        if (isStrongPassword(userInput.password)) {
-          setIsLoading(true);
-          const rawResponse = await fetch(`${API_ENDPOINT}/resetPassword`, {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userInput),
-          });
-          if (rawResponse.status === 429) {
-            setHelperText("Too many attempts. Please wait before trying again.");
-            setIsLoading(false);
-            return;
-          }
-          if (!rawResponse.ok) {
-            setHelperText("Something went wrong");
-            setIsLoading(false);
-            return;
-          }
-          const response = await rawResponse.json();
+        if (!rawResponse.ok) {
+          setHelperText("Something went wrong");
+          setIsLoading(false);
+          return;
+        }
+        const response = (await rawResponse.json()) as {
+          submitted_in_time?: boolean;
+          email_verified?: boolean;
+          name?: string;
+        };
 
-          if (response.submitted_in_time) {
-            router.push("/login");
-          } else if (!response.submitted_in_time && response.user_exists) {
-            setError(true);
-            setHelperText("The link has expired.");
-            setIsLoading(false);
+        if (response.submitted_in_time) {
+          if (response.email_verified) {
+            sessionStorage.setItem("userName", response.name ?? "");
+            router.push("/game");
           } else {
-            setError(true);
-            setHelperText("Something went wrong");
+            setError(false);
+            setHelperText("Something is wrong with the code.");
             setIsLoading(false);
           }
         } else {
-          setError(true);
-          setHelperText(
-            "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
-          );
+          setHelperText("The code has expired. Please try logging in again to receive a new one.");
+          setIsLoading(false);
         }
       } catch (err) {
-        setError(true);
         setHelperText("Something went wrong");
         setIsLoading(false);
       }
     },
-    [email, router, token]
+    [email, router]
   );
 
   return (
@@ -109,10 +100,10 @@ export default function SignIn() {
           >
             <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
             <Typography component="h1" variant="h4" fontWeight={500}>
-              Reset Password
+              Verify Your Email
             </Typography>
-            <Typography component="p" variant="p" textAlign={"center"} mt=".75rem">
-              Enter a new strong password.
+            <Typography component="p" variant="body1" textAlign={"center"} mt=".75rem">
+              A code has been sent to your email address. Enter the code to finish signing up.
             </Typography>
             <FormHelperText error={error}>{helperText}</FormHelperText>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -120,11 +111,10 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
+                name="code"
+                label="Verification Code"
+                type="text"
+                id="code"
               />
               <Button
                 type="submit"
@@ -140,7 +130,7 @@ export default function SignIn() {
                   fontSize: { lg: "1.25rem", xs: "1.25rem" },
                 }}
               >
-                Set Password
+                Submit
               </Button>
             </Box>
           </Box>
