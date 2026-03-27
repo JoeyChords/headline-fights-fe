@@ -9,6 +9,9 @@ export async function POST() {
   });
   const cookieData = res.headers.getSetCookie();
 
+  if (!res.ok) {
+    return new Response(null, { status: res.status });
+  }
   var data = await res.json();
   data = JSON.stringify(data[0]);
 

@@ -1,6 +1,6 @@
 {
   "name": "headline-fights-fe",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "engines": {
     "node": ">=24.14.0 <25.0.0"

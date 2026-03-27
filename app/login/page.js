@@ -22,12 +22,14 @@ const API_ENDPOINT = config.API_ENDPOINT;
 export default function SignIn() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   const handleSubmit = useCallback(
     async (event) => {
       try {
         event.preventDefault();
+        setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
@@ -43,21 +45,23 @@ export default function SignIn() {
         });
         if (rawResponse.status === 429) {
           setHelperText("Too many login attempts. Please try again later.");
+          setIsLoading(false);
           return;
         }
         if (rawResponse.status === 401) {
           setHelperText("Something is wrong with your email or password");
+          setIsLoading(false);
           return;
         }
         if (!rawResponse.ok) {
           setHelperText("Something went wrong");
+          setIsLoading(false);
           return;
         }
         const response = await rawResponse.json();
         if (response.email_verified) {
           if (response.isSignedIn === "True") {
             setError(false);
-            setHelperText("Loading...");
             sessionStorage.setItem("userName", response.user);
             router.push("/game");
           }
@@ -67,6 +71,7 @@ export default function SignIn() {
         }
       } catch (err) {
         setHelperText("Something went wrong");
+        setIsLoading(false);
       }
     },
     [router]
@@ -108,6 +113,7 @@ export default function SignIn() {
                 size="large"
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
                 Sign In

@@ -19,12 +19,14 @@ const API_ENDPOINT = config.API_ENDPOINT;
 export default function ForgotPassword() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   const handleSubmit = useCallback(
     async (event) => {
       try {
         event.preventDefault();
+        setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
@@ -39,10 +41,12 @@ export default function ForgotPassword() {
         });
         if (rawResponse.status === 429) {
           setHelperText("Too many attempts. Please wait before trying again.");
+          setIsLoading(false);
           return;
         }
         if (!rawResponse.ok) {
           setHelperText("Something went wrong");
+          setIsLoading(false);
           return;
         }
         const response = await rawResponse.json();
@@ -50,12 +54,15 @@ export default function ForgotPassword() {
         if (response.email_sent) {
           setError(false);
           setHelperText("Your email has been sent.");
+          setIsLoading(false);
         } else {
           setError(true);
           setHelperText("Something is wrong with your email address.");
+          setIsLoading(false);
         }
       } catch (err) {
         setHelperText("Something went wrong");
+        setIsLoading(false);
       }
     },
     [router]
@@ -92,6 +99,7 @@ export default function ForgotPassword() {
                 size="large"
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
                 Email Me

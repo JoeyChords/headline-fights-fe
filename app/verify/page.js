@@ -19,6 +19,7 @@ export default function SignIn() {
   const [email, setEmail] = React.useState("");
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function SignIn() {
     async (event) => {
       try {
         event.preventDefault();
+        setIsLoading(true);
         const data = new FormData(event.currentTarget);
 
         const userInput = {
@@ -46,10 +48,12 @@ export default function SignIn() {
         });
         if (rawResponse.status === 429) {
           setHelperText("Too many attempts. Please try again later.");
+          setIsLoading(false);
           return;
         }
         if (!rawResponse.ok) {
           setHelperText("Something went wrong");
+          setIsLoading(false);
           return;
         }
         const response = await rawResponse.json();
@@ -61,12 +65,15 @@ export default function SignIn() {
           } else {
             setError(false);
             setHelperText("Something is wrong with the code.");
+            setIsLoading(false);
           }
         } else {
           setHelperText("The code has expired. Please try logging in again to receive a new one.");
+          setIsLoading(false);
         }
       } catch (err) {
         setHelperText("Something went wrong");
+        setIsLoading(false);
       }
     },
     [email, router]
@@ -101,6 +108,7 @@ export default function SignIn() {
                 size="large"
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
                 Submit

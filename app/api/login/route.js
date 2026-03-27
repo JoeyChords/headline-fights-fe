@@ -18,7 +18,7 @@ export async function POST(request) {
   var cookieData = res.headers.getSetCookie();
 
   return new Response(data, {
-    status: 200,
+    status: res.status,
     headers: {
       "Access-Control-Allow-Origin": "https://www.headlinefights.com",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",

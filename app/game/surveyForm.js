@@ -122,7 +122,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(feedback),
     })
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
       .then((response) => {
         if (response.isAuthenticated) {
           setPublicationDataset([
@@ -140,7 +140,8 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
         } else {
           router.push("/login");
         }
-      });
+      })
+      .catch(() => router.push("/login"));
   };
 
   const getNextHeadline = () => {
@@ -172,7 +173,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           </Button>
           <h2 className="text-center">
             See the{" "}
-            <Link href={`/dashboard?name=${user.username}`} underline="always" color={blueGrey[700]}>
+            <Link href={"/dashboard"} underline="always" color={blueGrey[700]}>
               Dashboard
             </Link>{" "}
             for all your results.
@@ -203,7 +204,7 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
           </Button>
           <h2 className="text-center">
             See the{" "}
-            <Link href={`/dashboard?name=${user.username}`} underline="always" color={blueGrey[700]}>
+            <Link href={"/dashboard"} underline="always" color={blueGrey[700]}>
               Dashboard
             </Link>{" "}
             for all your results.

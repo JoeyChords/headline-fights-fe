@@ -13,6 +13,9 @@ export async function POST(request) {
     headers: { "Content-Type": contentType },
     body: JSON.stringify(bodyContent),
   });
+  if (!res.ok) {
+    return NextResponse.json({ data: null }, { status: res.status });
+  }
   const data = await res.json();
 
   return NextResponse.json({ data });

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.1.2] - 2026-03-27
+
+### Security
+
+- Added `isLoading` state to all auth form submit buttons (login, register, verify, forgotPassword, resetPassword) — buttons are disabled while a request is in flight, preventing duplicate submissions.
+- Removed `setHelperText("Loading...")` calls from login and register — the disabled button state communicates pending submission without exposing internal state as a user-facing string.
+- Converted [app/register/page.tsx](./app/register/page.tsx) form handler from promise chains to `async/await` for consistent `isLoading` reset on all exit paths.
+
 ## [1.1.1] - 2026-03-27
 
 ### Security

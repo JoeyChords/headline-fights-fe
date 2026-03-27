@@ -38,12 +38,12 @@ function Copyright(props: any) {
 export default function SignUp() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     setError(false);
-    setHelperText("Loading...");
 
     const data: any = new FormData(event.currentTarget);
 
@@ -53,34 +53,50 @@ export default function SignUp() {
       password: data.get("password"),
     };
 
-    if (isEmail(userInput.email) && isStrongPassword(userInput.password)) {
-      fetch(`${API_ENDPOINT}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userInput),
-      }).then((res) => {
-        res.json().then((response) => {
-          //Check to see if the email address is available
-          if (response.available == "True") {
-            sessionStorage.setItem("pendingVerifyEmail", userInput.email);
-            router.push("/verify");
-          } else if (response.validEmail == "False") {
-            setError(true);
-            setHelperText("Please enter a valid email address");
-          } else {
-            setError(true);
-            setHelperText("The email address you entered is already in use");
-          }
-        });
-      });
-    } else if (!isEmail(userInput.email)) {
+    if (!isEmail(userInput.email)) {
       setError(true);
       setHelperText("Please enter a valid email address");
-    } else if (!isStrongPassword(userInput.password)) {
+      return;
+    }
+    if (!isStrongPassword(userInput.password)) {
       setError(true);
       setHelperText(
         "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
       );
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${API_ENDPOINT}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      });
+      if (!res.ok) {
+        setError(true);
+        setHelperText("Something went wrong");
+        setIsLoading(false);
+        return;
+      }
+      const response = await res.json();
+      //Check to see if the email address is available
+      if (response.available == "True") {
+        sessionStorage.setItem("pendingVerifyEmail", userInput.email);
+        router.push("/verify");
+      } else if (response.validEmail == "False") {
+        setError(true);
+        setHelperText("Please enter a valid email address");
+        setIsLoading(false);
+      } else {
+        setError(true);
+        setHelperText("The email address you entered is already in use");
+        setIsLoading(false);
+      }
+    } catch {
+      setError(true);
+      setHelperText("Something went wrong");
+      setIsLoading(false);
     }
   };
 
@@ -122,6 +138,7 @@ export default function SignUp() {
                   size="large"
                   fullWidth
                   variant="contained"
+                  disabled={isLoading}
                   sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
                 >
                   Sign Up

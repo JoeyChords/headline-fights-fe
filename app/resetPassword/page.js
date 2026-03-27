@@ -22,6 +22,7 @@ export default function SignIn() {
   const [token, setToken] = React.useState("");
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function SignIn() {
           return;
         }
         if (isStrongPassword(userInput.password)) {
+          setIsLoading(true);
           const rawResponse = await fetch(`${API_ENDPOINT}/resetPassword`, {
             method: "POST",
             credentials: "include",
@@ -55,10 +57,12 @@ export default function SignIn() {
           });
           if (rawResponse.status === 429) {
             setHelperText("Too many attempts. Please wait before trying again.");
+            setIsLoading(false);
             return;
           }
           if (!rawResponse.ok) {
             setHelperText("Something went wrong");
+            setIsLoading(false);
             return;
           }
           const response = await rawResponse.json();
@@ -68,9 +72,11 @@ export default function SignIn() {
           } else if (!response.submitted_in_time && response.user_exists) {
             setError(true);
             setHelperText("The link has expired.");
+            setIsLoading(false);
           } else {
             setError(true);
             setHelperText("Something went wrong");
+            setIsLoading(false);
           }
         } else {
           setError(true);
@@ -81,6 +87,7 @@ export default function SignIn() {
       } catch (err) {
         setError(true);
         setHelperText("Something went wrong");
+        setIsLoading(false);
       }
     },
     [email, router, token]
@@ -124,6 +131,7 @@ export default function SignIn() {
                 size="large"
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
                 sx={{ mt: 3, mb: 2, textTransform: "capitalize", borderRadius: "100vw", fontSize: { lg: "1.25rem", xs: "1.25rem" } }}
               >
                 Set Password
