@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { deepPurple } from "@mui/material/colors";
 import { black_ops_one } from "@/app/fonts";
 
-const capitalize = require("lodash/capitalize") as (s: string) => string;
+const capitalize = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "");
 
 const gamePath = "/game";
 const settings = {

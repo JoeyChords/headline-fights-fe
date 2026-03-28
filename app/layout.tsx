@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-full">
-        <ThemeRegistry options={{ key: "mui" }}>
+        <ThemeRegistry>
           {children}
           <Analytics />
           <SpeedInsights />

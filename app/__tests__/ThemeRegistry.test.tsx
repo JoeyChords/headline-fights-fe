@@ -1,8 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 
+vi.mock("@mui/material-nextjs/v16-appRouter", () => ({
+  AppRouterCacheProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
 vi.mock("next/navigation", () => ({
-  useServerInsertedHTML: vi.fn(),
   useRouter: vi.fn(() => ({
     push: vi.fn(),
     replace: vi.fn(),
@@ -23,7 +27,7 @@ import ThemeRegistry from "../ThemeRegistry";
 describe("ThemeRegistry", () => {
   it("renders children", () => {
     render(
-      <ThemeRegistry options={{ key: "mui" }}>
+      <ThemeRegistry>
         <div data-testid="child">hello</div>
       </ThemeRegistry>
     );
