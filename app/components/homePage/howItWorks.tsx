@@ -56,7 +56,6 @@ export default function HowItWorks() {
               }
               component={
                 <HowItWorksComponent
-                  total={10}
                   title={"1."}
                   explanation={"We show you a headline and accompanying image without revealing its source."}
                 ></HowItWorksComponent>
@@ -68,7 +67,6 @@ export default function HowItWorks() {
               icon={<ThumbUpOutlinedIcon sx={{ color: deepPurple["A100"], fontSize: "3rem" }}></ThumbUpOutlinedIcon>}
               component={
                 <HowItWorksComponent
-                  total={10}
                   title={"2."}
                   explanation={
                     "You rate the headline for known media bias types, then guess if it's from Fox News or CNN."
@@ -84,7 +82,6 @@ export default function HowItWorks() {
               }
               component={
                 <HowItWorksComponent
-                  total={10}
                   title={"3."}
                   explanation={
                     "We tell you if you're right, then calculate your ratings both separately and along with everyone else's."
@@ -102,7 +99,6 @@ export default function HowItWorks() {
               }
               component={
                 <HowItWorksComponent
-                  total={10}
                   title={"4."}
                   explanation={
                     "You see how you rate each publication for bias, then compare your results to the crowd's ratings."
