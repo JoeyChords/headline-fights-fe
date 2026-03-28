@@ -1,11 +1,11 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 import { deepPurple } from "@mui/material/colors";
-import config from "@/app/config";
-const API_ENDPOINT = config.API_ENDPOINT;
-const PUB_1 = config.PUB_1;
-const PUB_2 = config.PUB_2;
 
-export default function GuessAccuracyChart(props: any) {
+interface GuessAccuracyChartProps {
+  dataset: Record<string, number | string | Date>[];
+}
+
+export default function GuessAccuracyChart(props: GuessAccuracyChartProps) {
   const chartSetting = {
     yAxis: [
       {

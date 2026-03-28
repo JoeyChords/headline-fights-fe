@@ -1,16 +1,12 @@
-import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
-import { blueGrey } from "@mui/material/colors";
-import { grey } from "@mui/material/colors";
 import Box from "@mui/material/Box";
-import HowItWorksComponent from "@/app/components/homePage/howItWorksComponent";
-import HideSourceOutlinedIcon from "@mui/icons-material/HideSourceOutlined";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined";
-import DangerousOutlinedIcon from "@mui/icons-material/DangerousOutlined";
+import type { ReactNode } from "react";
 
-export default function HowItWorksBox(props: any) {
+interface HowItWorksBoxProps {
+  icon: ReactNode;
+  component: ReactNode;
+}
+
+export default function HowItWorksBox(props: HowItWorksBoxProps) {
   return (
     <>
       <Box

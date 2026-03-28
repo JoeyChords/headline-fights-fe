@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
@@ -6,8 +5,15 @@ import Grid from "@mui/system/Unstable_Grid";
 import StatsBox from "@/app/components/homePage/statsBox";
 import StatsComponent from "@/app/components/homePage/statsComponent";
 import CTAButton from "@/app/components/homePage/ctaButton";
+import type { ReactNode } from "react";
 
-export default function Stats(props: any) {
+interface StatsData {
+  numPub2Ratings: ReactNode;
+  numPub1Ratings: ReactNode;
+  numUsers: ReactNode;
+}
+
+export default function Stats({ props }: { props: StatsData }) {
   return (
     <>
       <Box
@@ -26,7 +32,12 @@ export default function Stats(props: any) {
               Rs, Ds, and Indys
             </Box>
           </Typography>
-          <Typography variant="h3" fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }} fontWeight={"700"} lineHeight={"1.3"}>
+          <Typography
+            variant="h3"
+            fontSize={{ xs: "1.75rem", md: "2.3rem", lg: "3.25rem" }}
+            fontWeight={"700"}
+            lineHeight={"1.3"}
+          >
             <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
               More Ratings,
               <br />
@@ -35,19 +46,33 @@ export default function Stats(props: any) {
           </Typography>
           <Typography variant="h3" fontSize={{ xs: "1rem" }} fontWeight={"500"} lineHeight={"1.45"}>
             <Box component="span" sx={{ display: "block", textAlign: "center", mt: ".5rem" }}>
-              Headline Fights data is more accurate when it&apos;s large and diverse. All ideologies are necessary and welcome.
+              Headline Fights data is more accurate when it&apos;s large and diverse. All ideologies are necessary and
+              welcome.
             </Box>
           </Typography>
         </Box>
-        <Grid container maxWidth="85rem" spacing={4} sx={{ mx: "auto", display: "flex", mb: "3.5rem", justifyContent: "center" }}>
+        <Grid
+          container
+          maxWidth="85rem"
+          spacing={4}
+          sx={{ mx: "auto", display: "flex", mb: "3.5rem", justifyContent: "center" }}
+        >
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <StatsBox component={<StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>}></StatsBox>
+            <StatsBox
+              component={
+                <StatsComponent total={props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>
+              }
+            ></StatsBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <StatsBox component={<StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>}></StatsBox>
+            <StatsBox
+              component={<StatsComponent total={props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>}
+            ></StatsBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <StatsBox component={<StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>}></StatsBox>
+            <StatsBox
+              component={<StatsComponent total={props.numUsers} title={"People Rated Headlines"}></StatsComponent>}
+            ></StatsBox>
           </Grid>
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center" }}>

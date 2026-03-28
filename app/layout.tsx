@@ -4,11 +4,11 @@ import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/700.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
+import type { ReactNode } from "react";
 import { Metadata } from "next";
 import ThemeRegistry from "./ThemeRegistry";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
 
 export const metadata: Metadata = {
   title: "Headline Fights",
@@ -23,8 +23,7 @@ export const viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout(props: any) {
-  const { children } = props;
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-full">

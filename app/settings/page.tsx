@@ -1,26 +1,28 @@
 "use client";
 import AppBarLoggedIn from "../components/app-bar/appBarLoggedIn";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
+const subscribe = () => () => {};
+const getServerUserNameSnapshot = () => "";
+const getClientUserNameSnapshot = () => sessionStorage.getItem("userName") ?? "";
 
 export default function Settings() {
-  const [queryName, setQueryName] = useState("");
+  const queryName = useSyncExternalStore(subscribe, getClientUserNameSnapshot, getServerUserNameSnapshot);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUsername] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    setQueryName(sessionStorage.getItem("userName") ?? "");
-  }, []);
-
-  useEffect(() => {
     fetch(`${API_ENDPOINT}/settings`, { method: "GET", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);

@@ -35,7 +35,10 @@ export default function Home() {
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/home`, { method: "POST", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           setIsLoggedIn(true);
@@ -72,7 +75,10 @@ export default function Home() {
     <>
       <style>{"body { background-color: black; }"}</style>
       <Box justifyContent="center" sx={{ height: "100vh", width: "100%", position: "relative" }}>
-        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+        <CircularProgress
+          color="secondary"
+          sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+        />
       </Box>
     </>
   );

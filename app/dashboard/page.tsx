@@ -1,7 +1,7 @@
 "use client";
-import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
+import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -19,9 +19,12 @@ import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
+const subscribe = () => () => {};
+const getServerUserNameSnapshot = () => "";
+const getClientUserNameSnapshot = () => sessionStorage.getItem("userName") ?? "";
 
 export default function Dashboard() {
-  const [queryName, setQueryName] = useState("");
+  const queryName = useSyncExternalStore(subscribe, getClientUserNameSnapshot, getServerUserNameSnapshot);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [stats, setStats] = useState<Stats>(initialStats);
 
@@ -43,12 +46,11 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    setQueryName(sessionStorage.getItem("userName") ?? "");
-  }, []);
-
-  useEffect(() => {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })
-      .then((res) => { if (!res.ok) throw new Error(String(res.status)); return res.json(); })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((response) => {
         if (response.isAuthenticated) {
           if (response.email_verified) {
@@ -76,7 +78,7 @@ export default function Dashboard() {
         }
       })
       .catch(() => router.push("/login"));
-  }, [router, queryName]);
+  }, [router]);
 
   if (isLoggedIn) {
     return (
@@ -455,7 +457,10 @@ export default function Dashboard() {
       <style>{"body { background-color: #f5f5f5; }"}</style>
       <Box justifyContent="center" sx={{ bgcolor: grey[100], height: "100vh", overflow: "auto", position: "relative" }}>
         <AppBarLoggedIn name={queryName ? queryName : stats.user.username}></AppBarLoggedIn>
-        <CircularProgress color="secondary" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
+        <CircularProgress
+          color="secondary"
+          sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+        />
       </Box>
     </>
   );

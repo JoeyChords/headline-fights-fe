@@ -69,7 +69,13 @@ export default function BiasChart(props: { pub1Bias: number; pub2Bias: number })
           <Box
             sx={{
               textAlign: "center",
-              padding: { xs: "4rem 0 0 0", sm: "4rem 0 0 0", md: "4rem 0 0 0", lg: "4rem 0 3rem 0", xl: "4rem 0 3rem 0" },
+              padding: {
+                xs: "4rem 0 0 0",
+                sm: "4rem 0 0 0",
+                md: "4rem 0 0 0",
+                lg: "4rem 0 3rem 0",
+                xl: "4rem 0 3rem 0",
+              },
             }}
           >
             Bias Meter
@@ -93,7 +99,10 @@ export default function BiasChart(props: { pub1Bias: number; pub2Bias: number })
               //change left yAxis label styles
               "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
                 fontSize: "1rem !important",
-                transform: { xs: "rotate(0.75turn) translateX(-35px) translateY(-80px)", sm: "rotate(0turn) translateX(0px) translateY(0px)" },
+                transform: {
+                  xs: "rotate(0.75turn) translateX(-35px) translateY(-80px)",
+                  sm: "rotate(0turn) translateX(0px) translateY(0px)",
+                },
               },
               // change bottom label styles
               //change left yAxis label styles

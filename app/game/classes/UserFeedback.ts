@@ -2,7 +2,7 @@
  * Includes user and headline data to send back to API server.
  */
 
-class UserFeedback{
+class UserFeedback {
   publicationAnswer: string;
   publicationCorrect: boolean;
   headline: string;
@@ -12,7 +12,16 @@ class UserFeedback{
   attribute2: string;
   attribute2Answer: string;
 
-  constructor(publication: string, publicationAnswerStatus: boolean, headlineID: string, userID: string, question1Attribute: string, question1Value: string, question2Attribute: string, question2Value: string) {
+  constructor(
+    publication: string,
+    publicationAnswerStatus: boolean,
+    headlineID: string,
+    userID: string,
+    question1Attribute: string,
+    question1Value: string,
+    question2Attribute: string,
+    question2Value: string
+  ) {
     this.publicationAnswer = publication;
     this.publicationCorrect = publicationAnswerStatus;
     this.headline = headlineID;
@@ -24,4 +33,4 @@ class UserFeedback{
   }
 }
 
-module.exports = UserFeedback;
+export default UserFeedback;

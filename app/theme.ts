@@ -6,9 +6,16 @@ import { grey } from "@mui/material/colors";
 // Create a theme instance.
 const theme = createTheme({
   typography: {
-    fontFamily: ["Poppins", "Roboto", '"Helvetica Neue"', "Arial", "sans-serif", '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(
-      ","
-    ),
+    fontFamily: [
+      "Poppins",
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
   },
   palette: {
     primary: {

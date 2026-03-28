@@ -11,7 +11,10 @@ import CTAButton from "@/app/components/homePage/ctaButton";
 export default function HeroSection(props: { pub1Bias: number; pub2Bias: number }) {
   return (
     <>
-      <Box component="section" sx={{ bgcolor: deepPurple["A100"], p: { sm: "0", lg: "1rem" }, borderRadius: "1.75rem", width: "100%" }}>
+      <Box
+        component="section"
+        sx={{ bgcolor: deepPurple["A100"], p: { sm: "0", lg: "1rem" }, borderRadius: "1.75rem", width: "100%" }}
+      >
         <AppBarHomePage></AppBarHomePage>
         <Grid container maxWidth="85rem" spacing={0} sx={{ mx: "auto", mt: "5rem", mb: "5rem", display: "flex" }}>
           <Grid xs={12} sm={6} sx={{ p: { xs: "1.25rem", sm: 3, lg: 5 } }}>
@@ -47,8 +50,8 @@ export default function HeroSection(props: { pub1Bias: number; pub2Bias: number 
                 }}
               >
                 <Box>
-                  Headline Fights is a game that helps players learn to recognize bias in the news media by pitting CNN and Fox News headlines against
-                  each other.
+                  Headline Fights is a game that helps players learn to recognize bias in the news media by pitting CNN
+                  and Fox News headlines against each other.
                 </Box>
               </Typography>
               <Box sx={{ textAlign: { xs: "center", sm: "left" }, mb: { xs: "4rem", sm: 0 } }}>

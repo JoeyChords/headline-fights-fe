@@ -1,16 +1,24 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import type { ReactNode } from "react";
 import config from "@/app/config";
-const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
 
-export default function HeadlineCount(props: any) {
+interface HeadlineCountProps {
+  total: ReactNode;
+  pub1Total: ReactNode;
+  pub2Total: ReactNode;
+}
+
+export default function HeadlineCount(props: HeadlineCountProps) {
   return (
     <>
-      <Stack spacing={2} sx={{ position: "absolute", width: "100%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+      <Stack
+        spacing={2}
+        sx={{ position: "absolute", width: "100%", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+      >
         <Typography align="center" variant="h5">
           Headlines Rated
         </Typography>

@@ -1,0 +1,155 @@
+"use client";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import FormHelperText from "@mui/material/FormHelperText";
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import isStrongPassword from "validator/lib/isStrongPassword";
+import isEmail from "validator/lib/isEmail";
+import isUUID from "validator/lib/isUUID";
+import Footer from "@/app/components/footer/footer";
+import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut";
+import config from "@/app/config";
+const API_ENDPOINT = config.API_ENDPOINT;
+
+export default function SignIn() {
+  const [email] = React.useState(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("email") ?? "";
+  });
+  const [token] = React.useState(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("token") ?? "";
+  });
+  const [helperText, setHelperText] = React.useState("");
+  const [error, setError] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const router = useRouter();
+
+  const handleSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      try {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        const userInput = {
+          email: email,
+          token: token,
+          password: String(data.get("password") ?? ""),
+        };
+        if (!isEmail(userInput.email) || !isUUID(userInput.token)) {
+          setError(true);
+          setHelperText("This reset link is invalid or has expired.");
+          return;
+        }
+        if (isStrongPassword(userInput.password)) {
+          setIsLoading(true);
+          const rawResponse = await fetch(`${API_ENDPOINT}/resetPassword`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userInput),
+          });
+          if (rawResponse.status === 429) {
+            setHelperText("Too many attempts. Please wait before trying again.");
+            setIsLoading(false);
+            return;
+          }
+          if (!rawResponse.ok) {
+            setHelperText("Something went wrong");
+            setIsLoading(false);
+            return;
+          }
+          const response = (await rawResponse.json()) as {
+            submitted_in_time?: boolean;
+            user_exists?: boolean;
+          };
+
+          if (response.submitted_in_time) {
+            router.push("/login");
+          } else if (!response.submitted_in_time && response.user_exists) {
+            setError(true);
+            setHelperText("The link has expired.");
+            setIsLoading(false);
+          } else {
+            setError(true);
+            setHelperText("Something went wrong");
+            setIsLoading(false);
+          }
+        } else {
+          setError(true);
+          setHelperText(
+            "Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+          );
+        }
+      } catch (err) {
+        setError(true);
+        setHelperText("Something went wrong");
+        setIsLoading(false);
+      }
+    },
+    [email, router, token]
+  );
+
+  return (
+    <>
+      <style>{"body { background-color: #f5f5f5; }"}</style>
+      <AppBarLoggedOut></AppBarLoggedOut>
+      <Box component="main">
+        <Container maxWidth="xs">
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar variant="square" src="/logo-icon-512x512.png" sx={{ mb: ".75rem", width: 56, height: 56 }}></Avatar>
+            <Typography component="h1" variant="h4" fontWeight={500}>
+              Reset Password
+            </Typography>
+            <Typography component="p" variant="body1" textAlign={"center"} mt=".75rem">
+              Enter a new strong password.
+            </Typography>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
+              <Button
+                type="submit"
+                size="large"
+                fullWidth
+                variant="contained"
+                disabled={isLoading}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  borderRadius: "100vw",
+                  fontSize: { lg: "1.25rem", xs: "1.25rem" },
+                }}
+              >
+                Set Password
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+      <Footer></Footer>
+    </>
+  );
+}
