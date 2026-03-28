@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.3.1] - 2026-03-28
+
+### Fixed
+
+- Fixed SSR hydration mismatch — replaced the manual emotion cache implementation in `ThemeRegistry` with `AppRouterCacheProvider` from `@mui/material-nextjs`, ensuring emotion class name hashes are consistent between server and client.
+- Fixed Fast Refresh performing a full reload on every render — `require("lodash/capitalize")` in `appBarLoggedIn.tsx` was a CommonJS call inside a client component, which breaks hot module replacement; replaced with an inline function.
+
+### Changed
+
+- Upgraded `@mui/material` and `@mui/icons-material` from 5.14.18 to 5.18.0 — resolves React 19 `element.ref` compatibility warning that was also contributing to Fast Refresh full reloads.
+- Added `@mui/material-nextjs` for App Router cache integration.
+- Removed `lodash` dependency — no longer used anywhere in the codebase.
+
 ## [1.3.0] - 2026-03-27
 
 ### Added
