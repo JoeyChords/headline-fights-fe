@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import Box from "@mui/material/Box";
@@ -6,8 +5,15 @@ import Grid from "@mui/system/Unstable_Grid";
 import StatsBox from "@/app/components/homePage/statsBox";
 import StatsComponent from "@/app/components/homePage/statsComponent";
 import CTAButton from "@/app/components/homePage/ctaButton";
+import type { ReactNode } from "react";
 
-export default function Stats(props: any) {
+interface StatsData {
+  numPub2Ratings: ReactNode;
+  numPub1Ratings: ReactNode;
+  numUsers: ReactNode;
+}
+
+export default function Stats({ props }: { props: StatsData }) {
   return (
     <>
       <Box
@@ -54,22 +60,18 @@ export default function Stats(props: any) {
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox
               component={
-                <StatsComponent total={props.props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>
+                <StatsComponent total={props.numPub2Ratings} title={"Fox News Headlines Rated"}></StatsComponent>
               }
             ></StatsBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox
-              component={
-                <StatsComponent total={props.props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>
-              }
+              component={<StatsComponent total={props.numPub1Ratings} title={"CNN Headlines Rated"}></StatsComponent>}
             ></StatsBox>
           </Grid>
           <Grid xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <StatsBox
-              component={
-                <StatsComponent total={props.props.numUsers} title={"People Rated Headlines"}></StatsComponent>
-              }
+              component={<StatsComponent total={props.numUsers} title={"People Rated Headlines"}></StatsComponent>}
             ></StatsBox>
           </Grid>
         </Grid>

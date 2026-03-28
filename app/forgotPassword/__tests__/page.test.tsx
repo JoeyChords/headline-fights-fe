@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
+import { describe, expect, it, vi, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -18,15 +18,15 @@ import ForgotPassword from "../page";
 
 async function submitForm(email: string) {
   await userEvent.type(screen.getByLabelText(/email/i), email);
-  fireEvent.submit(screen.getByRole("button", { name: /email me/i }).closest("form")!);
+  fireEvent.submit(screen.getByRole("button").closest("form")!);
 }
 
-describe("ForgotPassword page", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-    vi.unstubAllGlobals();
-  });
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.unstubAllGlobals();
+});
 
+describe("ForgotPassword page", () => {
   it("renders without crashing with key elements present", () => {
     render(<ForgotPassword />);
     expect(screen.getByText("Forgot Password")).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe("ForgotPassword page", () => {
     expect(screen.getByRole("button", { name: /email me/i })).toBeInTheDocument();
   });
 
-  it("shows success message when email_sent is true", async () => {
+  it("shows success message and disabled countdown button when email_sent is true", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -46,6 +46,7 @@ describe("ForgotPassword page", () => {
     render(<ForgotPassword />);
     await submitForm("test@example.com");
     await waitFor(() => expect(screen.getByText(/your email has been sent/i)).toBeInTheDocument());
+    expect(screen.getByRole("button", { name: /resend in/i })).toBeDisabled();
   });
 
   it("disables the button while submitting", async () => {
@@ -59,28 +60,24 @@ describe("ForgotPassword page", () => {
   });
 
   it("shows error for a 429 response", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 429,
-      })
-    );
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 429 }));
     render(<ForgotPassword />);
     await submitForm("test@example.com");
     await waitFor(() => expect(screen.getByText(/too many attempts/i)).toBeInTheDocument());
   });
 
   it("shows generic error on non-ok response", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        ok: false,
-        status: 500,
-      })
-    );
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 500 }));
     render(<ForgotPassword />);
     await submitForm("test@example.com");
     await waitFor(() => expect(screen.getByText(/something went wrong/i)).toBeInTheDocument());
+  });
+
+  it("button is not disabled on error responses — user can try again", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 500 }));
+    render(<ForgotPassword />);
+    await submitForm("test@example.com");
+    await waitFor(() => expect(screen.getByText(/something went wrong/i)).toBeInTheDocument());
+    expect(screen.getByRole("button", { name: /email me/i })).toBeEnabled();
   });
 });

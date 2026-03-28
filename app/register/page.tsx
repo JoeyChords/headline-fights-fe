@@ -17,19 +17,20 @@ import { useRouter } from "next/navigation";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import normalizeEmail from "validator/lib/normalizeEmail";
+import type { TypographyProps } from "@mui/material";
 import Footer from "@/app/components/footer/footer";
 
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
-function Copyright(props: any) {
+function Copyright(props: TypographyProps) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="/">
         Headline Fights
       </Link>{" "}
-      {new Date().getFullYear()}
+      <span suppressHydrationWarning>{new Date().getFullYear()}</span>
       {"."}
     </Typography>
   );
@@ -41,16 +42,16 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(false);
 
-    const data: any = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);
 
-    const userInput: any = {
-      name: data.get("name"),
-      email: normalizeEmail(data.get("email")),
-      password: data.get("password"),
+    const userInput = {
+      name: String(data.get("name") ?? ""),
+      email: normalizeEmail(String(data.get("email") ?? "")) || "",
+      password: String(data.get("password") ?? ""),
     };
 
     if (!isEmail(userInput.email)) {

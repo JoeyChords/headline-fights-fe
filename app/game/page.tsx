@@ -1,39 +1,47 @@
 "use client";
 import Headline from "./headline";
 import AppBarLoggedIn from "../components/app-bar/appBarLoggedIn";
-import { grey } from "@mui/material/colors";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
+const subscribe = () => () => {};
+const getServerUserNameSnapshot = () => "";
+const getClientUserNameSnapshot = () => sessionStorage.getItem("userName") ?? "";
+
+interface GameAuthResponse {
+  isAuthenticated: boolean;
+  email_verified: boolean;
+  user?: {
+    username: string;
+    email: string;
+  };
+}
 
 export default function Home() {
-  const [queryName, setQueryName] = useState("");
+  const queryName = useSyncExternalStore(subscribe, getClientUserNameSnapshot, getServerUserNameSnapshot);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUsername] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    setQueryName(sessionStorage.getItem("userName") ?? "");
-  }, []);
-
-  useEffect(() => {
     fetch(`${API_ENDPOINT}/game`, { method: "GET", credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(String(res.status));
-        return res.json();
+        return res.json() as Promise<GameAuthResponse>;
       })
       .then((response) => {
         if (response.isAuthenticated) {
           if (response.email_verified) {
             setIsLoggedIn(true);
-            setUsername(response.user.username);
-            sessionStorage.setItem("userName", response.user.username);
+            setUsername(response.user?.username ?? "");
+            sessionStorage.setItem("userName", response.user?.username ?? "");
           } else {
-            sessionStorage.setItem("pendingVerifyEmail", response.user.email);
+            if (response.user?.email) {
+              sessionStorage.setItem("pendingVerifyEmail", response.user.email);
+            }
             router.push("/verify");
           }
         } else {
@@ -41,7 +49,7 @@ export default function Home() {
         }
       })
       .catch(() => router.push("/login"));
-  }, [router, queryName]);
+  }, [router]);
 
   if (isLoggedIn) {
     return (

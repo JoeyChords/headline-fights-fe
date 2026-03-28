@@ -1,8 +1,14 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import type { ReactNode } from "react";
 
-export default function StatsComponent(props: any) {
+interface StatsComponentProps {
+  total: ReactNode;
+  title: string;
+}
+
+export default function StatsComponent(props: StatsComponentProps) {
   return (
     <>
       <Stack spacing={2} alignItems="center" justifyContent="center">

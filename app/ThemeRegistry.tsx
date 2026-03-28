@@ -8,11 +8,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import React from "react";
 
+interface ThemeRegistryProps {
+  options: Parameters<typeof createCache>[0];
+  children: React.ReactNode;
+}
+
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
-export default function ThemeRegistry(props: any) {
-  const { options, children } = props;
-
+export default function ThemeRegistry({ options, children }: ThemeRegistryProps) {
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache(options);
     cache.compat = true;

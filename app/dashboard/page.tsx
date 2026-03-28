@@ -1,7 +1,7 @@
 "use client";
-import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn.js";
+import AppBarLoggedIn from "@/app/components/app-bar/appBarLoggedIn";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -19,9 +19,12 @@ import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 const PUB_1 = config.PUB_1;
 const PUB_2 = config.PUB_2;
+const subscribe = () => () => {};
+const getServerUserNameSnapshot = () => "";
+const getClientUserNameSnapshot = () => sessionStorage.getItem("userName") ?? "";
 
 export default function Dashboard() {
-  const [queryName, setQueryName] = useState("");
+  const queryName = useSyncExternalStore(subscribe, getClientUserNameSnapshot, getServerUserNameSnapshot);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [stats, setStats] = useState<Stats>(initialStats);
 
@@ -41,10 +44,6 @@ export default function Dashboard() {
   let dataset = publicationDataset;
 
   const router = useRouter();
-
-  useEffect(() => {
-    setQueryName(sessionStorage.getItem("userName") ?? "");
-  }, []);
 
   useEffect(() => {
     fetch(`${API_ENDPOINT}/dashboard`, { method: "POST", credentials: "include" })
@@ -79,7 +78,7 @@ export default function Dashboard() {
         }
       })
       .catch(() => router.push("/login"));
-  }, [router, queryName]);
+  }, [router]);
 
   if (isLoggedIn) {
     return (

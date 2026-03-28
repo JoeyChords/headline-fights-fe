@@ -1,8 +1,6 @@
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { blueGrey } from "@mui/material/colors";
-import { grey } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import HowItWorksComponent from "@/app/components/homePage/howItWorksComponent";
@@ -13,7 +11,7 @@ import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined
 import CTAButton from "@/app/components/homePage/ctaButton";
 import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
 
-export default function HowItWorks(props: any) {
+export default function HowItWorks() {
   return (
     <>
       <Box

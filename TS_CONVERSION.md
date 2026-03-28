@@ -83,28 +83,28 @@ These files are already TypeScript but use `any`. No rename needed — just tigh
 
 **Shared components (no external data dependencies — easiest to test in isolation):**
 
-- [ ] `app/components/footer/footer.tsx`
-- [ ] `app/components/homePage/footer.tsx`
-- [ ] `app/components/terms-and-privacy-footer/terms-and-privacy-footer.tsx`
-- [ ] `app/components/homePage/statsBox.tsx`
-- [ ] `app/components/homePage/howItWorksBox.tsx`
-- [ ] `app/components/homePage/ctaButton.tsx`
-- [ ] `app/components/homePage/statsComponent.tsx`
-- [ ] `app/components/homePage/howItWorksComponent.tsx`
-- [ ] `app/components/homePage/stats.tsx`
-- [ ] `app/components/homePage/howItWorks.tsx`
+- [x] `app/components/footer/footer.tsx`
+- [x] `app/components/homePage/footer.tsx`
+- [x] `app/components/terms-and-privacy-footer/terms-and-privacy-footer.tsx`
+- [x] `app/components/homePage/statsBox.tsx`
+- [x] `app/components/homePage/howItWorksBox.tsx`
+- [x] `app/components/homePage/ctaButton.tsx`
+- [x] `app/components/homePage/statsComponent.tsx`
+- [x] `app/components/homePage/howItWorksComponent.tsx`
+- [x] `app/components/homePage/stats.tsx`
+- [x] `app/components/homePage/howItWorks.tsx`
 
 **Data-dependent components:**
 
-- [ ] `app/dashboard/components/headlineCount.tsx`
-- [ ] `app/dashboard/components/guessAccuracyChart.tsx`
-- [ ] `app/game/components/guessAccuracyChart.tsx`
+- [x] `app/dashboard/components/headlineCount.tsx`
+- [x] `app/dashboard/components/guessAccuracyChart.tsx`
+- [x] `app/game/components/guessAccuracyChart.tsx`
 
 **Pages and root files:**
 
-- [ ] `app/register/page.tsx` _(many `any` — event handlers, form data)_
-- [ ] `app/ThemeRegistry.tsx`
-- [ ] `app/layout.tsx`
+- [x] `app/register/page.tsx` _(many `any` — event handlers, form data)_
+- [x] `app/ThemeRegistry.tsx`
+- [x] `app/layout.tsx`
 
 ---
 
@@ -113,14 +113,14 @@ These files are already TypeScript but use `any`. No rename needed — just tigh
 Most complex part of the app. Multiple interacting components with shared state.
 Convert last so earlier phases have established type patterns to follow.
 
-- [ ] `app/game/page.js` → `page.tsx`
-- [ ] `app/game/headline.js` → `headline.tsx`
-- [ ] `app/game/surveyForm.js` → `surveyForm.tsx`
+- [x] `app/game/page.js` → `page.tsx`
+- [x] `app/game/headline.js` → `headline.tsx`
+- [x] `app/game/surveyForm.js` → `surveyForm.tsx`
 
 ---
 
 ## Progress
 
 **Total files:** 38 (22 JS conversions + 16 TSX cleanups)
-**Converted:** 0
-**Remaining:** 38
+**Converted:** 38
+**Remaining:** 0

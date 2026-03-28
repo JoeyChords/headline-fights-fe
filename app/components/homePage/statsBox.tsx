@@ -1,6 +1,11 @@
 import Box from "@mui/material/Box";
+import type { ReactNode } from "react";
 
-export default function StatsBox(props: any) {
+interface StatsBoxProps {
+  component: ReactNode;
+}
+
+export default function StatsBox(props: StatsBoxProps) {
   return (
     <Box
       sx={{

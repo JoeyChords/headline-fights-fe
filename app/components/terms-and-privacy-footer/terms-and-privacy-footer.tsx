@@ -1,16 +1,13 @@
 "use client";
-import { Box } from "@mui/material";
-import { Typography } from "@mui/material";
+import { Box, Typography, Link, Grid } from "@mui/material";
+import type { TypographyProps } from "@mui/material";
 import { black_ops_one } from "@/app/fonts";
-import { Link } from "@mui/material";
-import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
 
-function Copyright(props: any) {
+function Copyright(props: TypographyProps) {
   return (
     <Typography variant="body2" color="#ffffff" {...props}>
       {"© "}
-      Headline Fights {new Date().getFullYear()}
+      Headline Fights <span suppressHydrationWarning>{new Date().getFullYear()}</span>
       {"."}
     </Typography>
   );

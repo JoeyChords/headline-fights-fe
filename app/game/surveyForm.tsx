@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,7 +16,30 @@ import { blueGrey } from "@mui/material/colors";
 import { grey } from "@mui/material/colors";
 import { surveyCriteria, SurveyCriteria } from "@/app/game/modules/attributesAndQuestions";
 
-function RadioLabel({ trueOrFalse, label }) {
+import config from "@/app/config";
+const API_ENDPOINT = config.API_ENDPOINT;
+const PUB_1 = config.PUB_1;
+const PUB_2 = config.PUB_2;
+
+export interface HeadlineData {
+  _id: string;
+  headline: string;
+  photo_source_url: string;
+  publication: string;
+}
+
+export interface UserData {
+  id: string;
+  username: string;
+  email: string;
+}
+
+interface RadioLabelProps {
+  trueOrFalse: string;
+  label: string;
+}
+
+function RadioLabel({ trueOrFalse, label }: RadioLabelProps) {
   return (
     <Box>
       <span className="font-bold">{trueOrFalse}</span>
@@ -24,30 +48,40 @@ function RadioLabel({ trueOrFalse, label }) {
   );
 }
 
-import config from "@/app/config";
-const API_ENDPOINT = config.API_ENDPOINT;
-const PUB_1 = config.PUB_1;
-const PUB_2 = config.PUB_2;
+interface PublicationDataPoint {
+  [key: string]: string | number;
+  you: number;
+  crowd: number;
+  publication: string;
+}
 
-export default function PublicationForm({ user, headlines, fetchOnClick }) {
-  const [publicationCorrect, setPublicationCorrect] = React.useState(undefined);
+interface UpdateStatsResponse {
+  isAuthenticated: boolean;
+  publicationStats: {
+    userPub1Percent: number;
+    crowdPub1Percent: number;
+    userPub2Percent: number;
+    crowdPub2Percent: number;
+  };
+}
+
+interface PublicationFormProps {
+  user: UserData;
+  headlines: HeadlineData;
+  fetchOnClick: () => void;
+}
+
+export default function PublicationForm({ user, headlines, fetchOnClick }: PublicationFormProps) {
+  const [publicationCorrect, setPublicationCorrect] = React.useState<boolean | null | undefined>(undefined);
   const [publicationValue, setPublicationValue] = React.useState("");
-  const [publicationDataset, setPublicationDataset] = React.useState([
-    {
-      you: 0,
-      crowd: 0,
-      publication: PUB_1,
-    },
-    {
-      you: 0,
-      crowd: 0,
-      publication: PUB_2,
-    },
+  const [publicationDataset, setPublicationDataset] = React.useState<PublicationDataPoint[]>([
+    { you: 0, crowd: 0, publication: PUB_1 },
+    { you: 0, crowd: 0, publication: PUB_2 },
   ]);
   const [disabled, setDisabled] = React.useState(true);
-  const [question1, setQuestion1] = React.useState(new SurveyCriteria("", "", "", "", ""));
+  const [question1, setQuestion1] = React.useState<SurveyCriteria>(new SurveyCriteria("", "", "", "", ""));
   const [question1Value, setQuestion1Value] = React.useState("");
-  const [question2, setQuestion2] = React.useState(new SurveyCriteria("", "", "", "", ""));
+  const [question2, setQuestion2] = React.useState<SurveyCriteria>(new SurveyCriteria("", "", "", "", ""));
   const [question2Value, setQuestion2Value] = React.useState("");
 
   React.useEffect(() => {
@@ -68,46 +102,46 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const router = useRouter();
 
-  let feedback = {};
-  let publicationCorrectProxy = undefined; //can't get state of publicationCorrect for unknown reason, so using this instead
+  const feedbackRef = React.useRef<UserFeedback | Record<string, never>>({});
+  const publicationCorrectRef = React.useRef<boolean | undefined>(undefined);
 
-  let dataset = publicationDataset;
+  const dataset: PublicationDataPoint[] = publicationDataset;
 
-  const handleQuestion1RadioChange = (event) => {
+  const handleQuestion1RadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion1Value(event.target.value);
     if (question2Value != "" && publicationValue != "") {
       setDisabled(false);
     }
   };
 
-  const handleQuestion2RadioChange = (event) => {
+  const handleQuestion2RadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion2Value(event.target.value);
     if (question1Value != "" && publicationValue != "") {
       setDisabled(false);
     }
   };
 
-  const handlePublicationRadioChange = (event) => {
+  const handlePublicationRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPublicationValue(event.target.value);
     if (question1Value != "" && question2Value != "") {
       setDisabled(false);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (publicationValue === headlines.publication) {
       setPublicationCorrect(true);
-      publicationCorrectProxy = true;
+      publicationCorrectRef.current = true;
     } else {
       setPublicationCorrect(false);
-      publicationCorrectProxy = false;
+      publicationCorrectRef.current = false;
     }
 
-    feedback = new UserFeedback(
+    feedbackRef.current = new UserFeedback(
       headlines.publication,
-      publicationCorrectProxy,
+      publicationCorrectRef.current ?? false,
       headlines._id,
       user.id,
       question1.attribute,
@@ -120,11 +154,11 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(feedback),
+      body: JSON.stringify(feedbackRef.current),
     })
       .then((res) => {
         if (!res.ok) throw new Error(String(res.status));
-        return res.json();
+        return res.json() as Promise<UpdateStatsResponse>;
       })
       .then((response) => {
         if (response.isAuthenticated) {
@@ -149,8 +183,8 @@ export default function PublicationForm({ user, headlines, fetchOnClick }) {
 
   const getNextHeadline = () => {
     fetchOnClick();
-    feedback = {};
-    publicationCorrectProxy = undefined;
+    feedbackRef.current = {};
+    publicationCorrectRef.current = undefined;
   };
 
   if (publicationCorrect) {

@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.3.0] - 2026-03-27
+
+### Added
+
+- TypeScript conversion Phase 5: [app/register/page.tsx](./app/register/page.tsx) — typed form handler, `Copyright` props, and `userInput`; [app/ThemeRegistry.tsx](./app/ThemeRegistry.tsx) — `ThemeRegistryProps` interface; [app/layout.tsx](./app/layout.tsx) — typed `children` prop.
+- TypeScript conversion Phase 6: [app/game/surveyForm.tsx](./app/game/surveyForm.tsx), [app/game/headline.tsx](./app/game/headline.tsx), [app/game/page.tsx](./app/game/page.tsx) — full type coverage including `HeadlineData`, `UserData`, `HeadlinesApiResponse`, and `GameAuthResponse` interfaces; [app/game/classes/UserFeedback.ts](./app/game/classes/UserFeedback.ts) — converted from CJS to ES module export.
+- Unit tests for [app/game/surveyForm.tsx](./app/game/surveyForm.tsx), [app/game/headline.tsx](./app/game/headline.tsx), [app/game/page.tsx](./app/game/page.tsx), [app/register/page.tsx](./app/register/page.tsx), and [app/forgotPassword/page.tsx](./app/forgotPassword/page.tsx).
+- 60-second resend cooldown on [app/forgotPassword/page.tsx](./app/forgotPassword/page.tsx) — button shows countdown and re-enables as "Resend Email" after the timer expires.
+
+### Fixed
+
+- Fixed `GameAuthResponse` in [app/game/page.tsx](./app/game/page.tsx) — `user` is now optional and all accesses use optional chaining, preventing a TypeError crash when the backend omits `user` on `email_verified: false` responses.
+- Fixed `pendingVerifyEmail` not being stored in sessionStorage — root cause was the above TypeError being caught and routing to `/login` before the `sessionStorage.setItem` call.
+- Fixed [app/verify/page.tsx](./app/verify/page.tsx) — replaced `useEffect` sessionStorage read with a lazy `useState` initializer to prevent React StrictMode double-mount from clearing the stored email before the second run reads it.
+- Fixed build error in [app/dashboard/page.tsx](./app/dashboard/page.tsx) — removed stale `.js` extension from `appBarLoggedIn` import after the file was converted to `.tsx`.
+
 ## [1.2.0] - 2026-03-27
 
 ### Added

@@ -104,7 +104,7 @@ export const surveyCriteria = [
   new SurveyCriteria(
     "decision_making_bias",
     "Decision-making",
-    "The headline clearly disapproves of something.",
+    "The headline clearly approves or disapproves of something.",
     "The writer of the headline does not seem to have made a decision on the subject.",
     "I don't know."
   ),

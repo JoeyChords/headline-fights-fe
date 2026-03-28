@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
@@ -16,57 +15,72 @@ import { green } from "@mui/material/colors";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
+const RESEND_COOLDOWN = 60;
+
 export default function ForgotPassword() {
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
-  const router = useRouter();
+  const [cooldown, setCooldown] = React.useState(0);
 
-  const handleSubmit = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      try {
-        event.preventDefault();
-        setIsLoading(true);
-        const data = new FormData(event.currentTarget);
+  React.useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setTimeout(() => {
+      setCooldown((c) => c - 1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
 
-        const userInput = {
-          email: normalizeEmail(String(data.get("email") ?? "")) || "",
-        };
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      setIsLoading(true);
+      const data = new FormData(event.currentTarget);
 
-        const rawResponse = await fetch(`${API_ENDPOINT}/forgotPassword`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInput),
-        });
-        if (rawResponse.status === 429) {
-          setHelperText("Too many attempts. Please wait before trying again.");
-          setIsLoading(false);
-          return;
-        }
-        if (!rawResponse.ok) {
-          setHelperText("Something went wrong");
-          setIsLoading(false);
-          return;
-        }
-        const response = (await rawResponse.json()) as { email_sent?: boolean };
+      const userInput = {
+        email: normalizeEmail(String(data.get("email") ?? "")) || "",
+      };
 
-        if (response.email_sent) {
-          setError(false);
-          setHelperText("Your email has been sent.");
-          setIsLoading(false);
-        } else {
-          setError(true);
-          setHelperText("Something is wrong with your email address.");
-          setIsLoading(false);
-        }
-      } catch (err) {
+      const rawResponse = await fetch(`${API_ENDPOINT}/forgotPassword`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInput),
+      });
+      if (rawResponse.status === 429) {
+        setHelperText("Too many attempts. Please wait before trying again.");
+        setIsLoading(false);
+        return;
+      }
+      if (!rawResponse.ok) {
         setHelperText("Something went wrong");
         setIsLoading(false);
+        return;
       }
-    },
-    [router]
-  );
+      const response = (await rawResponse.json()) as { email_sent?: boolean };
+
+      if (response.email_sent) {
+        setError(false);
+        setHelperText("Your email has been sent. Check your inbox.");
+        setCooldown(RESEND_COOLDOWN);
+        setIsLoading(false);
+      } else {
+        setError(true);
+        setHelperText("Something is wrong with your email address.");
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setHelperText("Something went wrong");
+      setIsLoading(false);
+    }
+  }, []);
+
+  const buttonLabel = () => {
+    if (isLoading) return "Email Me";
+    if (cooldown > 0) return `Resend in 0:${String(cooldown).padStart(2, "0")}`;
+    if (helperText === "Your email has been sent. Check your inbox.") return "Resend Email";
+    return "Email Me";
+  };
 
   return (
     <>
@@ -108,7 +122,7 @@ export default function ForgotPassword() {
                 size="large"
                 fullWidth
                 variant="contained"
-                disabled={isLoading}
+                disabled={isLoading || cooldown > 0}
                 sx={{
                   mt: 3,
                   mb: 2,
@@ -117,7 +131,7 @@ export default function ForgotPassword() {
                   fontSize: { lg: "1.25rem", xs: "1.25rem" },
                 }}
               >
-                Email Me
+                {buttonLabel()}
               </Button>
             </Box>
           </Box>

@@ -33,4 +33,4 @@ class UserFeedback {
   }
 }
 
-module.exports = UserFeedback;
+export default UserFeedback;

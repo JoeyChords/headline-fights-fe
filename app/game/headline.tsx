@@ -3,24 +3,26 @@
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { grey } from "@mui/material/colors";
-import { Typography } from "@mui/material";
-import SurveyForm from "./surveyForm";
+import SurveyForm, { HeadlineData, UserData } from "./surveyForm";
 import { useRouter } from "next/navigation";
-import { TurnedIn } from "@mui/icons-material";
 import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
+interface HeadlinesApiResponse {
+  isAuthenticated: boolean;
+  headline: HeadlineData;
+  user: UserData;
+}
+
 export default function Headline() {
-  const [headlines, setHeadlines] = useState({});
+  const [headlines, setHeadlines] = useState<HeadlineData | null>(null);
   const [headline, setHeadline] = useState("");
   const [photo, setPhoto] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<UserData | null>(null);
   const [isLoading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -36,7 +38,7 @@ export default function Headline() {
     })
       .then((res) => {
         if (!res.ok) throw new Error(String(res.status));
-        return res.json();
+        return res.json() as Promise<HeadlinesApiResponse>;
       })
       .then((response) => {
         if (response.isAuthenticated) {
@@ -59,7 +61,7 @@ export default function Headline() {
     fetch(API_ENDPOINT + "/headlines", { method: "POST", credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(String(res.status));
-        return res.json();
+        return res.json() as Promise<HeadlinesApiResponse>;
       })
       .then((response) => {
         if (response.isAuthenticated) {
@@ -125,7 +127,7 @@ export default function Headline() {
           </Grid>
           <Grid xs={12} md={6} sx={{ p: { xs: "2rem 1.25rem 0", sm: "2rem 1.75rem 0" } }}>
             <Box sx={{ width: { xs: "95%", sm: "85%" }, mx: "auto" }}>
-              <SurveyForm user={user} headlines={headlines} fetchOnClick={fetchOnClick}></SurveyForm>
+              <SurveyForm user={user!} headlines={headlines!} fetchOnClick={fetchOnClick}></SurveyForm>
             </Box>
           </Grid>
         </Grid>

@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import Footer from "@/app/components/footer/footer";
 import AppBarLoggedOut from "@/app/components/app-bar/appBarLoggedOut";
@@ -16,18 +16,16 @@ import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
-  const [email, setEmail] = React.useState("");
+  const [email] = React.useState(() => {
+    if (typeof window === "undefined") return "";
+    const stored = sessionStorage.getItem("pendingVerifyEmail") ?? "";
+    sessionStorage.removeItem("pendingVerifyEmail");
+    return stored;
+  });
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    const pendingEmail = sessionStorage.getItem("pendingVerifyEmail") ?? "";
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEmail(pendingEmail);
-    sessionStorage.removeItem("pendingVerifyEmail");
-  }, []);
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {

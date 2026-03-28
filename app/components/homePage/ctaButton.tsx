@@ -1,6 +1,11 @@
 import Button from "@mui/material/Button";
+import type { ReactNode } from "react";
 
-export default function CTAButton(props: any) {
+interface CTAButtonProps {
+  cta: ReactNode;
+}
+
+export default function CTAButton(props: CTAButtonProps) {
   return (
     <Button
       sx={{

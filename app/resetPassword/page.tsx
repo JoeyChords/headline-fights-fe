@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import isEmail from "validator/lib/isEmail";
 import isUUID from "validator/lib/isUUID";
@@ -18,19 +18,18 @@ import config from "@/app/config";
 const API_ENDPOINT = config.API_ENDPOINT;
 
 export default function SignIn() {
-  const [email, setEmail] = React.useState("");
-  const [token, setToken] = React.useState("");
+  const [email] = React.useState(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("email") ?? "";
+  });
+  const [token] = React.useState(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("token") ?? "";
+  });
   const [helperText, setHelperText] = React.useState("");
   const [error, setError] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEmail(params.get("email") ?? "");
-    setToken(params.get("token") ?? "");
-  }, []);
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {

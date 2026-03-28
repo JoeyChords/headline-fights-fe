@@ -1,11 +1,14 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { blueGrey } from "@mui/material/colors";
 import { grey } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 
-export default function StatsComponent(props: any) {
+interface HowItWorksComponentProps {
+  title: string;
+  explanation: string;
+}
+
+export default function HowItWorksComponent(props: HowItWorksComponentProps) {
   return (
     <>
       <Box sx={{ position: "absolute", bottom: "2rem", pr: "1rem" }}>
